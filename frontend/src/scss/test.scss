@@ -1,0 +1,10 @@
+@import "tailwindcss/tailwind.css";
+$color: red;
+
+.App {
+  color: $color;
+  font-size: large;
+}
+a {
+  color: rgb(206, 170, 170);
+}
