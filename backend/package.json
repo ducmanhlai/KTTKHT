@@ -2,15 +2,21 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel ./backend -d ./build/backend",
+    "build": "npm run clean && npm run build-babel",
+    "production": "npm run build && node ./build/backend/server.js",
+    "start": "nodemon --exec ./node_modules/.bin/babel-node server.js",
+    "sequelize": "node_modules/.bin/sequelize-auto -h sql12.freemysqlhosting.net -d sql12621075 -u sql12621075 -x 59cTMK5jdH -p 3306 -e mysql -o ./backend/models"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/runtime": "^7.18.9",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -18,10 +24,23 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "moment-timezone": "^0.5.43",
+    "mysql2": "^3.3.2",
     "nodemailer": "^6.9.1",
-    "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sequelize": "^6.31.1",
+    "sequelize-auto": "^0.8.8"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.22.1",
+    "@babel/node": "^7.18.9",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.18.9",
+    "@babel/polyfill": "^7.10.1",
+    "@babel/preset-env": "^7.22.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22"
   }
 }
