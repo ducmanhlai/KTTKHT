@@ -1,11 +1,10 @@
-import connect_database from "./connect_database";
 import * as dotenv from 'dotenv';
 import router from "../routers";
 import express from "express"
 var cors = require('cors')
 dotenv.config()
 export default function run(app) {
-    connect_database();
+    
     app.use(cors({ credentials: true, origin: true }));
     app.use(express.urlencoded({ extended: true }))
     app.use(express.json())

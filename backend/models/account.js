@@ -5,11 +5,7 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'role',
-        key: 'id'
-      }
+      primaryKey: true
     },
     password: {
       type: DataTypes.STRING(50),
@@ -34,7 +30,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     id_role: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'role',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
@@ -55,6 +55,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "phone" },
+        ]
+      },
+      {
+        name: "role_idx",
+        using: "BTREE",
+        fields: [
+          { name: "id_role" },
         ]
       },
     ]
