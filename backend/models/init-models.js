@@ -56,8 +56,8 @@ function initModels(sequelize) {
   payment_method.hasMany(payment, { as: "payments", foreignKey: "id_method"});
   payment.belongsTo(payment_status, { as: "status_payment_status", foreignKey: "status"});
   payment_status.hasMany(payment, { as: "payments", foreignKey: "status"});
-  account.belongsTo(role, { as: "id_role", foreignKey: "id"});
-  role.hasOne(account, { as: "account", foreignKey: "id"});
+  account.belongsTo(role, { as: "id_role_role", foreignKey: "id_role"});
+  role.hasMany(account, { as: "accounts", foreignKey: "id_role"});
   type_rule.belongsTo(rule, { as: "id_rule_rule", foreignKey: "id_rule"});
   rule.hasMany(type_rule, { as: "type_rules", foreignKey: "id_rule"});
   hero.belongsTo(skill_hero, { as: "id_skill_1_skill_hero", foreignKey: "id_skill_1"});

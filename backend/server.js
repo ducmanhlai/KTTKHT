@@ -1,4 +1,4 @@
 import express from 'express';
-import run from './services';
+import run from './configs';
 const app = express();
 run(app);
