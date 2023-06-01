@@ -6,10 +6,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    story: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
     price: {
       type: DataTypes.INTEGER,
       allowNull: true

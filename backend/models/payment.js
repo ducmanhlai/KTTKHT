@@ -1,48 +1,43 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('users', {
+  return sequelize.define('payment', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    name_user: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
-    gold: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    ruby: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    avatar: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    id_card: {
-      type: DataTypes.STRING(12),
-      allowNull: true
-    },
     id_account: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true
+    },
+    id_method: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
-        model: 'account',
+        model: 'payment_method',
         key: 'id'
       }
     },
-    coin: {
+    amount: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
+      allowNull: true
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'payment_status',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'users',
+    tableName: 'payment',
     timestamps: false,
     indexes: [
       {
@@ -54,10 +49,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "fk_account_idx",
+        name: "payment_method_idx",
         using: "BTREE",
         fields: [
-          { name: "id_account" },
+          { name: "id_method" },
+        ]
+      },
+      {
+        name: "payment_status_idx",
+        using: "BTREE",
+        fields: [
+          { name: "status" },
         ]
       },
     ]
