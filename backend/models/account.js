@@ -5,7 +5,11 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references: {
+        model: 'role',
+        key: 'id'
+      }
     },
     password: {
       type: DataTypes.STRING(50),
@@ -20,25 +24,17 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       unique: "phone"
     },
-    name: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
     created_time: {
       type: DataTypes.DATE,
-      allowNull: true
-    },
-    avatar: {
-      type: DataTypes.TEXT,
       allowNull: true
     },
     status: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    id_card: {
-      type: DataTypes.STRING(12),
-      allowNull: false
+    id_role: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
