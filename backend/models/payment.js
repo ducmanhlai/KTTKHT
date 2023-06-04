@@ -9,7 +9,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     id_account: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'account',
+        key: 'id'
+      }
     },
     id_method: {
       type: DataTypes.INTEGER,
@@ -60,6 +64,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "status" },
+        ]
+      },
+      {
+        name: "FK_payment_acc_idx",
+        using: "BTREE",
+        fields: [
+          { name: "id_account" },
         ]
       },
     ]

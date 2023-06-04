@@ -1,31 +1,31 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('hero_of_users', {
-    id_user: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'account',
-        key: 'id'
-      }
-    },
-    id_hero: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'hero',
-        key: 'id'
-      }
-    },
+  return sequelize.define('skin_of_user', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
+    },
+    id_user: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'account',
+        key: 'id'
+      }
+    },
+    id_skin: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'skin',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'hero_of_users',
+    tableName: 'skin_of_user',
     timestamps: false,
     indexes: [
       {
@@ -37,17 +37,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "FK_herouser_hero_idx",
-        using: "BTREE",
-        fields: [
-          { name: "id_hero" },
-        ]
-      },
-      {
-        name: "hero_of_users_users_idx",
+        name: "FK_skin_user_idx",
         using: "BTREE",
         fields: [
           { name: "id_user" },
+        ]
+      },
+      {
+        name: "FK_skin_user_skin_idx",
+        using: "BTREE",
+        fields: [
+          { name: "id_skin" },
         ]
       },
     ]

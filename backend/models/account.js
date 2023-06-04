@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('account', {
     id: {
       autoIncrement: true,
@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     password: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     email: {
@@ -17,12 +17,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     phone: {
       type: DataTypes.STRING(10),
-      allowNull: true,
-      unique: "phone"
+      allowNull: true
     },
     created_time: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
     status: {
       type: DataTypes.INTEGER,
@@ -50,11 +50,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "phone",
-        unique: true,
+        name: "role_idx",
         using: "BTREE",
         fields: [
-          { name: "phone" },
+          { name: "id_role" },
+        ]
+      },
+      {
+        name: "role_idx",
+        using: "BTREE",
+        fields: [
+          { name: "id_role" },
         ]
       },
       {
