@@ -1,2 +1,3 @@
 # Kiến Trúc Và Thiết Kế Phần Mềm
-![new Db](https://github.com/ducmanhlai/KTTKHT/assets/72874551/3b9f9ac3-e972-434c-aa56-295b2bb73f43)
+
+![new Db](https://github.com/ducmanhlai/KTTKHT/assets/72874551/a4af93f8-31db-4a43-b904-749f7364990b)
