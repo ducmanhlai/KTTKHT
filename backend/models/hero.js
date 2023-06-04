@@ -2,61 +2,75 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('hero', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
     price: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     classify: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'type_hero',
         key: 'id'
       }
     },
-    id_skill_1: {
+    coin: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'skill_hero',
-        key: 'id'
-      }
+      allowNull: false
     },
-    id_skill_2: {
+    baseHp: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      references: {
-        model: 'skill_hero',
-        key: 'id'
-      }
+      defaultValue: 0
     },
-    id_skill_3: {
+    armor: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      references: {
-        model: 'skill_hero',
-        key: 'id'
-      }
+      defaultValue: 0
     },
-    id_skill_special: {
+    magicDefense: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      references: {
-        model: 'skill_hero',
-        key: 'id'
-      }
+      defaultValue: 0
     },
-    id_normal_attack: {
+    attackDamage: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      references: {
-        model: 'skill_hero',
-        key: 'id'
-      }
+      defaultValue: 0
+    },
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    magicDamage: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    mana: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    speed: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 100
+    },
+    'attack speed': {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    armorPierce: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    magicPierce: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
@@ -72,45 +86,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "FK_hero_type_hero",
+        name: "FK_hero_type_hero_idx",
         using: "BTREE",
         fields: [
           { name: "classify" },
-        ]
-      },
-      {
-        name: "FK_hero_skill_1",
-        using: "BTREE",
-        fields: [
-          { name: "id_skill_1" },
-        ]
-      },
-      {
-        name: "FK_hero_skill_2",
-        using: "BTREE",
-        fields: [
-          { name: "id_skill_2" },
-        ]
-      },
-      {
-        name: "FK_hero_skill_3",
-        using: "BTREE",
-        fields: [
-          { name: "id_skill_3" },
-        ]
-      },
-      {
-        name: "FK_hero_skill_special",
-        using: "BTREE",
-        fields: [
-          { name: "id_skill_special" },
-        ]
-      },
-      {
-        name: "FK_hero_skill_id_normal_attack",
-        using: "BTREE",
-        fields: [
-          { name: "id_normal_attack" },
         ]
       },
     ]
