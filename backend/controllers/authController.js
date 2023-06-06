@@ -1,9 +1,8 @@
 import Model from '../configs/sequelize'
 import bcrypt from 'bcryptjs';
+import { createJWT } from '../configs/JWTAction';
 const salt = bcrypt.genSaltSync(10);
-import { createJWT } from '../services/JWTAction'
 class authController {
-
     //user login
     async login(req, res) {
         try {
