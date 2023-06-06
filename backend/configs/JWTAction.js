@@ -10,11 +10,8 @@ const createJWT = (data) => {
     } catch (e) {
         console.log(e);
     }
-
-    // console.log(token);
     return token;
 }
-
 const verifyJWT = (token) => {
     let key = process.env.JWT_SECRECT
     let data = null
@@ -30,7 +27,4 @@ const verifyJWT = (token) => {
 }
 
 
-module.exports = {
-    createJWT,
-    verifyJWT,
-}
+export {createJWT,verifyJWT}

@@ -60,7 +60,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       defaultValue: 100
     },
-    'attack speed': {
+    attackSpeed: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
