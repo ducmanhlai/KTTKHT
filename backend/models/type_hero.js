@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('type_hero', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -9,6 +10,10 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING(200),
       allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING(300),
+      allowNull: true
     }
   }, {
     sequelize,

@@ -1,0 +1,16 @@
+[{
+    "code":"001",
+    "messVie":"Lỗi đăng nhập",
+    "messEng":"Login error"
+},
+{
+    "code":"002",
+    "messVie":"Lỗi đăng kí",
+    "messEng":"SignUp error"
+},
+{
+    "code":"003",
+    "messVie":"Đăng nhập thành công",
+    "messEng":"Login compelete"
+}
+]
