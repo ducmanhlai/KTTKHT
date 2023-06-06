@@ -2,6 +2,9 @@ import Model from '../configs/sequelize'
 import bcrypt from 'bcryptjs';
 import { createJWT } from '../configs/JWTAction';
 const salt = bcrypt.genSaltSync(10);
+// import { createJWT } from '../services/JWTAction'
+import auth from "../../backend/middleware/authenJWT"
+
 class authController {
     //user login
     async login(req, res) {
@@ -9,12 +12,14 @@ class authController {
             let data = req.body
             let userData = {}
 
-            //check email tồn tại
-            let isExist = await checkUserEmail(data.email)
-            console.log('Check tồn tại: ', isExist);
-
+            //check email User tồn tại
+            let isExistUser = await checkUserEmail(data.email)
+            console.log('Check tồn tại: ', isExistUser);
+            //check email Admin tồn tại
+            let isExistAdmin = await checkUserEmailAdmin(data.email)
+            console.log('Check tồn tại: ', isExistAdmin);
             //Check email tồn tại
-            if (isExist) {
+            if (isExistUser) {
                 // const [rows] = await pool.execute('SELECT * FROM account where email=?', [email])
                 const userDataDb = await Model.account.findOne({ where: { email: data.email, id_role: 1 } })
 
@@ -37,28 +42,8 @@ class authController {
                     userData.message = 'Sai mật khẩu.Vui lòng kiểm tra lại'
                 }
             }
-            else {
-                userData.errCode = 1
-                userData.message = 'Tên đăng nhập không tồn tại'
-            }
-            return res.status(200).json(userData)
-        } catch (e) {
-            // reject(error)
-            console.log(e);
-        }
-    }
-
-    async loginAdmin(req, res) {
-        try {
-            let data = req.body
-            let userData = {}
-
-            //check email tồn tại
-            let isExist = await checkUserEmailAdmin(data.email)
-            console.log('Check tồn tại: ', isExist);
-
             //Check email tồn tại
-            if (isExist) {
+            else if (isExistAdmin) {
                 // const [rows] = await pool.execute('SELECT * FROM account where email=?', [email])
                 const userDataDb = await Model.account.findOne({ where: { email: data.email, id_role: 2 } })
 
@@ -101,8 +86,28 @@ class authController {
         } catch (e) {
             console.log(e);
         }
+    }
 
+    async testMiddleware(req, res) {
+        try {
+            let id_account = auth.tokenData(req)
+            console.log(req);
+            if (id_account) {
+                return res.status(200).json({
+                    errCode: 0,
+                    message: 'Thành công'
+                })
+            }
+            else {
+                return res.status(400).json({
+                    errCode: 1,
+                    message: 'Thất bại'
+                })
+            }
 
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
 
