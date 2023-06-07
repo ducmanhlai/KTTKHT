@@ -3,8 +3,27 @@ $color: red;
 
 .App {
   color: $color;
-  font-size: large;
+  // font-size: large;
 }
+
+body {
+  font-family: "Montserrat", arial, helvetica, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.6em;
+  background: #160e1e;
+}
+
 a {
   color: rgb(206, 170, 170);
+}
+
+img {
+  border: 0 none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  height: auto;
 }
