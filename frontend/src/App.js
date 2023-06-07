@@ -1,11 +1,11 @@
+import React from "react";
+
 import "./scss/test.scss";
+import Home from "./Component/Home/Home";
 function App() {
   return (
-    <div>
-      <h1 className="App">Hello world!</h1>
-      <a className="underline">hihi</a>
-
-      <div className="mt-10">Xiao Ming</div>
+    <div className="app">
+      <Home />
     </div>
   );
 }
