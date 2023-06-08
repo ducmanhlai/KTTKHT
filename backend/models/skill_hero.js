@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('skill_hero', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -21,6 +22,22 @@ module.exports = function(sequelize, DataTypes) {
         model: 'type_damage',
         key: 'id'
       }
+    },
+    type_skill: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'type_skill',
+        key: 'id'
+      }
+    },
+    id_hero: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'hero',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
@@ -36,10 +53,24 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "FK_skill_type_damage",
+        name: "FK_skill_hero_idx",
+        using: "BTREE",
+        fields: [
+          { name: "id_hero" },
+        ]
+      },
+      {
+        name: "FK_skill_type_damage_idx",
         using: "BTREE",
         fields: [
           { name: "type_damage" },
+        ]
+      },
+      {
+        name: "FK_skill_type_skill_idx",
+        using: "BTREE",
+        fields: [
+          { name: "type_skill" },
         ]
       },
     ]

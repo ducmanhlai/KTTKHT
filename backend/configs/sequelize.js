@@ -7,7 +7,7 @@ const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.LOGIN_NAM
   host: process.env.SERVER_NAME,
   dialect: 'mysql',
   query: {
-    "raw": true
+    "raw": false
   },
 });
 
