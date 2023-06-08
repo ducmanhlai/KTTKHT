@@ -1,4 +1,5 @@
 import Models from '../configs/sequelize';
+import auth from "../../backend/middleware/authenJWT"
 const SkinModel = Models.skin;
 class skillController {
     async get(req, res) {
@@ -47,6 +48,11 @@ class skillController {
                 data: []
             })
         }
+    }
+    async buy(req, res) {
+        const user= auth.tokenData(req);
+        console.log(user)
+        const { id_skin } = req.body;
     }
 }
 export default new skillController()
