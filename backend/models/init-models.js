@@ -48,8 +48,6 @@ function initModels(sequelize) {
   account.hasMany(hero_of_users, { as: "hero_of_users", foreignKey: "id_user"});
   payment.belongsTo(account, { as: "id_account_account", foreignKey: "id_account"});
   account.hasMany(payment, { as: "payments", foreignKey: "id_account"});
-  skin_of_user.belongsTo(account, { as: "id_user_account", foreignKey: "id_user"});
-  account.hasMany(skin_of_user, { as: "skin_of_users", foreignKey: "id_user"});
   users.belongsTo(account, { as: "id_account_account", foreignKey: "id_account"});
   account.hasMany(users, { as: "users", foreignKey: "id_account"});
   hero_of_users.belongsTo(hero, { as: "id_hero_hero", foreignKey: "id_hero"});
@@ -78,6 +76,8 @@ function initModels(sequelize) {
   type_skill.hasMany(skill_hero, { as: "skill_heros", foreignKey: "type_skill"});
   skin.belongsTo(type_skin, { as: "classify_type_skin", foreignKey: "classify"});
   type_skin.hasMany(skin, { as: "skins", foreignKey: "classify"});
+  skin_of_user.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
+  users.hasMany(skin_of_user, { as: "skin_of_users", foreignKey: "id_user"});
 
   return {
     account,
