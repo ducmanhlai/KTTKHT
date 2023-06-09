@@ -1,4 +1,5 @@
 import React from "react";
+import "./Login.scss";
 
 import facebookImage from "../../img/facebook.png";
 import instagramImage from "../../img/instagram.png";
@@ -17,8 +18,8 @@ export default function Login() {
               type="text"
               id="login-name"
               name="name"
-              value={this.state.username}
-              onChange={(event) => this.handleOnChangeEmail(event)}
+              // value={this.state.username}
+              // onChange={(event) => this.handleOnChangeEmail(event)}
             ></input>
           </label>
           <label>
@@ -27,8 +28,8 @@ export default function Login() {
               type="password"
               id="login-password"
               name="password"
-              value={this.state.password}
-              onChange={(event) => this.handleOnChangePassword(event)}
+              // value={this.state.password}
+              // onChange={(event) => this.handleOnChangePassword(event)}
             ></input>
           </label>
 
@@ -36,7 +37,7 @@ export default function Login() {
             id="login-submit"
             className="submit"
             type="button"
-            onClick={() => this.handleLogin()}
+            // onClick={() => this.handleLogin()}
           >
             Đăng Nhập
           </button>
