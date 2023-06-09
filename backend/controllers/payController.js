@@ -80,43 +80,43 @@ class payController {
             res.status(200).json({ RspCode: '97', Message: 'Fail checksum' })
         }
     }
-    showResult(req,res){
+    showResult(req, res) {
         var vnp_Params = req.query;
 
         var secureHash = vnp_Params['vnp_SecureHash'];
-    
+
         delete vnp_Params['vnp_SecureHash'];
         delete vnp_Params['vnp_SecureHashType'];
-    
+
         vnp_Params = sortObject(vnp_Params);
         var tmnCode = config.vnp_TmnCode;
         var secretKey = config.vnp_HashSecret;
-    
+
         var querystring = require('qs');
         var signData = querystring.stringify(vnp_Params, { encode: false });
-        var crypto = require("crypto");     
+        var crypto = require("crypto");
         var hmac = crypto.createHmac("sha512", secretKey);
-        var signed = hmac.update(new Buffer.from(signData, 'utf-8')).digest("hex");     
-    
-        if(secureHash === signed){
+        var signed = hmac.update(new Buffer.from(signData, 'utf-8')).digest("hex");
+
+        if (secureHash === signed) {
             //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
-            res.send({code: vnp_Params['vnp_ResponseCode']})
+            res.send({ code: vnp_Params['vnp_ResponseCode'] })
             console.log('Thành công')
-        } else{
-            res.send({code: '97'})
+        } else {
+            res.send({ code: '97' })
         }
     }
 }
 function sortObject(obj) {
-	let sorted = {};
-	let str = [];
-	let key;
-	for (key in obj){
-		if (obj.hasOwnProperty(key)) {
-		str.push(encodeURIComponent(key));
-		}
-	}
-	str.sort();
+    let sorted = {};
+    let str = [];
+    let key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            str.push(encodeURIComponent(key));
+        }
+    }
+    str.sort();
     for (key = 0; key < str.length; key++) {
         sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, "+");
     }
