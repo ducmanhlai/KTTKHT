@@ -10,6 +10,6 @@ export default function router(app) {
    app.use('/api/v1/hero', heroRouter);
    app.use('/api/v1/admin', adminRouter);
    app.use('/api/v1/skill', skillRouter)
-   app.use('/api/v1/skin', auth.authenUser,skinRouter);
+   app.use('/api/v1/skin',skinRouter);
    app.use("/api/v1/payment",paymentRouter)
 }
