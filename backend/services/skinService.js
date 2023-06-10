@@ -7,35 +7,46 @@ const UserModel = Models.users
 async function BuySkinService(id_acc, id_skin, res) {
     try {
         const listPromise = []
-        listPromise.push(AccountModel.findByPk(id_acc));
         listPromise.push(UserModel.findOne({ where: { id_account: id_acc } }));
         listPromise.push(SkinModel.findByPk(id_skin,{raw:true}))
-        const [acc, user, skin] = await Promise.all(listPromise);
-        checkTransaction(user,skin)
-        res.send({
-            message: 'Có lỗi xảy ra',
-            data: []
-        })
+        const [user, skin] = await Promise.all(listPromise);
+        checkTransaction(user,skin,res)
     } catch (error) {
+        console.log(error)
         res.send({
             message: 'Có lỗi xảy ra',
             data: []
         })
-        console.log(error)
+        
     }
 }
-function checkTransaction(user, skin) {
+async function checkTransaction(user, skin,res) {
     const price = skin.price;
     const coinUser = user.dataValues.coin;
     if (coinUser >= price) {
         const newUser = { ...user.dataValues, coin: coinUser - price };
-        Promise.all([user.update(newUser), SkinOfUserModel.create({ id_user: user.dataValues.id_account, id_skin: skin.id })])
+        const skin_of_user = await SkinOfUserModel.findOne({where:{ id_user: user.dataValues.id_account, id_skin: skin.id }});
+        if(skin_of_user==null){
+            Promise.all([user.update(newUser), SkinOfUserModel.create({ id_user: user.dataValues.id_account, id_skin: skin.id })])
             .then(data => {
-                console.log(true)
+                res.send({
+                    message: 'Mua thành công',
+                    data: []
+                })
+            }).catch(err=>{
+                res.send({
+                    message: 'Có lỗi xảy ra',
+                    data: []
+                })
             })
-            .catch(error => {
-                console.log(error)
+        }
+        else{
+            res.send({
+                message: 'Bạn đã sở hữu trang phục này!',
+                data: []
             })
+        }
+       
     }
     else {
         console.log("Ko đủ tiền")
