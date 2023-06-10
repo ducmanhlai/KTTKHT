@@ -1,0 +1,107 @@
+.main-container {
+  padding: 50px 0 70px 0;
+  position: relative;
+  margin-bottom: -50px;
+  border-top: 2px solid #ae903b;
+
+  .hero-page {
+    .inner-page {
+      width: 1168px;
+      margin: 0 auto;
+      position: relative;
+
+      .filter-hero {
+        overflow: hidden;
+        margin-bottom: 5%;
+
+        .item-filter {
+          width: 14.111%;
+          float: left;
+
+          .radio {
+            display: none;
+
+            & + label {
+              color: #acacac;
+              text-transform: uppercase;
+              font-size: 16px;
+              font-weight: 500;
+
+              span {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background: url(../../img/check_radio_sheet.png) right center
+                  no-repeat;
+                margin: -1px 4px 0 0;
+                vertical-align: middle;
+                cursor: pointer;
+              }
+            }
+
+            &:checked + label span {
+              background: url(../../img/check_radio_sheet.png) left center
+                no-repeat;
+            }
+          }
+
+          input[type="radio"] {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 4px 0 0;
+            line-height: normal;
+          }
+        }
+      }
+
+      .bx-search {
+        padding: 0 0 5% 0;
+
+        .search {
+          background: #000 url(../../img/bt-search.png) right center no-repeat;
+          background-size: auto 100%;
+          padding: 5px 50px 5px 10px;
+          border: 1px solid #a08945;
+          width: 70%;
+          margin: 0 auto;
+          cursor: pointer;
+
+          input {
+            border: none;
+            background-color: transparent;
+            line-height: 40px;
+            color: #acacac;
+            width: 100%;
+            outline: none;
+          }
+        }
+      }
+
+      .bx-list-hero {
+        .list-hero {
+          .list-champion {
+            width: 14.111%;
+            float: left;
+
+            .heroes {
+              padding: 10%;
+
+              img {
+                width: 100%;
+                border: 2px solid #a08945;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .info-tab {
+    .nav-link {
+      .link-title {
+        width: 20%;
+      }
+    }
+  }
+}
