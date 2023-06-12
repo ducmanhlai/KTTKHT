@@ -26,7 +26,6 @@ class heroController {
         }
 
     }
-
     async createHero(req, res) {
         try {
             const file = req.file.buffer;
