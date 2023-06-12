@@ -1,19 +1,19 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('action', {
+  return sequelize.define('level_item', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    skill: {
-      type: DataTypes.STRING(100),
+    level: {
+      type: DataTypes.STRING(45),
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'action',
+    tableName: 'level_item',
     timestamps: false,
     indexes: [
       {

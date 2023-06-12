@@ -1,47 +1,51 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('skill_hero', {
+  return sequelize.define('payment', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING(200),
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: false
-    },
-    type_damage: {
+    id_account: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'type_damage',
+        model: 'account',
         key: 'id'
       }
     },
-    type_skill: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'type_skill',
-        key: 'id'
-      }
-    },
-    id_hero: {
+    id_method: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'hero',
+        model: 'payment_method',
         key: 'id'
       }
+    },
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'payment_status',
+        key: 'id'
+      }
+    },
+    id_order: {
+      type: DataTypes.STRING(45),
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'skill_hero',
+    tableName: 'payment',
     timestamps: false,
     indexes: [
       {
@@ -53,24 +57,24 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "FK_skill_hero_idx",
+        name: "payment_method_idx",
         using: "BTREE",
         fields: [
-          { name: "id_hero" },
+          { name: "id_method" },
         ]
       },
       {
-        name: "FK_skill_type_damage_idx",
+        name: "payment_status_idx",
         using: "BTREE",
         fields: [
-          { name: "type_damage" },
+          { name: "status" },
         ]
       },
       {
-        name: "FK_skill_type_skill_idx",
+        name: "FK_payment_acc_idx",
         using: "BTREE",
         fields: [
-          { name: "type_skill" },
+          { name: "id_account" },
         ]
       },
     ]

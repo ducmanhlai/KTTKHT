@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('skill_hero', {
+  return sequelize.define('item', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -9,39 +9,39 @@ module.exports = function(sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING(200),
-      allowNull: false
+      allowNull: true
     },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: false
-    },
-    type_damage: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'type_damage',
-        key: 'id'
-      }
-    },
-    type_skill: {
+    level: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'type_skill',
+        model: 'level_item',
         key: 'id'
       }
     },
-    id_hero: {
+    type: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'hero',
+        model: 'type_item',
         key: 'id'
       }
+    },
+    description: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    icon: {
+      type: DataTypes.STRING(200),
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'skill_hero',
+    tableName: 'item',
     timestamps: false,
     indexes: [
       {
@@ -53,24 +53,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "FK_skill_hero_idx",
+        name: "fk_item_level_idx",
         using: "BTREE",
         fields: [
-          { name: "id_hero" },
+          { name: "level" },
         ]
       },
       {
-        name: "FK_skill_type_damage_idx",
+        name: "fk_item_type_idx",
         using: "BTREE",
         fields: [
-          { name: "type_damage" },
-        ]
-      },
-      {
-        name: "FK_skill_type_skill_idx",
-        using: "BTREE",
-        fields: [
-          { name: "type_skill" },
+          { name: "type" },
         ]
       },
     ]

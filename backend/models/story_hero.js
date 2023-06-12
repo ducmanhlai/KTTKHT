@@ -1,19 +1,22 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('action', {
-    id: {
-      autoIncrement: true,
+  return sequelize.define('story_hero', {
+    id_hero: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references: {
+        model: 'hero',
+        key: 'id'
+      }
     },
-    skill: {
-      type: DataTypes.STRING(100),
-      allowNull: false
+    story: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'action',
+    tableName: 'story_hero',
     timestamps: false,
     indexes: [
       {
@@ -21,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id" },
+          { name: "id_hero" },
         ]
       },
     ]

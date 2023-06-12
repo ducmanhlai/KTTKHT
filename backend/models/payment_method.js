@@ -1,19 +1,19 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('action', {
+  return sequelize.define('payment_method', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    skill: {
-      type: DataTypes.STRING(100),
-      allowNull: false
+    name: {
+      type: DataTypes.STRING(45),
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'action',
+    tableName: 'payment_method',
     timestamps: false,
     indexes: [
       {
