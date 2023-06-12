@@ -1,5 +1,6 @@
 import Models from '../configs/sequelize';
 const SkillModel = Models.skill_hero;
+const type_damageModel = Models.type_damage
 class skillController {
    async get(req, res) {
       try {
@@ -7,7 +8,8 @@ class skillController {
          let listSkill = await SkillModel.findAll({
             where: {
                id_hero: id_hero
-            }
+            },
+            include: [ { model: type_damageModel, as: 'type_damage_type_damage' } ]
          });
          res.send({
             data: listSkill,

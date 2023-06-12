@@ -1,6 +1,7 @@
 import Models from '../configs/sequelize';
 import auth from "../../backend/middleware/authenJWT"
 const SkinModel = Models.skin;
+import BuySkinService from '../services/skinService';
 class skillController {
     async get(req, res) {
         try {
@@ -50,9 +51,20 @@ class skillController {
         }
     }
     async buy(req, res) {
-        const user= auth.tokenData(req);
-        console.log(user)
-        const { id_skin } = req.body;
+        try {
+            const account = auth.tokenData(req);
+            const { id_skin } = req.body; 
+            BuySkinService(account.id,id_skin,res) 
+        } catch (error) {
+            console.log(error)
+              res.send({
+                message:'Có lỗi xảy ra',
+                data:[]
+              })
+
+        }
+
+
     }
 }
 export default new skillController()
