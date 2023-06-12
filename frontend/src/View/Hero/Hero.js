@@ -127,7 +127,7 @@ export default function Hero() {
             </div>
 
             <div className="bx-list-hero">
-              <ul className="list-hero overflow-hidden">
+              <ul className="list-hero overflow-hidden ">
                 <li id="champion-1" className="list-champion">
                   <span className="tags hidden" tag="1" type="6">
                     Valhein, valhein
@@ -137,6 +137,7 @@ export default function Hero() {
                       <img
                         src="https://lienquan.garena.vn/files/champion/icon/4b36c6e5e2d1ce9dd9e2841d2902043c5ee04efeb2f2d.jpg"
                         alt="img"
+                        className="hover:opacity-75"
                       ></img>
                     </a>
                     <p
@@ -159,6 +160,7 @@ export default function Hero() {
                       <img
                         src="https://lienquan.garena.vn/files/champion/icon/71f7a36c0dd250ce0affeffcf14360f45e57c0420b4b6.jpg"
                         alt="img"
+                        className="hover:opacity-75"
                       ></img>
                     </a>
                     <p
@@ -181,6 +183,7 @@ export default function Hero() {
                       <img
                         src="https://lienquan.garena.vn/files/champion/icon/dab2c45af3206cd0ac30b450357aa8ce5fc5264d71f45.jpg"
                         alt="img"
+                        className="hover:opacity-75"
                       ></img>
                     </a>
                     <p
@@ -203,6 +206,7 @@ export default function Hero() {
                       <img
                         src="https://lienquan.garena.vn/files/champion/icon/eef053fb25793d536185559e8bf5a82d5c132caaa102e.jpg"
                         alt="img"
+                        className="hover:opacity-75"
                       ></img>
                     </a>
                     <p
@@ -225,6 +229,7 @@ export default function Hero() {
                       <img
                         src="https://lienquan.garena.vn/files/champion/icon/f69423f533b12cbcd8ab15a7127e1e445e79e0b77e4ec.jpg"
                         alt="img"
+                        className="hover:opacity-75"
                       ></img>
                     </a>
                     <p
@@ -247,6 +252,7 @@ export default function Hero() {
                       <img
                         src="https://lienquan.garena.vn/files/champion/icon/36c65a1b6446ee0b34260fa7cbb9a04c5955d4504884a.jpg"
                         alt="img"
+                        className="hover:opacity-75"
                       ></img>
                     </a>
                     <p
@@ -269,6 +275,7 @@ export default function Hero() {
                       <img
                         src="https://lienquan.garena.vn/files/champion/icon/5064b1bbcb8dcac94f88292537d6c35459e96577aa90c.jpg"
                         alt="img"
+                        className="hover:opacity-75"
                       ></img>
                     </a>
                     <p

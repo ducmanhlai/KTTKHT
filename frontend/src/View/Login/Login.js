@@ -67,7 +67,7 @@ export default function Login() {
           <div className="img">
             <div className="img-text m-up">
               <h2>Có gì mới?</h2>
-              <p>Truy cập website để tìm kiếm đồ uống ưa thích đi nào</p>
+              <p>Truy cập website để hiểu hơn về game đi nào</p>
             </div>
             <div className="img-btn">
               <span className="m-up">Đăng Ký</span>
