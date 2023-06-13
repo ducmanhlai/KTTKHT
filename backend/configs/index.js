@@ -4,7 +4,6 @@ import express from "express"
 var cors = require('cors')
 dotenv.config()
 export default function run(app) {
-    
     app.use(cors({ credentials: true, origin: true }));
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
