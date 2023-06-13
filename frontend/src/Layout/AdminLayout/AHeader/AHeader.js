@@ -45,7 +45,7 @@ export default function AHeader() {
                   </Link>
                 </li>
                 <li className="title-menu-top float-left">
-                  <Link className="top-menu-link py-0 px-4" to="/notifications">
+                  <Link className="top-menu-link py-0 px-4" to="/rule">
                     Luật chơi
                   </Link>
                 </li>

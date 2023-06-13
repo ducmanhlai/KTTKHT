@@ -47,8 +47,7 @@ auth.authenAdmin = (req, res, next) => {
             console.log(err);
             return res.sendStatus(403);
         }
-        // console.log('Phong test:', data.role);
-        if (data.role !== 1) return res.sendStatus(403);
+        if (data.id_role != 2) return res.sendStatus(403);
         next();
     })
 }
