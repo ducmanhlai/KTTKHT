@@ -1,10 +1,10 @@
 import axios from "./axios";
-import toast, { Toaster } from 'react-hot-toast';
 import { getToken } from "../services/token";
 const axiosApiInstance = axios.create({});
 
 axiosApiInstance.interceptors.request.use((config) => {
-  let accessToken = localStorage.getItem('accessToken');
+  let [accessToken,refreshToken] = getToken()
+   
   if(accessToken === null){
     localStorage.clear()
     window.location.href = "/login";

@@ -12,7 +12,7 @@ class skillController {
             where: {
                id_hero: id_hero
             },
-            include: [{ model: type_damageModel, as: 'type_damage_type_damage' }]
+            include: [{ model: typeDamageModel, as: 'type_damage_type_damage' }]
          });
          res.send({
             data: listSkill,

@@ -106,6 +106,7 @@ export default function Login() {
         </div>
       </div>
     </div>
+    
   );
   function handleOnChangeEmail(e) {
     const inputEmail = e.target.value;
