@@ -1,12 +1,12 @@
 import React from "react";
-import AHeader from "../AHeader/AHeader";
+// import AHeader from "../AHeader/AHeader";
 import { FaLock, FaUnlock } from "react-icons/fa";
 import "./Account.scss";
 
 export default function Account() {
   return (
     <>
-      <AHeader />
+      {/* <AHeader /> */}
 
       <div className="account-main-container pt-20">
         <div className="d-flex justify-content-center title-account text-center">
@@ -34,16 +34,10 @@ export default function Account() {
                 <td>xiaoming@gmail.com</td>
                 <td>09999999</td>
                 <td>
-                  <button
-                    className="btn-edit"
-                    // onClick={() => this.handleEditProduct(item)}
-                  >
+                  <button className="btn-edit">
                     <FaLock />
                   </button>
-                  <button
-                    className="btn-delete"
-                    // onClick={() => this.handleDeleteProduct(item)}
-                  >
+                  <button className="btn-delete">
                     <FaUnlock />
                   </button>
                 </td>

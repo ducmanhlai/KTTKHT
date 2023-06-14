@@ -11,7 +11,9 @@ import "./scss/test.scss";
 // import Equip from "./View/Equip/Equip";
 import AHome from "./Layout/AdminLayout/Home/AHome";
 import Account from "./Layout/AdminLayout/Account/Account";
-// import AHeader from "./Layout/AdminLayout/AHeader/AHeader";
+import Heroes from "./Layout/AdminLayout/Heroes/Heroes";
+import Skin from "./Layout/AdminLayout/Skin/Skin";
+import AHeader from "./Layout/AdminLayout/AHeader/AHeader";
 
 function App() {
   return (
@@ -30,10 +32,13 @@ function App() {
         </Routes>
         <Hero /> */}
       <BrowserRouter>
+        <AHeader />
         <Routes>
           <Route path="/" exact element={<AHome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/heroes" element={<Heroes />} />
+          <Route path="/skin" element={<Skin />} />
         </Routes>
       </BrowserRouter>
     </div>

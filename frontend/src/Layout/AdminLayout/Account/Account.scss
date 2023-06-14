@@ -14,7 +14,7 @@
 
   .table-user-account {
     #customers-account {
-      background-color: #ccc;
+      border: 3px solid #ccc;
 
       font-family: Arial, Helvetica, sans-serif;
       border-collapse: collapse;
@@ -29,15 +29,20 @@
         // }
 
         &:hover {
-          background-color: #ddd;
+          //   background-color: #ddd;
+          opacity: 0.9;
         }
 
         th {
           padding-top: 12px;
           padding-bottom: 12px;
           text-align: center;
+          //   background-image: url("../../../img/btn.png");
+          //   background-size: cover;
+          background-color: #fff;
+
           // background-color: #0d6efd;
-          background-color: #ddd;
+          //   background-color: #ddd;
           // background: linear-gradient(to right, #6dd5fa, #ffffff);
           color: #000;
           border: 1px solid #fff;
@@ -46,12 +51,15 @@
         }
 
         td {
+          //   background-image: url("../../../img/btn.png");
+          //   background-size: cover;
+          background-color: #fff;
           border: 0.5px solid #ddd;
           padding: 8px;
           color: #000;
           text-align: center;
           font-size: 16px;
-          font-weight: bold;
+          //   font-weight: bold;
           opacity: 0.9;
 
           .avatar-image {
