@@ -1,16 +1,20 @@
 import Model from '../configs/sequelize';
 import mail from '../services/mail'
+import auth from '../middleware/authenJWT'
 
-class adminController {
+class userController {
 
-    //Lấy tất cả người dùng 
-    async getAllUser(req, res) {
+    //Lấy thông tin người dùng 
+    async getInfoUser(req, res) {
         try {
-            let dataUser = await Model.account.findAll({ where: { id_role: 1 }, raw: true })
+            let id_account = auth.tokenData(req).id
+            console.log(id_account);
+            // let dataUser = await Model.account.findAll({ where: { id_role: 1 }, raw: true })
+            let dataUser = await Model.users.findOne({ where: { id_account }, raw: true })
 
             return res.status(200).json({
                 errCode: 0,
-                message: 'Lấy thành công tất cả User',
+                message: 'Lấy thành công thông tin người dùng',
                 data: dataUser
             })
         } catch (e) {
@@ -18,29 +22,17 @@ class adminController {
         }
     }
 
-    //Khóa người dùng không nghiêm túc
-    async blockUser(req, res) {
+    //Sửa thông tin người dùng
+    async updateUser(req, res) {
         try {
-            //Cần id người dùng để lấy email
-            let id_account = req.query.id_account
-            let dataUser = await Model.account.findOne({ where: { id: id_account, id_role: 1, status: 0 } })
+            let id_account = auth.tokenData(req).id
+            let { phone, name_user, avatar, id_card } = req.body
+            console.log(phone, name_user, avatar, id_card);
 
-            //Admin soạn nội dung gửi gắm đến người chơi không nghiêm túc
-            let { content } = req.body
+            let dataUser = await Model.account.findOne({ where: { id_account }, raw: true })
 
-            if (dataUser) {
-                let email = dataUser.dataValues.email;
-                //Gửi mail đi cho người dùng bị khóa
-                mail.sendAccountBlocked(email, content)
-                //update trạng thái người dùng
-                dataUser.status = 1
-                await dataUser.save();
-                // let updateStatus = await Model.account.findOne({ where: { id: id_account }, raw: true })
-                return res.status(200).json({
-                    errCode: 0,
-                    message: 'Khóa thành công tài khoản người dùng không nghiêm túc chấp hành nội quy của trò chơi!'
-                })
-            }
+
+
             return res.status(400).json({
                 errCode: 1,
                 message: 'Khóa tài khoản người dùng thất bại!'
@@ -81,4 +73,4 @@ class adminController {
     }
 
 }
-export default new adminController()
+export default new userController()
