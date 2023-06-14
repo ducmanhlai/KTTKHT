@@ -3,8 +3,8 @@ import { getToken } from "../services/token";
 const axiosApiInstance = axios.create({});
 
 axiosApiInstance.interceptors.request.use((config) => {
-  // const [accessToken,refreshToken] = getToken()
-  let accessToken= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInBhc3N3b3JkIjoiJDJ5JDEwJElXZFN0Z1JUM0pYYi5zSmg5a1FDU2VMU1BMdFpCMWZiT3ZoczVlZU5IWi5pVlE1LloyT3c2IiwiZW1haWwiOiJkdWNtYW5oQGdtYWlsLmNvbSIsInBob25lIjoiIiwiY3JlYXRlZF90aW1lIjoiMjAyMy0wNi0wOFQwNjoyNTo0Ny4wMDBaIiwic3RhdHVzIjowLCJpZF9yb2xlIjoxLCJpYXQiOjE2ODY3MzU0MjksImV4cCI6MTY4Njc1MzQyOX0.mhwQ-LYxyl4giTwSq9I0_62p8liifuAcMCtuE9MdK-s'
+  let [accessToken,refreshToken] = getToken()
+   
   if(accessToken === null){
     localStorage.clear()
     window.location.href = "/login";
