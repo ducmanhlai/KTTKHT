@@ -21,7 +21,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     exp: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
     status: {
       type: DataTypes.BOOLEAN,

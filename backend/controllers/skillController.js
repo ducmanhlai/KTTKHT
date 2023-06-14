@@ -11,7 +11,8 @@ class skillController {
          let listSkill = await SkillModel.findAll({
             where: {
                id_hero: id_hero
-            }
+            },
+            include: [{ model: type_damageModel, as: 'type_damage_type_damage' }]
          });
          res.send({
             data: listSkill,

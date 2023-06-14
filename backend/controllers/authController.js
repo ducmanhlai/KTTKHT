@@ -31,7 +31,7 @@ class authController {
                     userData.errCode = 0;
                     userData.message = 'Đăng nhập thành công';
                     delete data['password']// bỏ cái password nhạy cảm
-                    userData.acessToken = createJWT(data.dataValues, 'TOKEN')
+                    userData.accessToken = createJWT(data.dataValues, 'TOKEN')
                     userData.refreshToken = createJWT(data.dataValues, 'REFRESH')//đổi dữ liệu ng dùng thành tokten
 
                 }

@@ -8,7 +8,6 @@ auth.tokenData = (req) => {
 
     const token = authorizationHeader.split(' ')[1];
     let result = null;
-
     jwt.verify(token, process.env.JWT_SECRECT, (err, data) => {
         if (err) {
             console.log(err);
@@ -25,14 +24,12 @@ auth.authenUser = (req, res, next) => {
 
     const token = authorizationHeader.split(' ')[1]
     if (!token) return res.sendStatus(401)
-
     let key = process.env.JWT_SECRECT
     jwt.verify(token, key, (err, data) => {
         if (err) {
             console.log(err);
             return res.sendStatus(403)
         }
-        console.log(data);
         next()
     })
 }
@@ -50,8 +47,7 @@ auth.authenAdmin = (req, res, next) => {
             console.log(err);
             return res.sendStatus(403);
         }
-        console.log('Phong test:', data.role);
-        if (data.role !== 1) return res.sendStatus(403);
+        if (data.id_role != 2) return res.sendStatus(403);
         next();
     })
 }
