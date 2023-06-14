@@ -10,15 +10,6 @@ module.exports = function(sequelize, DataTypes) {
     skill: {
       type: DataTypes.STRING(100),
       allowNull: false
-    },
-    move: {
-      type: DataTypes.STRING(100),
-      allowNull: false
-    },
-    status: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 0
     }
   }, {
     sequelize,

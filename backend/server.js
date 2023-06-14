@@ -1,8 +1,4 @@
 import express from 'express';
-import run from './services';
+import run from './configs';
 const app = express();
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-  });
-
 run(app);

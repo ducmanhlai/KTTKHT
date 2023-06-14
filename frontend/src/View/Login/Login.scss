@@ -59,6 +59,7 @@
           padding-bottom: 5px;
           border-bottom: 1px solid rgba(109, 93, 93, 0.4);
           text-align: center;
+          color: #000;
         }
       }
 
@@ -75,7 +76,12 @@
         font-size: 15px;
         cursor: pointer;
       }
-
+      button:disabled :hover,
+      button[disabled]{
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+      }
       .submit {
         margin-top: 40px;
         margin-bottom: 30px;

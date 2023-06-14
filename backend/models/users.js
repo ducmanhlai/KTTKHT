@@ -18,6 +18,27 @@ module.exports = function(sequelize, DataTypes) {
     ruby: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    avatar: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    id_card: {
+      type: DataTypes.STRING(12),
+      allowNull: true
+    },
+    id_account: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'account',
+        key: 'id'
+      }
+    },
+    coin: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     }
   }, {
     sequelize,
@@ -30,6 +51,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "fk_account_idx",
+        using: "BTREE",
+        fields: [
+          { name: "id_account" },
         ]
       },
     ]

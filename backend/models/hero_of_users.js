@@ -4,20 +4,24 @@ module.exports = function(sequelize, DataTypes) {
     id_user: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
       references: {
-        model: 'users',
+        model: 'account',
         key: 'id'
       }
     },
     id_hero: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
       references: {
         model: 'hero',
         key: 'id'
       }
+    },
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     sequelize,
@@ -29,15 +33,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id_user" },
+          { name: "id" },
+        ]
+      },
+      {
+        name: "FK_herouser_hero_idx",
+        using: "BTREE",
+        fields: [
           { name: "id_hero" },
         ]
       },
       {
-        name: "hero_of_users_hero",
+        name: "hero_of_users_users_idx",
         using: "BTREE",
         fields: [
-          { name: "id_hero" },
+          { name: "id_user" },
         ]
       },
     ]

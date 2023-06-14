@@ -15,22 +15,9 @@ import Heroes from "./Layout/AdminLayout/Heroes/Heroes";
 import Skin from "./Layout/AdminLayout/Skin/Skin";
 import AHeader from "./Layout/AdminLayout/AHeader/AHeader";
 
-function App() {
+export default function App() {
   return (
     <div className="app">
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/news" element={<Login />} />
-          <Route path="/academy" element={<Hero />}>
-            <Route path="introduce" element={<Introduce />} />
-            <Route path="skin" element={<Skin />} />
-            <Route path="equip" element={<Equip />} />
-            <Route path="skin" element={<Skin />} />
-          </Route>
-        </Routes>
-        <Hero /> */}
       <BrowserRouter>
         <AHeader />
         <Routes>
@@ -44,5 +31,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

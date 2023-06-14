@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     password: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     email: {
@@ -17,28 +17,24 @@ module.exports = function(sequelize, DataTypes) {
     },
     phone: {
       type: DataTypes.STRING(10),
-      allowNull: true,
-      unique: "phone"
-    },
-    name: {
-      type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: true
     },
     created_time: {
       type: DataTypes.DATE,
-      allowNull: true
-    },
-    avatar: {
-      type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: true,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
     status: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    id_card: {
-      type: DataTypes.STRING(12),
-      allowNull: false
+    id_role: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'role',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
@@ -54,11 +50,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "phone",
-        unique: true,
+        name: "role_idx",
         using: "BTREE",
         fields: [
-          { name: "phone" },
+          { name: "id_role" },
         ]
       },
     ]
