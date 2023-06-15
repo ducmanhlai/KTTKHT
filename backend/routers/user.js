@@ -1,7 +1,10 @@
 import { Router } from "express";
 import userController from "../controllers/userController";
 const userRouter = Router();
+const multer = require('multer');
+const upload = multer();
+
 userRouter.get('/getinfo', userController.getInfoUser)
-userRouter.put('/update', userController.updateUser)
+userRouter.put('/update', upload.single('avatar'), userController.updateUser)
 userRouter.post('/unlockuser?:id_account', userController.unlockUser)
 export default userRouter

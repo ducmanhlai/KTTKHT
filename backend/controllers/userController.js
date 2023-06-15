@@ -1,6 +1,7 @@
 import Model from '../configs/sequelize';
 import mail from '../services/mail'
 import auth from '../middleware/authenJWT'
+import Resize from '../services/resize'
 
 class userController {
 
@@ -10,14 +11,31 @@ class userController {
             let id_account = auth.tokenData(req).id
             console.log(id_account);
             // let dataUser = await Model.account.findAll({ where: { id_role: 1 }, raw: true })
-            let dataUser = await Model.users.findOne({ where: { id_account }, raw: true })
+            let users = Model.users
 
-            return res.status(200).json({
-                errCode: 0,
-                message: 'Lấy thành công thông tin người dùng',
-                data: dataUser
+            let dataUser = await Model.account.findOne({
+                where: { id: id_account }, raw: true, include: [{
+                    model: users,
+                    as: 'users',
+                }]
             })
-        } catch (e) {
+            if (dataUser) {
+                delete dataUser['password'] //bỏ password nhạy cảm
+                return res.status(200).json({
+                    errCode: 0,
+                    message: 'Lấy thành công thông tin người dùng',
+                    data: dataUser
+                })
+            }
+            else {
+                return res.status(400).json({
+                    errCode: 1,
+                    message: 'Lỗi không hợp lệ',
+                    data: dataUser
+                })
+            }
+        }
+        catch (e) {
             console.log(e);
         }
     }
@@ -26,16 +44,66 @@ class userController {
     async updateUser(req, res) {
         try {
             let id_account = auth.tokenData(req).id
-            let { phone, name_user, avatar, id_card } = req.body
-            console.log(phone, name_user, avatar, id_card);
+            let { name_user, phone } = req.body
+            console.log(name_user, phone);
+            let dataAccount = await Model.account.findOne({
+                where: { id: id_account }
+            })
+            let dataUser = await Model.users.findOne({
+                where: { id_account }
+            })
+            const imagePath = '../public/images';
+            // call class Resize
+            const fileUpload = new Resize(imagePath);
+            let filename = ''
+            if (!req.file) {
+                //Không có ảnh sẽ không update avatar
+                dataAccount.set({
+                    phone
+                })
+                dataUser.set({
+                    name_user
+                })
+                await dataAccount.save()
+                await dataUser.save()
+            }
+            else {
+                //Có ảnh sẽ update avatar
+                filename = await fileUpload.save(req.file.buffer);
+                console.log(filename);
 
-            let dataUser = await Model.account.findOne({ where: { id_account }, raw: true })
+                dataAccount.set({
+                    phone
+                })
 
+                dataUser.set({
+                    name_user,
+                    avatar: filename
+                })
+                await dataAccount.save()
+                await dataUser.save()
+            }
 
+            // let dataAccount = await Model.account.findOne({
+            //     where: { id: id_account }
+            // })
+            // dataAccount.set({
+            //     phone: phone
+            // })
+            // let dataUser = await Model.users.findOne({
+            //     where: { id_account }
+            // })
+            // dataUser.set({
+            //     name_user,
+            //     id_card
+            // })
+            // await dataAccount.save()
+            // await dataUser.save()
+            // console.log(dataAccount);
 
             return res.status(400).json({
-                errCode: 1,
-                message: 'Khóa tài khoản người dùng thất bại!'
+                errCode: 0,
+                message: 'Cập nhật thành công thông tin người dùng!'
             })
         } catch (e) {
             console.log(e);
