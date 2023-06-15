@@ -4,6 +4,7 @@ import jwtDecode from "jwt-decode";
 import Login from "./View/Login/Login";
 
 import "./scss/test.scss";
+
 import Home from "./View/Home/Home";
 import Hero from "./View/Hero/Hero";
 import Introduce from "./View/Introduce/Introduce";
@@ -45,5 +46,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
