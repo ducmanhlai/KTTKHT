@@ -10,21 +10,22 @@ import Introduce from "./View/Introduce/Introduce";
 import Skin from "./View/Skin/Skin";
 import Equip from "./View/Equip/Equip";
 import Profile from "./View/Profile";
+import Account from "./Layout/AdminLayout/Account/Account";
 import { AuthContextProvider } from "./context/authContext";
 import AHome from "./Layout/AdminLayout/Home/AHome";
 
 function App() {
   let role = jwtDecode(localStorage.getItem('accessToken')).id_role;
-
   return (
     <div className="app">
       <AuthContextProvider>
         <BrowserRouter>
-          
+
           {role == 2 ?
             <Routes>
               <Route path="/" exact element={<AHome />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/account" element={<Account />} />
             </Routes>
             :
             <Routes>
