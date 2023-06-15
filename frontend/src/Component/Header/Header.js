@@ -39,10 +39,9 @@ export default function Header() {
                     Học viện
                   </Link>
                 </li>
-
                 <li className="title-menu-top float-left">
-                  <Link className="top-menu-link py-0 px-4" to="/account">
-                    Tài khoản
+                  <Link className="top-menu-link py-0 px-4" to="/profile">
+                    Cá nhân
                   </Link>
                 </li>
                 <li className="title-menu-top float-left">
@@ -58,12 +57,6 @@ export default function Header() {
               </ul>
             </div>
 
-            <Link
-              to="/login"
-              className="py-0 px-4 absolute right-4 top-4 text-base text-white hover:text-slate-300"
-            >
-              Đăng nhập
-            </Link>
           </nav>
 
           <div className="bx-top">
@@ -89,7 +82,7 @@ export default function Header() {
           <img
             src="https://lienquan.garena.vn/files/upload/images/ThanhTu/APL2023/1920x864.jpg"
             alt="img-top"
-            // className="hover:opacity-80"
+          // className="hover:opacity-80"
           ></img>
 
           {/* <img

@@ -28,4 +28,14 @@ mail.createCode = () => {
     return result;
 }
 
+mail.sendAccountBlocked = (userEmail, content) => {
+    let mailOptions = {
+        from: 'huynhthanhphong12a1',
+        to: userEmail,
+        subject: 'TÀI KHOẢN CỦA BẠN ĐÃ BỊ KHÓA VĨNH VIỄN',
+        text: content,
+    };
+    transporter.sendMail(mailOptions)
+}
+
 module.exports = mail
