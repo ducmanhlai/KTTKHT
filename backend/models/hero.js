@@ -71,6 +71,10 @@ module.exports = function(sequelize, DataTypes) {
     magicPierce: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    avatar: {
+      type: DataTypes.STRING(200),
+      allowNull: true
     }
   }, {
     sequelize,
