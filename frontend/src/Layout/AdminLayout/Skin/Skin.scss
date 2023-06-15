@@ -1,0 +1,115 @@
+.list {
+  display: flex;
+  width: 100%;
+  .listContainer {
+    flex: 6;
+  }
+}
+
+th{
+  color: black;
+  border: 2px solid black;
+}
+
+td {
+  height: 50px !important;
+  color: black;
+  text-align: center;
+  align-items: center;
+}
+
+tr {
+  height: 40px !important;
+}
+.content-wrapper {
+  display:flex;
+}
+.content-wrapper .container {
+  //   padding: 40px 0;
+  //   border-radius: 5px;
+  margin-top: -60px;
+  margin-left: 20px;
+}
+.main-content {
+    width: 832px;
+    margin-left: 320px;
+    background-color: wheat;
+  border-radius: 10px;
+  margin-top: -80px;
+}
+
+.Skin-inf {
+  text-align: center;
+  justify-content: center;
+}
+.Skin-list {
+  // padding-top: 10px !important;
+  // text-align: center;
+  // justify-content: center;
+}
+
+.Skin-list .list-images {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  align-items: center;
+  text-align: center;
+  margin-left: 42px;
+}
+
+.button-add {
+  border: white solid 2px;
+  float:none;
+  text-align: center;
+  color: black;
+}
+
+// .button-del {
+//   background: none;
+//   border: none;
+//   text-align: center;
+//   align-items: center;
+//   padding: 20px;
+//   width: 0px;
+//   margin-left: -30px;
+//   // font-size: 3px;
+//   // font-size: smaller;
+// }
+.button-edit {
+  background: none;
+  border: none;
+  text-align: center;
+  padding: 20px;
+  width: 0px;
+  margin-left: -30px;
+}
+.button-inf {
+  //   text-align: center;
+  //   width: 85px;
+  padding-top: 24px !important;
+  color: darkblue !important;
+}
+
+.btn-style {
+  font-size: 15px;
+  text-decoration: underline !important;
+  color: blue !important;
+  position: relative;
+  bottom: 8px;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.btn-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.input-Skin {
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
