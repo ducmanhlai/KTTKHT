@@ -24,7 +24,7 @@ class skillController {
             const imagePath = '../public/images';
             const { price, classify, name } = req.body;
             const fileUpload = new Resize(imagePath);
-            console.log(id);
+            let id_hero = req.query.id_hero
             let filename = ''
             if (!req.file || !price || !classify || !name) {
                 //Không có ảnh sẽ không update avatar
@@ -36,18 +36,18 @@ class skillController {
             else {
                 console.log(price, classify, name);
                 filename = await fileUpload.save(req.file.buffer);
-                // const hero = await HeroModel.create({
-                //     price, classify, name
-                // });
-                // return res.status(200).json({
-                //     errCode: 0,
-                //     data: hero,
-                //     message: 'Tạo thành công'
-                // })
+                const skin = await SkinModel.create({
+                    price, classify, name, avatar: filename, id_hero
+                });
+                return res.status(200).json({
+                    errCode: 0,
+                    data: skin,
+                    message: 'Tạo trang phục thành công'
+                })
             }
         } catch (error) {
             console.log(error)
-            res.status(400).send({
+            return res.status(400).send({
                 message: 'Tạo thất bại',
                 data: [],
             })
@@ -55,26 +55,40 @@ class skillController {
     }
     async update(req, res) {
         try {
-            const file = req.file.buffer;
             const imagePath = '../public/images';
-            // call class Resize
-            let skin = {};
+            const { price, classify, name, id_hero } = req.body;
             const fileUpload = new Resize(imagePath);
-            if (!req.file) {
-                skin = { ...req.body }
+            let id_skin = req.query.id_skin
+            const dataSkin = await SkinModel.findOne({
+                where: { id: id_skin }
+
+            });
+
+            let filename = ''
+            if (!req.file || !price || !classify || !name || !id_hero) {
+                console.log(id_skin, price, classify, name, id_hero, req.file);
+                //Không có ảnh sẽ không update avatar
+                return res.send({
+                    errCode: 1,
+                    message: 'Không thể cập nhật do thiếu thông tin của trang phục tướng. Vui lòng nhập đầy đủ thông tin!'
+                })
             }
             else {
-                const filename = await fileUpload.save(req.file.buffer);
-                skin = { ...req.body, avatar: filename };
+                console.log(price, classify, name);
+                filename = await fileUpload.save(req.file.buffer);
+                const skin = await dataSkin.set({
+                    price, classify, name, avatar: filename, id_hero
+                });
+                await skin.save()
+                return res.status(200).json({
+                    errCode: 0,
+                    data: skin,
+                    message: 'Cập nhật trang phục thành công'
+                })
             }
-            const result = await SkinModel.update(skin, { where: { id: skin.id } });
-            res.send({
-                message: 'Cập nhật thành công',
-                data: result
-            })
         } catch (error) {
             console.log(error)
-            res.send({
+            return res.send({
                 message: 'Lỗi máy chủ',
                 data: []
             })

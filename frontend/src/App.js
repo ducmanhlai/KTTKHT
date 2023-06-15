@@ -21,7 +21,7 @@ function App() {
     <div className="app">
       <AuthContextProvider>
         <BrowserRouter>
-          
+
           {role == 2 ?
             <Routes>
               <Route path="/" exact element={<AHome />} />
@@ -46,3 +46,4 @@ function App() {
     </div>
   );
 }
+export default App
