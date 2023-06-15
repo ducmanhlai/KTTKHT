@@ -91,11 +91,11 @@ export default function Header() {
             alt="img-top"
           ></img>
 
-          <img
+          {/* <img
             src="https://lienquan.garena.vn/files/upload/images/Thanh%20Th%E1%BA%A3o%20CTV/webteaser2_1920x864.jpg"
             alt="img-top"
             className="hover:opacity-90"
-          ></img>
+          ></img> */}
 
           <div className="owl-dots">
             <button className="owl-dot">
