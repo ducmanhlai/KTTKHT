@@ -7,4 +7,5 @@ const upload = multer();
 userRouter.get('/getinfo', userController.getInfoUser)
 userRouter.put('/update', upload.single('avatar'), userController.updateUser)
 userRouter.post('/unlockuser?:id_account', userController.unlockUser)
+userRouter.get('/analysis', userController.analysis)
 export default userRouter
