@@ -21,20 +21,30 @@ class skillController {
     }
     async create(req, res) {
         try {
-            const file = req.file.buffer;
             const imagePath = '../public/images';
-            // call class Resize
+            const { price, classify, name } = req.body;
             const fileUpload = new Resize(imagePath);
-            if (!req.file) {
-                res.status(401).json({ error: 'Please provide an image' });
+            console.log(id);
+            let filename = ''
+            if (!req.file || !price || !classify || !name) {
+                //Không có ảnh sẽ không update avatar
+                return res.send({
+                    errCode: 1,
+                    message: 'Không thể tạo do thiếu thông tin của trang phục tướng. Vui lòng nhập đầy đủ thông tin!'
+                })
             }
-            const filename = await fileUpload.save(req.file.buffer);
-            const skin = { ...req.body, avatar: filename };
-            const newSkin = await SkinModel.create(skin);
-            res.status(200).send({
-                message: 'Tạo thành công',
-                data: newSkin
-            })
+            else {
+                console.log(price, classify, name);
+                filename = await fileUpload.save(req.file.buffer);
+                // const hero = await HeroModel.create({
+                //     price, classify, name
+                // });
+                // return res.status(200).json({
+                //     errCode: 0,
+                //     data: hero,
+                //     message: 'Tạo thành công'
+                // })
+            }
         } catch (error) {
             console.log(error)
             res.status(400).send({
