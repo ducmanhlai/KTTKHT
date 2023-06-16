@@ -15,23 +15,13 @@ import AHome from "./Layout/AdminLayout/Home/AHome";
 // import Header from "./Component/Header/Header";
 
 function App() {
-<<<<<<< HEAD
-  // let role = jwtDecode(localStorage.getItem('accessToken')).id_role;
-  let role = 1;
-=======
-  let role = jwtDecode(localStorage.getItem('accessToken')).id_role;
->>>>>>> 0a9a928d083d51801e0a704dc636df0b05c4f78c
+  let role = jwtDecode(localStorage.getItem('accessToken')).id_role || 1;
   return (
     <div className="app">
       <AuthContextProvider>
         <BrowserRouter>
-<<<<<<< HEAD
           {/* <Header/> */}
           {role == 2 ? (
-=======
-
-          {role == 2 ?
->>>>>>> 0a9a928d083d51801e0a704dc636df0b05c4f78c
             <Routes>
               <Route path="/" exact element={<AHome />} />
               <Route path="/login" element={<Login />} />
@@ -45,7 +35,7 @@ function App() {
               <Route path="/news" element={<Login />} />
               <Route path="/academy" element={<Hero />}>
                 <Route path="introduce" element={<Introduce />} />
-                
+
                 <Route path="equip" element={<Equip />} />
                 <Route path="skin" element={<Skin />} />
               </Route>

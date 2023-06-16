@@ -1,10 +1,9 @@
 import Model from '../configs/sequelize'
 import bcrypt from 'bcryptjs';
-import { createJWT } from '../configs/JWTAction';
+import { createJWT, verifyJWT } from '../configs/JWTAction';
+import auth from "../../backend/middleware/authenJWT";
+import mail from '../services/mail';
 const salt = bcrypt.genSaltSync(10);
-// import { createJWT } from '../services/JWTAction'
-import auth from "../../backend/middleware/authenJWT"
-import mail from '../services/mail'
 
 class authController {
     //user login
@@ -62,8 +61,6 @@ class authController {
             console.log(e);
         }
     }
-
-
 
     async testMiddleware(req, res) {
         try {
@@ -243,7 +240,36 @@ class authController {
             console.log(error);
         }
     }
-
+    async refreshToken(req, res) {
+        const { token } = req.body;
+        try {
+            let check = verifyJWT(token,'REFRESH');
+            delete check.iat,
+            delete check.exp
+            if(check){
+                let accessToken= createJWT(check,'TOKEN');
+                let refreshToken = createJWT(check,'REFRESH')
+                res.status(200).send({
+                    message:'Thành công',
+                    data:{
+                        accessToken,
+                        refreshToken
+                    }
+                })
+            }
+            else res.send({
+                message:'Lỗi xảy ra',
+                data:{}
+            })
+        } catch (error) {
+            res.send({
+                message:'Lỗi xảy ra',
+                data:{}
+            })
+            console.log(error)
+        }
+       
+    }
 }
 
 //Check email user tồn tại
@@ -314,6 +340,7 @@ let checkCodeFromDb = async (id_account, code) => {
     } catch (e) {
         console.log(e);
     }
+
 }
 
 export default new authController()

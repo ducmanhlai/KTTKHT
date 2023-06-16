@@ -1,11 +1,11 @@
 import axios from "./axios";
-import { getToken } from "../services/token";
+import { getToken, setToken } from "../services/token";
 const axiosApiInstance = axios.create({});
 
 axiosApiInstance.interceptors.request.use((config) => {
-  let [accessToken,refreshToken] = getToken()
-   
-  if(accessToken === null){
+  let [accessToken, refreshToken] = getToken()
+
+  if (accessToken === null) {
     localStorage.clear()
     window.location.href = "/login";
   }
@@ -19,32 +19,29 @@ axiosApiInstance.interceptors.request.use((config) => {
 });
 
 axiosApiInstance.interceptors.response.use(
-  response  => response,
+  response => response,
   async (error) => {
-    if (error.response.status === 401) {
+    if (error.response.status == 403) {
       const refreshToken = localStorage.getItem("refreshToken");
-     if(refreshToken){
-       let apiResponse = await axios.get(
-           axios.defaults.baseURL + `/api/auth/user/refresh/${refreshToken}`
-       );
-       if(apiResponse.data.status && apiResponse){
-         // alert("Da Refresh Token")
-         const [accessToken,refreshToken] = getToken()
-         //alert("Da set Token moi")
-         error.config.headers = {
-           'Authorization': `Bearer ${accessToken}`
-         }
-         window.location.reload()
-       }
-       else {
-         localStorage.clear()
-         window.location.href = "/login";
-       }
-     }
-      /*error.config.headers[
-        "Authorization"
-      ] = `Bearer ${apiResponse.data.accessToken}`;*/
-      //return axios(error.config);
+      if (refreshToken) {
+        let apiResponse = await axios.post(
+          axios.defaults.baseURL + `/api/v1/auth/refresh`
+          , { token: refreshToken });
+        if (apiResponse.data.status && apiResponse) {
+          // alert("Da Refresh Token")
+          const { accessToken, refreshToken } = apiResponse.data.data;
+          setToken(accessToken, refreshToken);
+          //alert("Da set Token moi")
+          error.config.headers = {
+            'Authorization': `Bearer ${accessToken}`
+          }
+          window.location.reload()
+        }
+        else {
+          localStorage.clear()
+          window.location.href = "/login";
+        }
+      }
     } else {
       return Promise.reject(error);
     }
