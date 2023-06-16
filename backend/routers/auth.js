@@ -10,5 +10,6 @@ authRouter.put('/changepassword', auth.authenUser, authController.changePassword
 authRouter.post('/forgotpassword', authController.forgotPassword)
 authRouter.post('/checkcode?:id_account', authController.checkCodeForgotPassword)
 authRouter.put('/changeforgotpassword?:id_account', authController.changeForgotPassword)
+authRouter.post('/refresh',authController.refreshToken)
 
 export default authRouter
