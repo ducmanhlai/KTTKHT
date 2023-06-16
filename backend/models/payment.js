@@ -38,6 +38,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'payment_status',
         key: 'id'
       }
+    },
+    id_order: {
+      type: DataTypes.STRING(45),
+      allowNull: true
     }
   }, {
     sequelize,

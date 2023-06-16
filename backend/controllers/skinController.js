@@ -1,6 +1,8 @@
 import Models from '../configs/sequelize';
-import auth from "../../backend/middleware/authenJWT"
+import auth from "../../backend/middleware/authenJWT";
+import Resize from '../services/resize'
 const SkinModel = Models.skin;
+import BuySkinService from '../services/skinService';
 class skillController {
     async get(req, res) {
         try {
@@ -19,7 +21,15 @@ class skillController {
     }
     async create(req, res) {
         try {
-            const skin = req.body;
+            const file = req.file.buffer;
+            const imagePath = '../public/images';
+            // call class Resize
+            const fileUpload = new Resize(imagePath);
+            if (!req.file) {
+                res.status(401).json({ error: 'Please provide an image' });
+            }
+            const filename = await fileUpload.save(req.file.buffer);
+            const skin = { ...req.body, avatar: filename };
             const newSkin = await SkinModel.create(skin);
             res.status(200).send({
                 message: 'Tạo thành công',
@@ -35,7 +45,18 @@ class skillController {
     }
     async update(req, res) {
         try {
-            const skin = req.body;
+            const file = req.file.buffer;
+            const imagePath = '../public/images';
+            // call class Resize
+            let skin = {};
+            const fileUpload = new Resize(imagePath);
+            if (!req.file) {
+                skin = { ...req.body }
+            }
+            else {
+                const filename = await fileUpload.save(req.file.buffer);
+                skin = { ...req.body, avatar: filename };
+            }
             const result = await SkinModel.update(skin, { where: { id: skin.id } });
             res.send({
                 message: 'Cập nhật thành công',
@@ -50,9 +71,20 @@ class skillController {
         }
     }
     async buy(req, res) {
-        const user= auth.tokenData(req);
-        console.log(user)
-        const { id_skin } = req.body;
+        try {
+            const account = auth.tokenData(req);
+            const { id_skin } = req.body;
+            BuySkinService(account.id, id_skin, res)
+        } catch (error) {
+            console.log(error)
+            res.send({
+                message: 'Có lỗi xảy ra',
+                data: []
+            })
+
+        }
+
+
     }
 }
 export default new skillController()

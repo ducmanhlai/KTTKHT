@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.scss";
 
 export default function Header() {
@@ -15,55 +15,48 @@ export default function Header() {
         <div className="top-pc">
           <nav className="nav-top absolute top-0 left-0 right-0 h-40">
             <div className="inner-page relative my-0 mx-auto">
-              <a href="!#" className="logo absolute top-1 left-1/2">
+              <Link to="/" className="logo absolute top-1 left-1/2">
                 <img
                   src="https://cdn.vn.garenanow.com/web/kg/home/images/logo-new.png"
                   alt="logo-img"
                   className="hover:opacity-75"
                 ></img>
-              </a>
+              </Link>
 
               <ul className="menu-top overflow-hidden">
                 <li className="title-menu-top float-left">
-                  <a className="top-menu-link py-0 px-4" href="!#">
+                  <Link className="top-menu-link py-0 px-4" to="/">
                     Trang chủ
-                  </a>
+                  </Link>
                 </li>
                 <li className="title-menu-top float-left">
-                  <a className="top-menu-link py-0 px-4" href="!#">
-                    Tướng
-                  </a>
+                  <Link className="top-menu-link py-0 px-4" to="/news">
+                    Tin tức
+                  </Link>
                 </li>
                 <li className="title-menu-top float-left">
-                  <a className="top-menu-link py-0 px-4" href="!#">
-                    Trang phục
-                  </a>
-                </li>
-
-                <li className="title-menu-top float-left">
-                  <a className="top-menu-link py-0 px-4" href="!#">
-                    Tài khoản
-                  </a>
+                  <Link className="top-menu-link py-0 px-4" to="/academy">
+                    Học viện
+                  </Link>
                 </li>
                 <li className="title-menu-top float-left">
-                  <a className="top-menu-link py-0 px-4" href="!#">
+                  <Link className="top-menu-link py-0 px-4" to="/profile">
+                    Cá nhân
+                  </Link>
+                </li>
+                <li className="title-menu-top float-left">
+                  <Link className="top-menu-link py-0 px-4" to="/giftcode">
                     GiftCode
-                  </a>
+                  </Link>
                 </li>
                 <li className="title-menu-top float-left">
-                  <a className="top-menu-link py-0 px-4" href="!#">
+                  <Link className="top-menu-link py-0 px-4" to="/naptien">
                     Nạp tiền
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
 
-            <a
-              href="https://www.facebook.com/"
-              className="py-0 px-4 absolute right-4 top-4 text-base text-white hover:text-slate-300"
-            >
-              Đăng nhập
-            </a>
           </nav>
 
           <div className="bx-top">
@@ -89,6 +82,7 @@ export default function Header() {
           <img
             src="https://lienquan.garena.vn/files/upload/images/ThanhTu/APL2023/1920x864.jpg"
             alt="img-top"
+          // className="hover:opacity-80"
           ></img>
 
           {/* <img

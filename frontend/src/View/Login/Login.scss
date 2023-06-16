@@ -28,10 +28,11 @@
       padding: 60px 30px;
 
       h2 {
+        color: #000;
         width: 100%;
         font-size: 30px;
         text-align: center;
-        font-weight: 600;
+        font-weight: 500;
       }
 
       label {
@@ -58,6 +59,7 @@
           padding-bottom: 5px;
           border-bottom: 1px solid rgba(109, 93, 93, 0.4);
           text-align: center;
+          color: #000;
         }
       }
 
@@ -74,7 +76,12 @@
         font-size: 15px;
         cursor: pointer;
       }
-
+      button:disabled :hover,
+      button[disabled]{
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+      }
       .submit {
         margin-top: 40px;
         margin-bottom: 30px;
@@ -154,7 +161,7 @@
           top: 0;
           width: 450px;
           height: 100%;
-          background-image: url(../../assets/images/highlandcoffee.jpg);
+          background-image: url(../../img/highlandcoffee.jpg);
           background-size: cover;
           transition: -webkit-transform 1.2s ease-in-out;
           transition: transform 1.2s ease-in-out,
