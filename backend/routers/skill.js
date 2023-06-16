@@ -1,8 +1,8 @@
 import { Router } from "express";
 import skillController from "../controllers/skillController";
 import auth from '../middleware/authenJWT'
-const skillRouter= Router();
+const skillRouter = Router();
+skillRouter.post('/create', skillController.create);
 skillRouter.get('/get', skillController.get)
-skillRouter.post('/create',skillController.create);
-skillRouter.put('/update',auth.authenUser,skillController.update)
+skillRouter.put('/update', auth.authenUser, skillController.update)
 export default skillRouter

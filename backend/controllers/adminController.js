@@ -6,7 +6,10 @@ class adminController {
     //Lấy tất cả người dùng 
     async getAllUser(req, res) {
         try {
-            let dataUser = await Model.account.findAll({ where: { id_role: 1 }, raw: true })
+            let dataUser = await Model.account.findAll({
+                where: { id_role: 1 },
+                include: { model: Model.users, as: 'users', attributes: ['name_user']}
+            })
 
             return res.status(200).json({
                 errCode: 0,
@@ -17,7 +20,6 @@ class adminController {
             console.log(e);
         }
     }
-
     //Khóa người dùng không nghiêm túc
     async blockUser(req, res) {
         try {
@@ -79,6 +81,5 @@ class adminController {
             console.log(e);
         }
     }
-
 }
 export default new adminController()
