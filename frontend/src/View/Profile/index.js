@@ -31,27 +31,40 @@ export default () => {
     });
   }, []);
   return (
-    <div className="bg-white">
-      <section className=" body">
+    <div className="bg-white pt-14">
+      <section className=" body p-10 ml-10">
         {account?.id ? (
           <div className="container">
-            <h1 className="mb-12 text-2xl">Thông tin tài khoản </h1>
-            <div className="bg-white shadow rounded block">
-              <div className="profile-tab-nav flex-col">
-                <div className="p-12 text-center">
-                  <div className="img-circle text-center mb-4">
+            <h1 className="mb-5 text-black">Thông tin tài khoản</h1>
+            <div className="bg-white shadow rounded-lg d-block d-sm-flex">
+              <div className="profile-tab-nav">
+                <div className="p-4">
+                  <div className="img-circle text-center mb-3">
                     <img src={imguse} alt="img" className="shadow"></img>
                   </div>
-                  <h4 className="name">Ngô Duy Tân</h4>
+                  <h4 className=" name text-center mb-3">Newblack</h4>
+                  <div className="text-black">Tướng sở hữu:{analysis.hero}</div>
+                  <div className="text-black">
+                    Trang phục sở hữu:{analysis.skin}
+                  </div>
+                  <div className="line text-black ">
+                    Số tiền nạp:{" "}
+                    {new Intl.NumberFormat("vi-VN", config)
+                      .format(analysis.amount)
+                      .toLocaleString("vi", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
+                  </div>
                 </div>
                 <div
-                  className="nav nav-pills"
+                  className="nav flex-column nav-pills"
                   id="v-pills-tab"
                   role="tablist"
-                  // aria-orientation="vertical"
+                  aria-orientation="vertical"
                 >
                   <a
-                    className="nav-link active"
+                    className="nav-link"
                     id="account-tab"
                     data-toggle="pill"
                     href="#account"
@@ -60,7 +73,7 @@ export default () => {
                     aria-selected="true"
                   >
                     <i className="fa fa-home text-center mr-1"></i>
-                    Tài Khoản
+                    Tài khoản
                   </a>
                   <a
                     className="nav-link"
@@ -72,66 +85,106 @@ export default () => {
                     aria-selected="false"
                   >
                     <i className="fa fa-key text-center mr-1"></i>
-                    Đổi mật khẩu
+                    Mật khẩu
                   </a>
                 </div>
               </div>
-              <div className="tab-content" id="v-pills-tabContent">
+              <div className="tab-content p-5" id="v-pills-tabContent">
                 <div
                   className="tab-pane fade show active"
                   id="account"
                   role="tabpanel"
                   aria-labelledby="account-tab"
                 >
-                  <h3 className=" txt mb-4 text-black">Cài đặt tài khoản</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="form-group">
-                      <label class="block">
-                        <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                          Tên tài khoản
-                        </span>
-                        <input
-                          type="email"
-                          name="email"
-                          class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                          placeholder="Ngô Duy Tân"
-                        />
-                      </label>
+                  <h3 className="mb-4 text-black">Cài đặt tài khoản</h3>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label className="block">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Tên tài khoản
+                          </span>
+                          <input
+                            type="text"
+                            name="name"
+                            className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder="Ngô Duy Tân"
+                          />
+                        </label>
+                      </div>
                     </div>
-                    <div className="form-group">
-                      <label class="block">
-                        <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                          Email
-                        </span>
-                        <input
-                          type="email"
-                          name="email"
-                          class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                          placeholder="@gmail.com"
-                        />
-                      </label>
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label className="block">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Email
+                          </span>
+                          <input
+                            type="email"
+                            name="email"
+                            className=" text-inputmt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder="@gmail.com"
+                          />
+                        </label>
+                      </div>
                     </div>
-                    <div className="form-group ">
-                      <label class="block">
-                        <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                          Số điện thoại
-                        </span>
-                        <input
-                          type="email"
-                          name="email"
-                          class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                          placeholder="091214568"
-                        />
-                      </label>
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label className="block">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Số điện thoại
+                          </span>
+                          <input
+                            type="tel"
+                            name="phone"
+                            className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder="091214568"
+                          />
+                        </label>
+                      </div>
                     </div>
                   </div>
-                  <div className="mt-4">
-                    <button class="btn-update bg-sky-500 hover:bg-sky-700">
+                  <div>
+                    <button className="btn-update bg-sky-500 hover:bg-sky-700">
                       Cập nhập
                     </button>
-                    <button class="btn-cancel bg-white-500 hover:bg-red-500 rounded-md">
+                    <button className="btn-cancel bg-white-500 hover:bg-red-500 rounded-md">
                       Hủy
                     </button>
+                  </div>
+                </div>
+                <div
+                  className="tab-pane fade "
+                  id="password"
+                  role="tabpanel"
+                  aria-labelledby="password-tab"
+                >
+                  <h3 className="mb-4">Password Settings</h3>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label>Old password</label>
+                        <input type="password" className="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label>New password</label>
+                        <input type="password" className="form-control" />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label>Confirm new password</label>
+                        <input type="password" className="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <button className="btn btn-primary">Update</button>
+                    <button className="btn btn-light">Cancel</button>
                   </div>
                 </div>
               </div>
