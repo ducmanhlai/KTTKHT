@@ -31,7 +31,7 @@ export default function Hero() {
                 href="#hero-2"
                 onclick="var that=this;ga('send', 'event', 'Home_middle', 'FreeChamp', 'button');"
               >
-                <span class="mark-at"></span>
+                <span className="mark-at"></span>
                 <img
                   src="https://lienquan.garena.vn/files/free_champions/b337703499572ff6b074da4e0c2c37825a93c9da8f97c.png"
                   alt="img"
@@ -44,7 +44,7 @@ export default function Hero() {
                 href="#hero-3"
                 onclick="var that=this;ga('send', 'event', 'Home_middle', 'FreeChamp', 'button');"
               >
-                <span class="mark-at"></span>
+                <span className="mark-at"></span>
                 <img
                   src="https://lienquan.garena.vn/files/free_champions/5e24def8a3ad4011e78a368ff21f294259225f45b5fea.png"
                   alt="img"
@@ -53,11 +53,11 @@ export default function Hero() {
             </li>
             <li className="current">
               <a
-                class="hero-4"
+                className="hero-4"
                 href="#hero-4"
                 onclick="var that=this;ga('send', 'event', 'Home_middle', 'FreeChamp', 'button');"
               >
-                <span class="mark-at"></span>
+                <span className="mark-at"></span>
                 <img
                   src="https://lienquan.garena.vn/files/free_champions/d5f407882d37eeaee394ca3734099e4559757ac93535d.png"
                   alt="img"
@@ -66,11 +66,11 @@ export default function Hero() {
             </li>
             <li className="current">
               <a
-                class="hero-5"
+                className="hero-5"
                 href="#hero-5"
                 onclick="var that=this;ga('send', 'event', 'Home_middle', 'FreeChamp', 'button');"
               >
-                <span class="mark-at"></span>
+                <span className="mark-at"></span>
                 <img
                   src="https://lienquan.garena.vn/files/free_champions/8c31ae4c176b250db2f14732389a3e7259d33f15ac4fc.png"
                   alt="img"
@@ -79,11 +79,11 @@ export default function Hero() {
             </li>
             <li className="current">
               <a
-                class="hero-6"
+                className="hero-6"
                 href="#hero-6"
                 onclick="var that=this;ga('send', 'event', 'Home_middle', 'FreeChamp', 'button');"
               >
-                <span class="mark-at"></span>
+                <span className="mark-at"></span>
                 <img
                   src="https://lienquan.garena.vn/files/free_champions/0df51fbe1aedacb43acc27fc674ff22a5a780b35047a0.png"
                   alt="img"

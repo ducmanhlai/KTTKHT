@@ -1,0 +1,145 @@
+.hero {
+    .hero-page {
+        .inner-page{
+            width: 1168px;
+            .skin-hero {
+                    .title {
+                        margin-bottom: 20px;
+                        text-transform:uppercase;
+                        font-weight: bold;
+                        color: #cfc39b;                     
+                    }
+            }
+
+            .bxskin {
+                .cont-skin {
+                    .tabs-content-skin {
+                        border: 1px solid #a08945;
+                        &:first-child {
+                            display: block;
+                        }
+                    }
+                }
+                .numeral {
+                    text-align: center;
+                    margin-top: 40px;
+                }
+            }
+            .bxnumeral {
+                border: 1px solid #a08945;
+                padding: 3% 5% 2% 5%;
+                .headbx {
+                    border-bottom: 1px solid #a08945;
+                    padding-bottom: 15px;
+                }
+                .txt {
+                    color: #fff;
+                    font-size: 26px;
+                    text-transform: uppercase;
+                    font-family: arial,helvetica,sans-serif;
+                }
+                .level {
+                    display: none;
+                }
+                .cont {
+                    padding: 20px 0 0 0;
+                    overflow: hidden;
+                    .col {
+                        float: left;
+                        width: 33.3333%;
+                        padding-right: 20px;
+                        p {
+                            margin-bottom: 5px;
+                            label {
+                                margin-right: 10px;
+                                font-weight: 500;
+                            }
+                            .champion_stat {
+                                color: #a08945;
+                            }
+
+                        }
+                    }
+                    
+                }
+
+            }
+            .bxskill {
+                border: 1px solid #a08945;
+                padding: 3% 5% 2% 5%;
+                .tabs-link {
+                    margin-top: -24px;
+                    border-bottom: 1px solid #a08945;
+                    overflow: hidden;
+                    .current {
+                        display: inline-block;
+                        padding: 0 20px;
+                        background: url(https://lienquan.garena.vn/asset/images/line-link.png) right no-repeat;
+                    }
+                    .txtskill{
+                        line-height: 58px;
+                        display: block;
+                        text-align: center;
+                        text-transform: uppercase;
+                        color: #fff;
+                        font-size: 18px;
+                        // background: url(https://lienquan.garena.vn/asset/images/nav-current.png) bottom center no-repeat;
+                        // background-size: 100% auto;
+                        // text-decoration: none !important;
+                    }
+                        
+                }
+                .cont-skill {
+                    padding: 3% 7%;
+                    overflow: hidden;
+                    .tabs-content {
+                        display: block;
+                        .col-skill {
+                            width: 50%;
+                            float: left;
+                            border-right: 1px solid #a08945;
+                            padding-right: 7%;
+                            .item-skill {
+                                height: 500px !important;
+                                border-bottom: 1px solid #a08945;
+                                padding: 7% 0;
+                                overflow: hidden;
+                                .img-skill {
+                                    width: 20%;
+                                    float: left;
+                                }
+                                .in-skill {
+                                    width: 80%;
+                                    float: left;
+                                    padding-left: 5%;
+                                    min-height: 200px;
+                                    .name {
+                                        font-size: 18px;
+                                        text-transform: uppercase;
+                                        margin-bottom: 5px;
+                                        line-height: 22px;
+                                    }
+                                    .txt {
+                                        margin-bottom: 20px;
+                                        font-family: arial,helvetica,sans-serif;
+                                    }
+                                }
+                            }
+                            .item-skill:last-child {
+                                border: none;
+                            }
+                        }
+                        .col-skill:last-child {
+                            border-left: 1px solid #a08945;
+                            border-right: none;
+                            padding-left: 7%;
+                            padding-right: 0;
+                            margin-left: -1px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

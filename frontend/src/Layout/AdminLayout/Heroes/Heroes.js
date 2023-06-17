@@ -8,7 +8,7 @@ import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 // import HeroesDetail from "./HeroesDetail";
 import "./Heroes.scss";
 import VanHeo from "../../../img/vanheo.jpg";
-import { FaPlus, FaPencilAlt, FaEye } from "react-icons/fa";
+import { FaPlus, FaEye } from "react-icons/fa";
 
 export default function Heroes() {
   // const [load, setLoad] = useState(false);

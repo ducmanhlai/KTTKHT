@@ -28,38 +28,47 @@ class heroController {
     }
     async createHero(req, res) {
         try {
-            const file = req.file.buffer;
             const imagePath = '../public/images';
-            // call class Resize
-            const fileUpload = new Resize(imagePath);
-            if (!req.file) {
-                res.status(401).json({ error: 'Please provide an image' });
-            }
-            const filename = await fileUpload.save(req.file.buffer);
             const { price, classify, coin, baseHp, armor, magicDefe, attDam, name, magicDam, attSpe, armorPie, magicPie, mana } = req.body;
-            const hero = HeroModel.create({
-                price,
-                classify,
-                coin,
-                baseHp,
-                armor,
-                magicDefense: magicDefe,
-                attackDamage: attDam,
-                name,
-                magicDamage: magicDam,
-                attackSpeed: attSpe,
-                armorPierce: armorPie,
-                magicPierce: magicPie,
-                mana,
-                avatar: filename
-            });
-            res.send({
-                data: hero,
-                message: 'Tạo thành công'
-            })
+            const fileUpload = new Resize(imagePath);
+            let filename = ''
+
+            if (!req.file || !price || !classify || !coin || !baseHp || !armor || !magicDefe || !attDam || !name || !magicDam || !attSpe || !armorPie || !magicPie || !mana) {
+                //Không có ảnh sẽ không update avatar
+                return res.send({
+                    errCode: 1,
+                    message: 'Không thể tạo do thiếu thông tin của tướng. Vui lòng nhập đầy đủ thông tin!'
+                })
+            }
+            else {
+                console.log(price, classify, coin, baseHp, armor, magicDefe, attDam, name, magicDam, attSpe, armorPie, magicPie, mana);
+                filename = await fileUpload.save(req.file.buffer);
+                const hero = await HeroModel.create({
+                    price,
+                    classify,
+                    coin,
+                    baseHp,
+                    armor,
+                    magicDefense: magicDefe,
+                    attackDamage: attDam,
+                    name,
+                    magicDamage: magicDam,
+                    attackSpeed: attSpe,
+                    armorPierce: armorPie,
+                    magicPierce: magicPie,
+                    mana,
+                    avatar: filename
+                });
+                return res.status(200).json({
+                    errCode: 0,
+                    data: hero,
+                    message: 'Tạo thành công'
+                })
+            }
         } catch (error) {
             console.log(error)
-            res.send({
+            return res.send({
+                errCode: 2,
                 data: [],
                 message: 'Tạo thất bại'
             })
@@ -67,26 +76,54 @@ class heroController {
     }
     async updateHero(req, res) {
         try {
-            const body = req.body;
-            const hero = await HeroModel.findByPk(body.id);
-            const file = req.file.buffer;
+            const { price, classify, coin, baseHp, armor, magicDefe, attDam, name, magicDam, attSpe, armorPie, magicPie, mana } = req.body;
+            let id_hero = req.query.id_hero
+            let dataHero = await HeroModel.findOne({
+                where: { id: id_hero }
+            })
+            console.log(dataHero);
+            console.log(price, classify, coin, baseHp, armor, magicDefe, attDam, name, magicDam, attSpe, armorPie, magicPie, mana);
             const imagePath = '../public/images';
             // call class Resize
             const fileUpload = new Resize(imagePath);
-            if (!req.file) {
-                res.status(401).json({ error: 'Please provide an image' });
+            let filename = ''
+            if (!req.file || !price || !classify || !coin || !baseHp || !armor || !magicDefe || !attDam || !name || !magicDam || !attSpe || !armorPie || !magicPie || !mana) {
+                //Không có ảnh sẽ không update avatar
+                return res.status(404).json({
+                    errCode: 1,
+                    message: 'Không thể cập nhật do thiếu thông tin của tướng. Vui lòng nhập đầy đủ thông tin!'
+                })
             }
-            const filename = await fileUpload.save(req.file.buffer);
-            body = { ...body, avatar: filename }
-            await hero.update(body);
-            res.send({
-                data: hero,
-                message: 'Cập nhật thành công'
-            })
+            else {
+                console.log(price, classify, coin, baseHp, armor, magicDefe, attDam, name, magicDam, attSpe, armorPie, magicPie, mana);
+                filename = await fileUpload.save(req.file.buffer);
+                const hero = await dataHero.set({
+                    price,
+                    classify,
+                    coin,
+                    baseHp,
+                    armor,
+                    magicDefense: magicDefe,
+                    attackDamage: attDam,
+                    name,
+                    magicDamage: magicDam,
+                    attackSpeed: attSpe,
+                    armorPierce: armorPie,
+                    magicPierce: magicPie,
+                    mana,
+                    avatar: filename
+                });
+                await hero.save()
+                return res.status(200).json({
+                    errCode: 0,
+                    message: 'cập nhật thành công tướng'
+                })
+            }
+
         } catch (error) {
             console.log(error)
-            res.send({
-                data: [],
+            return res.status(400).json({
+                errCode: 2,
                 message: 'Cập nhật thất bại'
             })
         }
