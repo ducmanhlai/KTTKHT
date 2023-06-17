@@ -25,7 +25,7 @@ export default function Account() {
   }, [])
   return (
     <>
-      <AHeader />
+//       <AHeader />
       <Toaster
         toastOptions={{
           className: '',
