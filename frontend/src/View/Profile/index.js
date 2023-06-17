@@ -7,11 +7,16 @@ import Header from "../../Component/Header/Header";
 export default () => {
   const [account, setAccount] = useState({});
   const [analysis, setAnalysis] = useState({});
+  const [activeTab, setActiveTab] = useState("account");
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
   const config = {
     style: "currency",
     currency: "VND",
     maximumFractionDigits: 9,
   };
+
   useEffect(() => {
     (async () => {
       // const result = (await axiosApiInstance.get(axiosApiInstance.defaults.baseURL + '/api/v1/user/getinfo')).data.data;
@@ -47,7 +52,7 @@ export default () => {
                   <div className="text-black">
                     Trang phục sở hữu:{analysis.skin}
                   </div>
-                  <div className="line text-black ">
+                  <div className=" text-black ">
                     Số tiền nạp:{" "}
                     {new Intl.NumberFormat("vi-VN", config)
                       .format(analysis.amount)
@@ -64,25 +69,27 @@ export default () => {
                   aria-orientation="vertical"
                 >
                   <a
-                    className="nav-link"
-                    id="account-tab"
-                    data-toggle="pill"
+                    className={`nav-link ${
+                      activeTab === "account" ? "active " : "activenew"
+                    }`}
+                    onClick={() => handleTabClick("account")}
                     href="#account"
                     role="tab"
                     aria-controls="account"
-                    aria-selected="true"
+                    aria-selected={activeTab === "account"}
                   >
                     <i className="fa fa-home text-center mr-1"></i>
                     Tài khoản
                   </a>
                   <a
-                    className="nav-link"
-                    id="password-tab"
-                    data-toggle="pill"
+                    className={`nav-link ${
+                      activeTab === "password" ? "active " : "activenew"
+                    }`}
+                    onClick={() => handleTabClick("password")}
                     href="#password"
                     role="tab"
                     aria-controls="password"
-                    aria-selected="false"
+                    aria-selected={activeTab === "password"}
                   >
                     <i className="fa fa-key text-center mr-1"></i>
                     Mật khẩu
@@ -91,7 +98,9 @@ export default () => {
               </div>
               <div className="tab-content p-5" id="v-pills-tabContent">
                 <div
-                  className="tab-pane fade show active"
+                  className={`tab-pane fade ${
+                    activeTab === "account" ? "show active" : ""
+                  }`}
                   id="account"
                   role="tabpanel"
                   aria-labelledby="account-tab"
@@ -154,37 +163,70 @@ export default () => {
                   </div>
                 </div>
                 <div
-                  className="tab-pane fade "
+                  className={`tab-pane fade ${
+                    activeTab === "password" ? "show active" : ""
+                  }`}
                   id="password"
                   role="tabpanel"
                   aria-labelledby="password-tab"
                 >
-                  <h3 className="mb-4">Password Settings</h3>
+                  <h3 className="text-black mb-4">Đổi lại mật khẩu</h3>
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label>Old password</label>
-                        <input type="password" className="form-control" />
+                        <label className="block">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Mật khẩu cũ
+                          </span>
+                          <input
+                            type="password"
+                            name="password-old"
+                            className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder=""
+                          />
+                        </label>
                       </div>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label>New password</label>
-                        <input type="password" className="form-control" />
+                        <label className="block">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Mật khẩu mới
+                          </span>
+                          <input
+                            type="password"
+                            name="password-new"
+                            className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder=""
+                          />
+                        </label>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label>Confirm new password</label>
-                        <input type="password" className="form-control" />
+                        <label className="block">
+                          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                            Nhập lại mật khẩu mới
+                          </span>
+                          <input
+                            type="password"
+                            name="confim-password"
+                            className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder=""
+                          />
+                        </label>
                       </div>
                     </div>
                   </div>
                   <div>
-                    <button className="btn btn-primary">Update</button>
-                    <button className="btn btn-light">Cancel</button>
+                    <button className="btn-update bg-sky-500 hover:bg-sky-700">
+                      Cập nhập
+                    </button>
+                    <button className="btn-cancel bg-white-500 hover:bg-red-500 rounded-md">
+                      Hủy
+                    </button>
                   </div>
                 </div>
               </div>
