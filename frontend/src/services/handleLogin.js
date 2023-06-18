@@ -7,7 +7,7 @@ export default async (username,password)=>{
    setToken(result.accessToken,result.refreshToken)
    setTimeout(()=>{
      window.location.href= '/'
-   },3000)
+   },1500)
   }
   return result
 }
