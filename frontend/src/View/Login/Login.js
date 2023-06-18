@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import "./Login.scss";
 import facebookImage from "../../img/facebook.png";
 import instagramImage from "../../img/instagram.png";
@@ -7,31 +8,38 @@ import linkedinImage from "../../img/linkedin.png";
 import twitterImage from "../../img/twitter.png";
 import handleLogin from "../../services/handleLogin";
 export default function Login() {
-  const [username, setUserName] = useState('');
+  const [username, setUserName] = useState("");
   const [isValidUser, setIsValidUser] = useState(true);
-  const [password, setPassWord] = useState('');
+  const [password, setPassWord] = useState("");
   const [isValidPass, setIsValidPass] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
+
+  const handleClick = () => {
+    setIsSignup((prevState) => !prevState);
+  };
+
   return (
     <div className="login-page">
       <Toaster
         toastOptions={{
-          className: '',
+          className: "",
           duration: 3000,
           style: {
-            background: '#363636',
-            color: '#fff',
+            background: "#363636",
+            color: "#fff",
           },
           success: {
             duration: 2000,
             theme: {
-              primary: 'green',
-              secondary: 'black',
+              primary: "green",
+              secondary: "black",
             },
           },
         }}
       ></Toaster>
-      <div className="account-container">
-        <div className="form">
+
+      <div className="login-container">
+        <div className="form sign-in">
           <h2>Đăng Nhập</h2>
           <label>
             <span>Email</span>
@@ -42,10 +50,12 @@ export default function Login() {
               value={username}
               onChange={handleOnChangeEmail}
             ></input>
-            {username.length != 0 ? isValidUser ? (
-              <span style={{ color: 'green' }}>Email hợp lệ</span>
-            ) : (
-              <span style={{ color: 'red' }}>Email không hợp lệ</span>
+            {username.length != 0 ? (
+              isValidUser ? (
+                <span style={{ color: "green" }}>Email hợp lệ</span>
+              ) : (
+                <span style={{ color: "red" }}>Email không hợp lệ</span>
+              )
             ) : null}
           </label>
           <label>
@@ -57,10 +67,10 @@ export default function Login() {
               value={password}
               onChange={handleOnChangePassword}
             ></input>
-            {password.length != 0 ? isValidPass ? (
-              null
-            ) : (
-              <span style={{ color: 'red' }}>Mật khẩu không hợp lệ</span>
+            {password.length != 0 ? (
+              isValidPass ? null : (
+                <span style={{ color: "red" }}>Mật khẩu không hợp lệ</span>
+              )
             ) : null}
           </label>
 
@@ -99,8 +109,11 @@ export default function Login() {
               <h2>Có gì mới?</h2>
               <p>Truy cập website để hiểu hơn về game đi nào</p>
             </div>
+
             <div className="img-btn">
-              <span className="m-up">Đăng Ký</span>
+              <Link className="m-up no-underline" to="/signup">
+                Đăng Ký
+              </Link>
             </div>
           </div>
         </div>
@@ -119,12 +132,14 @@ export default function Login() {
     setPassWord(inputPassword);
     // Kiểm tra password chứa ít nhất 8 ký tự và không chứa khoảng trắng
     setIsValidPass(inputPassword.length >= 8 && !/\s/.test(inputPassword));
-  };
+  }
   function clickLogin() {
     (async () => {
       const data = await handleLogin(username, password);
-      toast.success(data.message)
-    })().catch(err => toast.error(`Có lỗi xảy ra
-    ${err}`))
+      toast.success(data.message);
+    })().catch((err) =>
+      toast.error(`Có lỗi xảy ra
+    ${err}`)
+    );
   }
 }

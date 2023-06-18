@@ -2,7 +2,15 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import Login from "./View/Login/Login";
+import SignUp from "./View/SignUp/SignUp";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./scss/test.scss";
+// import Home from "./View/Home/Home";
+// import Hero from "./View/Hero/Hero";
+// import Introduce from "./View/Introduce/Introduce";
+// import Skin from "./View/Skin/Skin";
+// import Equip from "./View/Equip/Equip";
 
 import Home from "./View/Home/Home";
 import Hero from "./View/Hero/Hero";
@@ -15,6 +23,7 @@ import { AuthContextProvider } from "./context/authContext";
 import AHome from "./Layout/AdminLayout/Home/AHome";
 import HeroDetail from './Component/HeroDetail/HeroDetail'
 // import Header from "./Component/Header/Header";
+import AHeader from "./Layout/AdminLayout/AHeader/AHeader";
 
 function App() {
   let role = jwtDecode(localStorage.getItem('accessToken')).id_role || 1;
@@ -22,13 +31,17 @@ function App() {
     <div className="app">
       <AuthContextProvider>
         <BrowserRouter>
-          {/* <Header/> */}
           {role == 2 ? (
+          <AHeader/>    
             <Routes>
               <Route path="/" exact element={<AHome />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/skin" element={<Skin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/heroes" element={<Heroes />} />
+          <Route path="/heroes-detail" element={<HeroesDetail />} />
+          <Route path="/skin" element={<Skin />} />
+          <Route path="/rule" element={<Rule />} />
             </Routes>
           ) : (
             <Routes>
@@ -51,3 +64,4 @@ function App() {
   );
 }
 export default App
+
