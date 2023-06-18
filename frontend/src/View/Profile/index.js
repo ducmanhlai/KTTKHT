@@ -3,8 +3,9 @@ import axiosApiInstance from "../../config/interceptor";
 
 import "./profile.scss";
 import imguse from "../../img/user2.jpg";
-import Header from "../../Component/Header/Header";
-export default () => {
+// import Header from "../../Component/Header/Header";
+
+export default function Profile() {
   const [account, setAccount] = useState({});
   const [analysis, setAnalysis] = useState({});
   const config = {
@@ -32,7 +33,7 @@ export default () => {
   }, []);
   return (
     <div className="bg-white">
-      <section className=" body">
+      <section className="body">
         {account?.id ? (
           <div className="container">
             <h1 className="mb-12 text-2xl">Thông tin tài khoản </h1>
@@ -143,4 +144,4 @@ export default () => {
       </section>
     </div>
   );
-};
+}

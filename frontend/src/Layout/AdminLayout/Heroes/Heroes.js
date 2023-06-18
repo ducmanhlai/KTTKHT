@@ -7,7 +7,7 @@ import axios from "axios";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 // import HeroesDetail from "./HeroesDetail";
 import "./Heroes.scss";
-import VanHeo from "../../../img/vanheo.jpg";
+import VanHeo from "../../../img/smallVanheo.jpg";
 import { FaPlus, FaEye } from "react-icons/fa";
 
 export default function Heroes() {
@@ -16,17 +16,35 @@ export default function Heroes() {
   const [list, setList] = useState([]);
   const [show, setShow] = useState(false);
   const [form, setForm] = useState();
-  const handleClose = () => setShow(false);
-  const [isHovered, setIsHovered] = useState(false);
+
+  const [name, setName] = useState();
+  const [price, setPrice] = useState();
+  const [coin, setCoin] = useState();
+  const [avatar, setAvatar] = useState();
+  const [attackDamage, setAttackDamage] = useState();
+  const [magicDamage, setMagicDamage] = useState();
+  const [baseHp, setBaseHP] = useState();
+  const [armor, setArmor] = useState();
+  const [magicArmor, setMagicArmor] = useState();
+  const [attackSpeed, setAttackSpeed] = useState();
+  const [speed, setSpeed] = useState();
+  const [mana, setMana] = useState();
+  const [armorPierce, setArmorPierce] = useState();
+  const [magicPierce, setMagicPierce] = useState();
+
+  const [type, setType] = useState();
 
   let Types = [
-    { name: "Đấu sĩ" },
-    { name: "Pháp sư" },
-    { name: "Trợ thủ" },
-    { name: "Đỡ đòn" },
-    { name: "Sát thủ" },
-    { name: "Xạ thủ" },
+    { id: 1, name: "Sát thủ" },
+    { id: 2, name: "Pháp sư" },
+    { id: 3, name: "Xạ thủ" },
+    { id: 4, name: "Trợ thủ" },
+    { id: 5, name: "Đỡ đòn" },
+    { id: 6, name: "Đấu sĩ" },
   ];
+
+  const handleClose = () => setShow(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   async function getHeroes() {
     const result = await axios.get("http://localhost:8081/api/v1/hero/get");
@@ -47,7 +65,33 @@ export default function Heroes() {
     setShow(true);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    console.log(avatar);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("coin", coin);
+    formData.append("avatar", avatar);
+    formData.append("attDam", attackDamage);
+    formData.append("magicDam", magicDamage);
+    formData.append("baseHp", baseHp);
+    formData.append("armor", armor);
+    formData.append("magicDefe", magicArmor);
+    formData.append("attSpe", attackSpeed);
+    formData.append("speed", speed);
+    formData.append("mana", mana);
+    formData.append("armorPie", armorPierce);
+    formData.append("magicPie", magicPierce);
+    formData.append("classify", type);
+    console.log(formData);
+    const result = await axios.post(
+      "http://localhost:8081/api/v1/hero/create",
+
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+    console.log("result: ", result);
+
     setShow(false);
   };
 
@@ -159,7 +203,7 @@ export default function Heroes() {
                     </>
                   )}
 
-                  <p className="name whitespace-nowrap mt-1 text-center">
+                  <p className="name-heroes whitespace-nowrap mt-1 text-center">
                     {hero.name}
                   </p>
                 </div>
@@ -169,256 +213,9 @@ export default function Heroes() {
         </div>
       </div>
       {
-        // <Modal size="lg" show={show} onHide={handleClose} animation={true}>
-        //   <Modal.Header className="bg-lime-500" closeButton>
-        //     <Modal.Title centered className="text-black text-center">
-        //       {form === "edit" ? "Cập Nhật" : "Thêm Tướng"}
-        //     </Modal.Title>
-        //   </Modal.Header>
-        //   <Modal.Body>
-        //     <Form onSubmit={handleSubmit}>
-        //       <Row>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroName">
-        //             <Form.Label className="text-black">Tên tướng</Form.Label>
-        //             <Form.Control
-        //               type="text"
-        //               placeholder="Nhập tên tướng"
-        //               name="name"
-        //               required
-        //               // value={hero_name}
-        //               // onChange={(e) => setName(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroPrice">
-        //             <Form.Label className="text-black">Giá vàng</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập giá vàng"
-        //               name="price"
-        //               required
-        //               // value={hero_price}
-        //               // onChange={(e) => setPrice(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroCoin">
-        //             <Form.Label className="text-black">Giá quân huy</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập quân huy"
-        //               name="coin"
-        //               required
-        //               // value={hero_coin}
-        //               // onChange={(e) => setCoin(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //       </Row>
-
-        //       <Row>
-        //         <Col>
-        //           <Form.Group controlId="HeroImage">
-        //             <Form.Label className="text-black">Ảnh tướng</Form.Label>
-        //             <Form.Control
-        //               type="file"
-        //               // placeholder="Chọn ảnh tướng"
-        //               // onChange={this.fileSelectedHandle}
-        //             />
-        //             {/* {this.state.img && (
-        //           <img
-        //             src={this.state.img}
-        //             height={90}
-        //             width={90}
-        //             alt="img"
-        //             className="d-block"
-        //           />
-        //         )} */}
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroAttackDamage">
-        //             <Form.Label className="text-black">Công vật lý</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập công vật lý"
-        //               name="attackDamage"
-        //               required
-        //               // value={hero_attack_damage}
-        //               // onChange={(e) => setAttackDamage(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroMagicDamage">
-        //             <Form.Label className="text-black">Công phép</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập công phép"
-        //               name="magicDamage"
-        //               required
-        //               // value={hero_magic_damage}
-        //               // onChange={(e) => setMagicDamage(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //       </Row>
-
-        //       <Row>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroBlood">
-        //             <Form.Label className="text-black">Máu tối đa</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập máu tối đa"
-        //               name="blood"
-        //               required
-        //               // value={hero_blood}
-        //               // onChange={(e) => setBlood(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroArmor">
-        //             <Form.Label className="text-black">Giáp</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập giáp"
-        //               name="armor"
-        //               required
-        //               // value={hero_armor}
-        //               // onChange={(e) => setArmor(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroMagicArmor">
-        //             <Form.Label className="text-black">Giáp phép</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập giáp phép"
-        //               name="magicArmor"
-        //               required
-        //               // value={hero_magic_armor}
-        //               // onChange={(e) => setMagicDamage(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //       </Row>
-
-        //       <Row>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroAttackDamage">
-        //             <Form.Label className="text-black">Tốc đánh</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập tốc đánh"
-        //               name="attackDamage"
-        //               required
-        //               // value={hero_attack_damage}
-        //               // onChange={(e) => setAttackDamage(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroSpeed">
-        //             <Form.Label className="text-black">Tốc chạy</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập tốc chạy"
-        //               name="speed"
-        //               required
-        //               // value={hero_speed}
-        //               // onChange={(e) => setSpeed(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroMana">
-        //             <Form.Label className="text-black">
-        //               Hồi năng lượng/5s
-        //             </Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập năng lượng"
-        //               name="mana"
-        //               required
-        //               // value={hero_mana}
-        //               // onChange={(e) => setMana(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //       </Row>
-
-        //       <Row>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroArmorPierce">
-        //             <Form.Label className="text-black">Xuyên giáp</Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập xuyên giáp"
-        //               name="armorPierce"
-        //               required
-        //               // value={hero_armor_pierce}
-        //               // onChange={(e) => setArmorPierce(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroMagicPierce">
-        //             <Form.Label className="text-black">
-        //               Xuyên giáp phép
-        //             </Form.Label>
-        //             <Form.Control
-        //               type="number"
-        //               placeholder="Nhập xuyên giáp phép"
-        //               name="magicPierce"
-        //               required
-        //               // value={hero_magic_pierce}
-        //               // onChange={(e) => setmagicPierce(e.target.value)}
-        //             />
-        //           </Form.Group>
-        //         </Col>
-        //         <Col>
-        //           <Form.Group className="mb-3" controlId="HeroType">
-        //             <Form.Label className="text-black">Vai trò</Form.Label>
-        //             <Form.Control
-        //               as="select"
-        //               // onChange={(event) =>
-        //               //   this.handleOnChangeInput(event, "id_category")
-        //               // }
-        //               // value={this.state.id_category}
-        //             >
-        //               <option>Chọn vai trò</option>
-        //               {Types &&
-        //                 Types.map((hero, index) => {
-        //                   return (
-        //                     <>
-        //                       <option key={hero.id}>{hero.name}</option>
-        //                     </>
-        //                   );
-        //                 })}
-        //             </Form.Control>
-        //           </Form.Group>
-        //         </Col>
-        //       </Row>
-        //     </Form>
-        //   </Modal.Body>
-        //   <Modal.Footer>
-        //     <Button variant="secondary" onClick={handleClose}>
-        //       Đóng
-        //     </Button>
-        //     <Button variant="success" onClick={handleSubmit}>
-        //       {form === "edit" ? "Cập Nhật" : "Thêm"}
-        //     </Button>
-        //   </Modal.Footer>
-        // </Modal>
         <Modal size="sl" show={show} onHide={handleClose} animation={true}>
-          <Modal.Header className="bg-lime-500" closeButton>
-            <Modal.Title centered className="text-black text-center">
+          <Modal.Header className="bg-green" closeButton>
+            <Modal.Title centered className="text-white text-center">
               {form === "edit" ? "Cập Nhật" : "Thêm Tướng"}
             </Modal.Title>
           </Modal.Header>
@@ -433,8 +230,8 @@ export default function Heroes() {
                       placeholder="Florentino"
                       name="name"
                       required
-                      // value={hero_name}
-                      // onChange={(e) => setName(e.target.value)}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -446,8 +243,8 @@ export default function Heroes() {
                       placeholder="25888"
                       name="price"
                       required
-                      // value={hero_price}
-                      // onChange={(e) => setPrice(e.target.value)}
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -459,8 +256,8 @@ export default function Heroes() {
                       placeholder="599"
                       name="coin"
                       required
-                      // value={hero_coin}
-                      // onChange={(e) => setCoin(e.target.value)}
+                      value={coin}
+                      onChange={(e) => setCoin(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -472,8 +269,8 @@ export default function Heroes() {
                     <Form.Label className="text-black">Ảnh tướng</Form.Label>
                     <Form.Control
                       type="file"
-                      // placeholder="Chọn ảnh tướng"
-                      // onChange={this.fileSelectedHandle}
+                      placeholder="Chọn ảnh tướng"
+                      onChange={(e) => setAvatar(e.target.files[0])}
                     />
                     {/* {this.state.img && (
                   <img
@@ -494,8 +291,8 @@ export default function Heroes() {
                       placeholder="170"
                       name="attackDamage"
                       required
-                      // value={hero_attack_damage}
-                      // onChange={(e) => setAttackDamage(e.target.value)}
+                      value={attackDamage}
+                      onChange={(e) => setAttackDamage(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -507,8 +304,8 @@ export default function Heroes() {
                       placeholder="0"
                       name="magicDamage"
                       required
-                      // value={hero_magic_damage}
-                      // onChange={(e) => setMagicDamage(e.target.value)}
+                      value={magicDamage}
+                      onChange={(e) => setMagicDamage(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -523,8 +320,8 @@ export default function Heroes() {
                       placeholder="3235"
                       name="blood"
                       required
-                      // value={hero_blood}
-                      // onChange={(e) => setBlood(e.target.value)}
+                      value={baseHp}
+                      onChange={(e) => setBaseHP(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -536,8 +333,8 @@ export default function Heroes() {
                       placeholder="89"
                       name="armor"
                       required
-                      // value={hero_armor}
-                      // onChange={(e) => setArmor(e.target.value)}
+                      value={armor}
+                      onChange={(e) => setArmor(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -549,8 +346,8 @@ export default function Heroes() {
                       placeholder="50"
                       name="magicArmor"
                       required
-                      // value={hero_magic_armor}
-                      // onChange={(e) => setMagicDamage(e.target.value)}
+                      value={magicArmor}
+                      onChange={(e) => setMagicArmor(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -565,8 +362,8 @@ export default function Heroes() {
                       placeholder="0"
                       name="attackDamage"
                       required
-                      // value={hero_attack_damage}
-                      // onChange={(e) => setAttackDamage(e.target.value)}
+                      value={attackSpeed}
+                      onChange={(e) => setAttackSpeed(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -578,8 +375,8 @@ export default function Heroes() {
                       placeholder="380"
                       name="speed"
                       required
-                      // value={hero_speed}
-                      // onChange={(e) => setSpeed(e.target.value)}
+                      value={speed}
+                      onChange={(e) => setSpeed(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -593,8 +390,8 @@ export default function Heroes() {
                       placeholder="50"
                       name="mana"
                       required
-                      // value={hero_mana}
-                      // onChange={(e) => setMana(e.target.value)}
+                      value={mana}
+                      onChange={(e) => setMana(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -609,8 +406,8 @@ export default function Heroes() {
                       placeholder="250"
                       name="armorPierce"
                       required
-                      // value={hero_armor_pierce}
-                      // onChange={(e) => setArmorPierce(e.target.value)}
+                      value={armorPierce}
+                      onChange={(e) => setArmorPierce(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -624,8 +421,8 @@ export default function Heroes() {
                       placeholder="0"
                       name="magicPierce"
                       required
-                      // value={hero_magic_pierce}
-                      // onChange={(e) => setmagicPierce(e.target.value)}
+                      value={magicPierce}
+                      onChange={(e) => setMagicPierce(e.target.value)}
                     />
                   </Form.Group>
                 </Col>
@@ -634,17 +431,15 @@ export default function Heroes() {
                     <Form.Label className="text-black">Vai trò</Form.Label>
                     <Form.Control
                       as="select"
-                      // onChange={(event) =>
-                      //   this.handleOnChangeInput(event, "id_category")
-                      // }
-                      // value={this.state.id_category}
+                      onChange={(e) => setType(e.target.value)}
+                      // value={type}
                     >
                       <option>Chọn vai trò</option>
                       {Types &&
                         Types.map((hero, index) => {
                           return (
                             <>
-                              <option key={hero.id}>{hero.name}</option>
+                              <option value={hero.id}>{hero.name}</option>
                             </>
                           );
                         })}
@@ -655,11 +450,11 @@ export default function Heroes() {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Đóng
-            </Button>
             <Button variant="success" onClick={handleSubmit}>
               {form === "edit" ? "Cập Nhật" : "Thêm"}
+            </Button>
+            <Button variant="secondary" onClick={handleClose}>
+              Đóng
             </Button>
           </Modal.Footer>
         </Modal>

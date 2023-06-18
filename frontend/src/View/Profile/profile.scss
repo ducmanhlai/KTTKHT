@@ -4,79 +4,74 @@ $success: #28a745;
 $danger: #dc3545;
 $warning: #ffc107;
 
-
-.body{
-	padding-top: 48px/* 48px */;
-    padding-bottom: 500px;
+.body {
+  padding-top: 48px /* 48px */;
+  padding-bottom: 500px;
 }
-.container{
-	width: 80%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-	background-color: #fff;
+.container {
+  width: 80%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
 }
-.profile-tab-nav{
-	height: 500px;
-	min-width:250px;
-	border-right: 2px solid #dee2e6!important;
-	margin-right: 2000px;
-	
+.profile-tab-nav {
+  height: 500px;
+  min-width: 250px;
+  border-right: 2px solid #dee2e6 !important;
+  margin-right: 2000px;
 }
-.name{
-	padding-right: 1250px;
-	font-size: 1.5rem;
-	color: #333;
-	// text-align: center;
+.name {
+  padding-right: 1250px;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
 }
 .shadow {
-	box-shadow: 0 2.5px 12px red!important;
+  box-shadow: 0 2.5px 12px red !important;
 }
 
-
-.tab-content{
-	flex:1 1;
-	margin-top: -500px;
-    margin-left: 250px;
+.tab-content {
+  flex: 1 1;
+  margin-top: -500px;
+  margin-left: 250px;
 }
 .form-group {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .nav {
-	flex-direction: column;
+  flex-direction: column;
 }
-.nav-pills{
-
-	a.nav-link{
-		padding:15px 20px;
-		border-bottom:1px solid #ddd;
-		border-radius:0;
-		color:#333;
-		i{
-			width:20px;
-		}
-	}
+.nav-pills {
+  a.nav-link {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    color: #333;
+    i {
+      width: 20px;
+    }
+  }
 }
 
 .img-circle img {
-		height: 100px;
-		width: 100px;
-		border-radius: 100%;
-		border: 5px solid #fff;
-	}
-.btn-update{
-	width: 98px;
-	height: 40px;
-	border-radius: 6px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border: 5px solid #fff;
 }
-.btn-cancel{
-	color: #333;
-	width: 66px;
-	height: 40px;
-	border-radius: 6px;
-	// border: 1px solid #333;
-	margin-left: 4px;
-
+.btn-update {
+  width: 98px;
+  height: 40px;
+  border-radius: 6px;
+}
+.btn-cancel {
+  color: #333;
+  width: 66px;
+  height: 40px;
+  border-radius: 6px;
+  // border: 1px solid #333;
+  margin-left: 4px;
 }
