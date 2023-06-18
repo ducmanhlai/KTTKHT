@@ -40,6 +40,7 @@
           //   background-image: url("../../../img/btn.png");
           //   background-size: cover;
           background-color: #fff;
+          background-color: wheat;
 
           // background-color: #0d6efd;
           //   background-color: #ddd;
@@ -54,6 +55,7 @@
           //   background-image: url("../../../img/btn.png");
           //   background-size: cover;
           background-color: #fff;
+          background-color: wheat;
           border: 0.5px solid #ddd;
           padding: 8px;
           color: #000;
@@ -68,29 +70,34 @@
             border-radius: 20%;
           }
 
-          .btn-edit {
-            // color: #b1ff00;
-            font-size: 18px;
-            background-color: transparent;
-            width: 22%;
-
-            &:hover {
-              color: #000;
-              opacity: 0.8;
-            }
+          .lock-btn {
+            font-size: 12px;
+            padding: 8px;
           }
 
-          .btn-delete {
-            // color: #ff0000;
-            font-size: 18px;
-            background-color: transparent;
-            width: 22%;
+          // .btn-edit {
+          //   // color: #b1ff00;
+          //   font-size: 18px;
+          //   background-color: transparent;
+          //   width: 22%;
 
-            &:hover {
-              color: #000;
-              opacity: 0.8;
-            }
-          }
+          //   &:hover {
+          //     color: #000;
+          //     opacity: 0.8;
+          //   }
+          // }
+
+          // .btn-delete {
+          //   // color: #ff0000;
+          //   font-size: 18px;
+          //   background-color: transparent;
+          //   width: 22%;
+
+          //   &:hover {
+          //     color: #000;
+          //     opacity: 0.8;
+          //   }
+          // }
         }
       }
     }

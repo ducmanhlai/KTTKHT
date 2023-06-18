@@ -104,10 +104,10 @@ const AddSkin = ({ onHide }) => {
                 onChange={(e) => setPrice(e.target.value)}
               />
             </Form.Group>
-            
+
             <Form.Group controlId="formSkin">
               <Form.Label>Bậc</Form.Label>
-              
+
               <div value={status} onChange={(e) => setStatus(e.target.value)}>
                 <Form.Check
                   inline

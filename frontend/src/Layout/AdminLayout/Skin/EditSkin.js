@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./Skin.scss";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 const EditSkin = ({ onHide }) => {
   const [name, setName] = useState("");
@@ -106,10 +106,10 @@ const EditSkin = ({ onHide }) => {
                 onChange={(e) => setPrice(e.target.value)}
               />
             </Form.Group>
-           
+
             <Form.Group controlId="formHeroes">
               <Form.Label>Bậc</Form.Label>
-              
+
               <div value={status} onChange={(e) => setStatus(e.target.value)}>
                 <Form.Check
                   inline

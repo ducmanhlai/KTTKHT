@@ -138,7 +138,7 @@ export default function HeroDetail() {
                 <p>
                   <label>Xuyên giáp phép</label>
                   <span className="champion_stat">
-                    {list && list.MagicPierce}
+                    {list && list.magicPierce}
                   </span>
                 </p>
               </div>
@@ -333,9 +333,9 @@ export default function HeroDetail() {
       </section>
       {
         <Modal size="sl" show={show} onHide={handleClose} animation={true}>
-          <Modal.Header className="bg-lime-500" closeButton>
-            <Modal.Title centered className="text-black text-center">
-              Cập nhật
+          <Modal.Header className="bg-green" closeButton>
+            <Modal.Title centered className="text-white text-center">
+              Chỉnh sửa chỉ số tướng
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -571,11 +571,11 @@ export default function HeroDetail() {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Đóng
-            </Button>
             <Button variant="success" onClick={handleSubmit}>
               {form === "edit" ? "Cập Nhật" : "Thêm"}
+            </Button>
+            <Button variant="secondary" onClick={handleClose}>
+              Đóng
             </Button>
           </Modal.Footer>
         </Modal>
