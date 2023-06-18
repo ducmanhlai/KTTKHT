@@ -52,7 +52,7 @@ export default function Login() {
             ></input>
             {username.length != 0 ? (
               isValidUser ? (
-                <span style={{ color: "green" }}>Email hợp lệ</span>
+                <span style={{ color: "green" }}></span>
               ) : (
                 <span style={{ color: "red" }}>Email không hợp lệ</span>
               )
