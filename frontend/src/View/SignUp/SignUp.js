@@ -1,27 +1,37 @@
-import React from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 
-// import toast, { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import "./SignUp.scss";
 
-// import handleLogin from "../../services/handleLogin";
+import handleLogin from "../../services/handleLogin";
+import axios from "../../config/axios";
 export default function Login() {
-  // const [username, setUserName] = useState("");
-  // const [isValidUser, setIsValidUser] = useState(true);
-  // const [password, setPassWord] = useState("");
-  // const [isValidPass, setIsValidPass] = useState(false);
-  // const [isSignup, setIsSignup] = useState(false);
-
-  // const handleClick = () => {
-  //   setIsSignup((prevState) => !prevState);
-  // };
-  // const handleLinkClick = () => {
-  //   // Xử lý logic chuyển hướng tại đây
-  //   window.location.href = "/login";
-  // };
-
+  const [username, setUserName] = useState("");
+  const [isValidUser, setIsValidUser] = useState(false);
+  const [password, setPassWord] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [isValidPass, setIsValidPass] = useState(false);
   return (
     <div className="signup-page">
+      <Toaster
+        toastOptions={{
+          className: "",
+          duration: 1700,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+          success: {
+            duration: 1000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      ></Toaster>
+
       <div className="signup-container">
         <div className="sub-signup-container">
           <div className="img">
@@ -37,55 +47,78 @@ export default function Login() {
             </div>
           </div>
         </div>
-
         <div class="form sign-up">
           <h2>Đăng Ký</h2>
           <label>
-            <span>Tên Đăng Nhập</span>
-            <input type="text" name="name" id="signup-name"></input>
-          </label>
-          <label>
-            <span>Email(Không bắt buộc)</span>
-            <input type="email" name="email" id="signup-email"></input>
+            <span>Email</span>
+            <input type="text" name="name" id="signup-name" value={username} onChange={handleOnChangeEmail}></input>
+            {username.length != 0 ? (
+              isValidUser ? (
+                <span style={{ color: "green" }}>Email hợp lệ</span>
+              ) : (
+                <span style={{ color: "red" }}>Email không hợp lệ</span>
+              )
+            ) : null}
           </label>
           <label>
             <span>Mật Khẩu</span>
-            <input type="password" name="password" id="signup-password"></input>
+            <input type="password" name="password" id="signup-password" value={password} onChange={handleOnChangePassword}></input>
+            {password.length != 0 ? (
+              isValidPass ? null : (
+                <span style={{ color: "red", fontSize: 11 }}>Mật khẩu phải có ít nhất 8 kí tự, không chứa khoảng trắng</span>
+              )
+            ) : null}
           </label>
           <label>
             <span>Xác nhận mật khẩu</span>
             <input
               type="password"
-              name="confirm-password"
-              id="signup-confirm-password"
+              name="password"
+              // id="signup-confirm-password"
+              value={confirmPass}
+              onChange={(e) => setConfirmPass(e.target.value)}
             ></input>
+            {confirmPass.length != 0 ? (
+              password.localeCompare(confirmPass) == 0 ? null : (
+                <span style={{ color: "red", fontSize: 11 }}>Mật khẩu không trùng khớp!!</span>
+              )
+            ) : null}
           </label>
-          <button type="button" id="signup-submit" class="submit">
+          <button type="button" id="signup-submit" class="submit" onClick={clickSignUp}>
             Đăng Ký
           </button>
         </div>
       </div>
     </div>
   );
-  // function handleOnChangeEmail(e) {
-  //   const inputEmail = e.target.value;
-  //   setUserName(inputEmail);
-  //   const emailPattern = /\S+@\S+\.\S+/; // Pattern kiểm tra email hợp lệ
-  //   setIsValidUser(emailPattern.test(inputEmail)); // Sử dụng test method để kiểm tra
-  // }
-  // function handleOnChangePassword(e) {
-  //   const inputPassword = e.target.value;
-  //   setPassWord(inputPassword);
-  //   // Kiểm tra password chứa ít nhất 8 ký tự và không chứa khoảng trắng
-  //   setIsValidPass(inputPassword.length >= 8 && !/\s/.test(inputPassword));
-  // }
-  // function clickLogin() {
-  //   (async () => {
-  //     const data = await handleLogin(username, password);
-  //     toast.success(data.message);
-  //   })().catch((err) =>
-  //     toast.error(`Có lỗi xảy ra
-  //   ${err}`)
-  //   );
-  // }
+  function handleOnChangeEmail(e) {
+    const inputEmail = e.target.value;
+    setUserName(inputEmail);
+    const emailPattern = /\S+@\S+\.\S+/; // Pattern kiểm tra email hợp lệ
+    setIsValidUser(emailPattern.test(inputEmail)); // Sử dụng test method để kiểm tra
+  }
+  function handleOnChangePassword(e) {
+    const inputPassword = e.target.value;
+    setPassWord(inputPassword);
+    // Kiểm tra password chứa ít nhất 8 ký tự và không chứa khoảng trắng
+    setIsValidPass(inputPassword.length >= 8 && !/\s/.test(inputPassword));
+  }
+  function clickSignUp() {
+    (async () => {
+      const data = (await axios.post('/api/v1/auth/signup', { email: username, password })).data;
+      if (data.errCode == 1) {
+        toast.error(data.message);
+      }
+      else {
+        setTimeout(() => {
+          window.location.href = '/login'
+        }, 1500)
+        toast.success('Tạo tài khoản thành công')
+      }
+
+    })().catch((err) =>
+      toast.error(`Có lỗi xảy ra
+    ${err}`)
+    );
+  }
 }
