@@ -96,6 +96,7 @@
                         display: block;
                         .col-skill {
                             width: 50%;
+                            flex-direction: column !important;
                             float: left;
                             border-right: 1px solid #a08945;
                             padding-right: 7%;

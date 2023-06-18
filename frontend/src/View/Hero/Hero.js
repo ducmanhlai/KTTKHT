@@ -1,14 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Hero.scss";
 import AcademyNavigation from "../../Component/AcademyNavigation/Anav";
 import Header from "../../Component/Header/Header";
 import Footer from "../../Component/Footer/Footer";
-
+import toast, { Toaster } from 'react-hot-toast';
+import axios from "../../config/axios";
+import axiosApiInstance from "../../config/interceptor";
 export default function Hero() {
+  const [listHero, setListHero] = useState([]);
+  const baseURL = 'http://localhost:8081/public/images/';
+  useEffect(() => {
+    (async () => {
+      const data = (await (await axios.get('/api/v1/hero/get')).data.data);
+      setListHero(data)
+    })().catch((err) => {
+      console.log(err);
+    })
+  }, [])
   return (
     <>
       <Header />
-
+      <Toaster
+        toastOptions={{
+          className: '',
+          duration: 1700,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            duration: 1500,
+            theme: {
+              primary: 'green',
+              secondary: 'black',
+            },
+          },
+        }}
+      ></Toaster>
       <section className="main-container">
         <AcademyNavigation />
 
@@ -128,30 +156,36 @@ export default function Hero() {
 
             <div className="bx-list-hero">
               <ul className="list-hero overflow-hidden ">
-                <li id="champion-1" className="list-champion">
-                  <span className="tags hidden" tag="1" type="6">
-                    Valhein, valhein
-                  </span>
-                  <div className="heroes">
-                    <a href="!#">
-                      <img
-                        src="https://lienquan.garena.vn/files/champion/icon/4b36c6e5e2d1ce9dd9e2841d2902043c5ee04efeb2f2d.jpg"
-                        alt="img"
-                        className="hover:opacity-75"
-                      ></img>
-                    </a>
-                    <p
-                      data-id="1"
-                      data-type="6"
-                      data-name="Valhein"
-                      className="name whitespace-nowrap mt-1 text-center"
-                    >
-                      Valhein
-                    </p>
-                  </div>
-                </li>
-
-                <li id="champion-1" className="list-champion">
+                {listHero.length != 0 ?
+                listHero.map((item,index)=>{
+                  return (
+                    <li id="champion-1" className="list-champion" key={index}>
+                    <span className="tags hidden" tag="1" type="6">
+                      {item.name}
+                    </span>
+                    <div className="heroes">
+                      <a href={`hero/detail?id=${item.id}`}>
+                        <img
+                          src={baseURL +item.avatar}
+                          alt="img"
+                          className="hover:opacity-75"
+                        ></img>
+                      </a>
+                      <p
+                        data-id="1"
+                        data-type="6"
+                        className="name whitespace-nowrap mt-1 text-center"
+                      >
+                        {item.name}
+                      </p>
+                    </div>
+                  </li>
+                  )
+                })
+                  :<div>Đang tải</div>
+                
+}
+                {/* <li id="champion-1" className="list-champion">
                   <span className="tags hidden" tag="2" type="4">
                     Ata, ata
                   </span>
@@ -287,7 +321,7 @@ export default function Hero() {
                       Tel'Annas
                     </p>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
