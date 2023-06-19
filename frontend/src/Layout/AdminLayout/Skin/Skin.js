@@ -9,6 +9,7 @@ import skin from "./Image/skin.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Skin.scss";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Skin() {
   return (
