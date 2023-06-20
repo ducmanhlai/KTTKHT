@@ -73,7 +73,7 @@ const EditSkin = ({ onHide }) => {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formName">
-              <Form.Label>Tên</Form.Label>
+              <Form.Label className="Name">Tên</Form.Label>
               <Form.Control
                 className="input-Skin"
                 type="text"
@@ -84,7 +84,7 @@ const EditSkin = ({ onHide }) => {
               />
             </Form.Group>
             <Form.Group controlId="formHeroes">
-              <Form.Label>Tướng</Form.Label>
+              <Form.Label className="Heroes">Tướng</Form.Label>
               <Form.Control
                 as="select"
                 className="input-Skin"
@@ -97,7 +97,7 @@ const EditSkin = ({ onHide }) => {
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="formPrice">
-              <Form.Label>Giá</Form.Label>
+              <Form.Label className="Price">Giá</Form.Label>
               <Form.Control
                 className="input-Price"
                 type="text"
@@ -107,39 +107,22 @@ const EditSkin = ({ onHide }) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formHeroes">
-              <Form.Label>Bậc</Form.Label>
-
-              <div value={status} onChange={(e) => setStatus(e.target.value)}>
-                <Form.Check
-                  inline
-                  type="radio"
-                  name="status"
-                  label="S+"
-                  id="s"
-                  shape="circle"
-                />
-
-                <Form.Check
-                  inline
-                  type="radio"
-                  name="status"
-                  label="S"
-                  id="s"
-                  shape="circle"
-                />
-                <Form.Check
-                  inline
-                  type="radio"
-                  name="status"
-                  label="A"
-                  id="a"
-                  shape="circle"
-                />
-              </div>
+            <Form.Group controlId="formValue">
+              <Form.Label className="Value">Bậc</Form.Label>
+              <Form.Control
+                as="select"
+                className="input-Value"
+                // value={Heroes}
+                // onChange={(e) => setHeroes(e.target.value)}
+              >
+                <option>S+</option>
+                <option>S</option>
+                <option>A+</option>
+                <option>A</option>
+              </Form.Control>
             </Form.Group>
             <Form.Group controlId="formImg">
-              <Form.Label>Ảnh</Form.Label>
+              <Form.Label className="Photo">Ảnh</Form.Label>
               <Form.Control
                 className="input-Img"
                 type="file"

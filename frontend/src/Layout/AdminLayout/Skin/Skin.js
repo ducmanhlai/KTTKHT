@@ -9,15 +9,20 @@ import skin from "./Image/skin.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Skin.scss";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AHeader from "../AHeader/AHeader";
 export default function Skin() {
   return (
+    <div>
+    <AHeader></AHeader>
+    
     <div className="list">
       <div className="listContainer">
         <Box mt="300px" mb="200px" ml="300px"></Box>
 
         <SkinMain />
       </div>
+    </div>
     </div>
   );
 }

@@ -23,12 +23,14 @@ tr {
 }
 .content-wrapper {
   display:flex;
+  background-color: transparent;
 }
 .content-wrapper .container {
   //   padding: 40px 0;
   //   border-radius: 5px;
   margin-top: -60px;
   margin-left: 20px;
+  background-color: transparent;
 }
 .main-content {
     width: 832px;
@@ -59,7 +61,7 @@ tr {
 
 .button-add {
   border: white solid 2px;
-  float:none;
+  float:right;
   text-align: center;
   color: black;
 }
@@ -81,7 +83,7 @@ tr {
   text-align: center;
   padding: 20px;
   width: 0px;
-  margin-left: -30px;
+  margin-left: -50px;
 }
 .button-inf {
   //   text-align: center;
@@ -107,9 +109,28 @@ tr {
   align-items: center;
   justify-content: center;
   width: 100%;
+  color: black;
 }
 
 .input-Skin {
   margin-top: -4px;
   margin-bottom: 8px;
+  
 }
+ 
+.Name{
+  color: black;
+}
+.Heroes{
+  color:black
+}
+.Price{
+  color:black
+}
+.Value{
+  color:black
+}
+.Photo{
+  color:black
+}
+
