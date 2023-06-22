@@ -86,12 +86,11 @@ export default function Heroes() {
     console.log(formData);
     const result = await axios.post(
       "http://localhost:8081/api/v1/hero/create",
-
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
     console.log("result: ", result);
-
+    
     setShow(false);
   };
 
