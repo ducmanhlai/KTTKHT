@@ -67,6 +67,7 @@ class skillController {
             })
         }
     }
+
     async update(req, res) {
         try {
             const imagePath = '../public/images';
