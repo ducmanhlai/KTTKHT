@@ -9,18 +9,20 @@ import skin from "./Image/skin.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Skin.scss";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AHeader from "../AHeader/AHeader";
 export default function Skin() {
   return (
+    <div>
+    <AHeader></AHeader>
+    
     <div className="list">
       <div className="listContainer">
-        <Box mt="300px" mb="200px" ml="300px">
-        
-          
-        </Box>
+        <Box mt="300px" mb="200px" ml="300px"></Box>
 
         <SkinMain />
       </div>
+    </div>
     </div>
   );
 }
@@ -28,10 +30,9 @@ export default function Skin() {
 const SkinMain = () => {
   return (
     <div className="content-wrapper">
-      
       <div className="container">
         <div className="main-content">
-        <button className="button-add">
+          <button className="button-add">
             <AddSkin />
           </button>
           <Table striped bordered hover size="sm">
@@ -50,11 +51,7 @@ const SkinMain = () => {
               <tr>
                 <td>1</td>
                 <td>
-                  <img
-                    className="list-images"
-                    alt="Skin photos"
-                    src={skin}
-                  />
+                  <img className="list-images" alt="Skin photos" src={skin} />
                 </td>
                 <td>Violet thần tiên tỉ tỉ</td>
                 <td>40.000</td>
@@ -74,11 +71,7 @@ const SkinMain = () => {
               <tr>
                 <td>2</td>
                 <td>
-                  <img
-                    className="list-images"
-                    alt="Skin photos"
-                    src={skin}
-                  />
+                  <img className="list-images" alt="Skin photos" src={skin} />
                 </td>
                 <td>Amily Vinh Quang</td>
                 <td>30.000</td>
@@ -97,11 +90,7 @@ const SkinMain = () => {
               <tr>
                 <td>3</td>
                 <td>
-                  <img
-                    className="list-images"
-                    alt="Skin photos"
-                    src={skin}
-                  />
+                  <img className="list-images" alt="Skin photos" src={skin} />
                 </td>
                 <td>Slimz thỏ ngọc</td>
                 <td>20.000</td>
@@ -116,16 +105,11 @@ const SkinMain = () => {
                     <DeleteModal />
                   </button>
                 </td> */}
-               
               </tr>
               <tr>
                 <td>4</td>
                 <td>
-                  <img
-                    className="list-images"
-                    alt="Skin photos"
-                    src={skin}
-                  />
+                  <img className="list-images" alt="Skin photos" src={skin} />
                 </td>
                 <td>Batman Matcha</td>
                 <td>20.000</td>
@@ -141,7 +125,6 @@ const SkinMain = () => {
                   </button>
                 </td> */}
               </tr>
-              
             </tbody>
           </Table>
         </div>

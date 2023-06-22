@@ -110,23 +110,23 @@ class userController {
         }
     }
     async analysis(req, res) {
-        let id_account = auth.tokenData(req).id;
+        let id_account =auth.tokenData(req).id;
         try {
             let data = await Promise.all([Model.hero_of_users.findAndCountAll({ where: { id_user: id_account } }),
-            Model.skin_of_user.findAndCountAll({ where: { id_user: id_account } }),
-            Model.payment.findAll({
-                attributes: [
-                    [sequelize.fn('SUM', sequelize.col('amount')), 'amount'],
-                ],
-                where: { id_account }
-            })
-            ])
+                Model.skin_of_user.findAndCountAll({ where: { id_user: id_account } }),
+                Model.payment.findAll({
+                    attributes: [
+                        [sequelize.fn('SUM', sequelize.col('amount')), 'amount'],
+                    ],
+                    where: { id_account }
+                })
+                ])
             res.send({
-                message: 'Thành công',
-                data: {
+                message:'Thành công',
+                data:{
                     hero: data[0].count,
                     skin: data[1].count,
-                    amount: data[2][0].amount
+                    amount:data[2][0].amount
                 }
             })
         } catch (error) {
@@ -134,11 +134,9 @@ class userController {
             res.send({
                 errCode: 500,
                 message: 'Có lỗi xảy ra',
-
+               
             })
         }
-
-
     }
 }
 export default new userController()

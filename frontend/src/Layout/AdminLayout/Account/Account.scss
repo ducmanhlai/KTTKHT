@@ -14,7 +14,7 @@
 
   .table-user-account {
     #customers-account {
-      background-color: #ccc;
+      border: 3px solid #ccc;
 
       font-family: Arial, Helvetica, sans-serif;
       border-collapse: collapse;
@@ -29,15 +29,21 @@
         // }
 
         &:hover {
-          background-color: #ddd;
+          //   background-color: #ddd;
+          opacity: 0.9;
         }
 
         th {
           padding-top: 12px;
           padding-bottom: 12px;
           text-align: center;
+          //   background-image: url("../../../img/btn.png");
+          //   background-size: cover;
+          background-color: #fff;
+          background-color: wheat;
+
           // background-color: #0d6efd;
-          background-color: #ddd;
+          //   background-color: #ddd;
           // background: linear-gradient(to right, #6dd5fa, #ffffff);
           color: #000;
           border: 1px solid #fff;
@@ -46,12 +52,16 @@
         }
 
         td {
+          //   background-image: url("../../../img/btn.png");
+          //   background-size: cover;
+          background-color: #fff;
+          background-color: wheat;
           border: 0.5px solid #ddd;
           padding: 8px;
           color: #000;
           text-align: center;
           font-size: 16px;
-          font-weight: bold;
+          //   font-weight: bold;
           opacity: 0.9;
 
           .avatar-image {
@@ -60,29 +70,34 @@
             border-radius: 20%;
           }
 
-          .btn-edit {
-            // color: #b1ff00;
-            font-size: 18px;
-            background-color: transparent;
-            width: 22%;
-
-            &:hover {
-              color: #000;
-              opacity: 0.8;
-            }
+          .lock-btn {
+            font-size: 12px;
+            padding: 8px;
           }
 
-          .btn-delete {
-            // color: #ff0000;
-            font-size: 18px;
-            background-color: transparent;
-            width: 22%;
+          // .btn-edit {
+          //   // color: #b1ff00;
+          //   font-size: 18px;
+          //   background-color: transparent;
+          //   width: 22%;
 
-            &:hover {
-              color: #000;
-              opacity: 0.8;
-            }
-          }
+          //   &:hover {
+          //     color: #000;
+          //     opacity: 0.8;
+          //   }
+          // }
+
+          // .btn-delete {
+          //   // color: #ff0000;
+          //   font-size: 18px;
+          //   background-color: transparent;
+          //   width: 22%;
+
+          //   &:hover {
+          //     color: #000;
+          //     opacity: 0.8;
+          //   }
+          // }
         }
       }
     }
