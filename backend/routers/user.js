@@ -3,8 +3,9 @@ import userController from "../controllers/userController";
 const userRouter = Router();
 const multer = require('multer');
 const upload = multer();
+import auth from "../middleware/authenJWT";
 
 userRouter.get('/getinfo', userController.getInfoUser)
-userRouter.put('/update', upload.single('avatar'), userController.updateUser)
-userRouter.get('/analysis', userController.analysis)
+userRouter.put('/update', auth.authenUser, upload.single('avatar'), userController.updateUser)
+userRouter.get('/analysis', auth.authenUser, userController.analysis)
 export default userRouter
