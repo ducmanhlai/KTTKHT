@@ -18,13 +18,16 @@
       }
 
       .bxskin {
+        // position: relative;
+        // left: auto;
+        // right: auto;
+        width: 8%;
+        margin-left: auto;
+        margin-right: auto;
         .cont-skin {
           .tabs-content-skin {
             border: 1px solid #a08945;
             display: block;
-            img {
-              max-width: 100%;
-            }
           }
         }
         .numeral {
@@ -135,39 +138,70 @@
           }
         }
         .cont-skill {
-          padding: 3% 7%;
+          padding: 3% 3%;
           overflow: hidden;
           .tabs-content {
             display: block;
+            .ask {
+              color: #00ffff;
+            }
+            .ideal {
+              color: #b1ff00;
+            }
+            .no-worry {
+              color: #ff8c00;
+            }
+            .contact {
+              color: #b1ff00;
+              a {
+                color: red;
+                font-size: 20px;
+              }
+            }
             .col-skill {
-              width: 50%;
+              width: 33.3333%;
               float: left;
               border-right: 1px solid #a08945;
               padding-right: 10%;
               padding-left: 4%;
+              max-height: 5%;
+
+              &:nth-child(3) {
+                border-right: none;
+              }
               .item-skill {
                 height: 500px !important;
                 border-bottom: 1px solid #a08945;
                 padding: 7% 0;
                 overflow: hidden;
                 .img-skill {
-                  width: 20%;
+                  width: 25%;
                   float: left;
+
+                  img {
+                    // width: 50px;
+                    // height: 80px;
+                  }
                 }
                 .in-skill {
-                  width: 80%;
+                  width: 75%;
                   float: left;
-                  padding-left: 5%;
-                  min-height: 200px;
-                  .name {
-                    font-size: 18px;
+                  padding-left: 7%;
+                  .name-skill {
+                    font-size: 20px;
                     text-transform: uppercase;
-                    margin-bottom: 5px;
+                    // margin-top: 2px;
+                    margin-bottom: 16px;
                     line-height: 22px;
+                    color: #00ffff;
                   }
                   .txt {
-                    margin-bottom: 20px;
-                    font-family: arial, helvetica, sans-serif;
+                    color: #b1ff00;
+                    margin-bottom: 16px;
+
+                    &:nth-child(2) {
+                      color: #ff8c00;
+                    }
                   }
                 }
               }
@@ -188,6 +222,9 @@
 
         .edit-heroes-button {
           font-size: 32px;
+          // position: relative;
+          // bottom: 400px;
+          // left: 10px;
 
           .edit-heroes-btn {
             // font-size: 24px;

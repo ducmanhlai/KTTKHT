@@ -1,262 +1,24 @@
-// import React, { useEffect, useState } from "react";
-// // import AHeader from "../AHeader/AHeader";
-// import toast, { Toaster } from "react-hot-toast";
-// import { FaLock, FaUnlock } from "react-icons/fa";
-// import "./Account.scss";
-// import axiosApiInstance from "../../../config/interceptor";
-// // import { Button } from "@material-tailwind/react";
-// import { Button, Modal, Form } from "react-bootstrap";
-// // import "bootstrap/dist/css/bootstrap.min.css";
-
-// export default function Account() {
-//   const [listUser, setListUser] = useState([]);
-//   const [user, setUser] = useState({});
-//   useEffect(() => {
-//     (async () => {
-//       const result = (
-//         await axiosApiInstance.get(
-//           axiosApiInstance.defaults.baseURL + "/api/v1/admin/getalluser"
-//         )
-//       ).data.data;
-//       setListUser([
-//         ...result.map((item) => {
-//           return {
-//             email: item.email,
-//             id: item.id,
-//             status: item.status,
-//             phone: item.phone,
-//             name: item.users[0]?.name_user,
-//           };
-//         }),
-//       ]);
-//     })().catch((err) => console.log(err));
-//   }, []);
-
-//   const [show, setShow] = useState(false);
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-//   const [reasonValue, setReasonValue] = useState("");
-
-//   const handleReasonChange = (event) => {
-//     console.log(event.target.value);
-//     setReasonValue(event.target.value);
-//   };
-
-//   return (
-//     <>
-//       {/* <AHeader /> */}
-//       <Toaster
-//         toastOptions={{
-//           className: "",
-//           duration: 3000,
-//           style: {
-//             background: "#363636",
-//             color: "#fff",
-//           },
-//           success: {
-//             duration: 2000,
-//             theme: {
-//               primary: "green",
-//               secondary: "black",
-//             },
-//           },
-//         }}
-//       ></Toaster>
-
-//       <div className="account-main-container pt-14">
-//         <div className="d-flex justify-content-center title-account text-center">
-//           Danh sách tài khoản
-//         </div>
-//         <div className="table-user-account">
-//           <table id="customers-account">
-//             <tbody>
-//               <tr>
-//                 <th>STT</th>
-//                 <th>Tên tài khoản</th>
-//                 <th>Email</th>
-//                 <th>Số điện thoại</th>
-//                 <th>Thao tác</th>
-//               </tr>
-//               {listUser.length > 0 ? (
-//                 listUser.map((item, index) => {
-//                   return (
-//                     <tr key={item.id}>
-//                       <td>{index + 1}</td>
-//                       <td>{item.name}</td>
-//                       <td>{item.email}</td>
-//                       <td>{item.phone}</td>
-//                       <td>
-//                         {item.status == 0 ? (
-//                           // <button
-//                           //   className="middle none center rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-//                           //   data-ripple-light="true"
-//                           //   onClick={() => {
-//                           //     handleClickLock(item);
-//                           //   }}
-//                           // >
-//                           //   Khóa
-//                           // </button>
-//                           <button
-//                             className="btn btn-success lock-btn"
-//                             onClick={() => {
-//                               handleClickLock(item);
-//                             }}
-//                             // onClick={handleShow}
-//                           >
-//                             <FaLock />
-//                           </button>
-//                         ) : (
-//                           // <button
-//                           //   className="middle none center rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-//                           //   data-ripple-light="true"
-//                           //   onClick={() => {
-//                           //     handleClickLock(item);
-//                           //   }}
-//                           // >
-//                           //   {" "}
-//                           //   Mở khóa
-//                           // </button>
-//                           <button
-//                             className="btn btn-danger lock-btn"
-//                             onClick={() => {
-//                               handleClickLock(item);
-//                             }}
-//                           >
-//                             <FaUnlock />
-//                           </button>
-//                         )}
-//                       </td>
-//                     </tr>
-//                   );
-//                 })
-//               ) : (
-//                 <div>Đang tải</div>
-//               )}
-//             </tbody>
-//           </table>
-//         </div>
-//       </div>
-//       {
-//         <Modal show={show} onHide={handleClose}>
-//           <Modal.Header closeButton className="bg-green">
-//             <Modal.Title className="text-white">Khoá tài khoản</Modal.Title>
-//           </Modal.Header>
-//           <Modal.Body>
-//             <Form>
-//               <Form.Group
-//                 className="mb-3"
-//                 controlId="exampleForm.ControlTextarea1"
-//               >
-//                 <Form.Label className="text-black">Lý do</Form.Label>
-//                 <Form.Control
-//                   type="text"
-//                   id="reason"
-//                   as="textarea"
-//                   rows={2}
-//                   value={reasonValue}
-//                   onChange={handleReasonChange}
-//                 />
-//                 <Form.Label className="text-black mt-3 ">
-//                   Ngài có chắc chắn muốn khoá tạm thời tài khoản này không ?
-//                 </Form.Label>
-//               </Form.Group>
-//             </Form>
-//           </Modal.Body>
-//           <Modal.Footer className="-mt-5">
-//             <Button variant="danger" className="px-3" onClick={BlockUser}>
-//               Đồng ý
-//             </Button>
-//             <Button variant="success" className="px-3" onClick={handleClose}>
-//               Không
-//             </Button>
-//           </Modal.Footer>
-//         </Modal>
-//       }
-//     </>
-//   );
-
-//   function handleClickLock(item) {
-//     setUser(item);
-//     if (item.status == 0) {
-//       // controlModal("open");
-//       handleShow(item);
-//     } else {
-//       (async () => {
-//         const result = (
-//           await axiosApiInstance.post(
-//             axiosApiInstance.defaults.baseURL +
-//               `/api/v1/admin/unlockuser?id_account=${user.id}`
-//           )
-//         ).data;
-//         result.errCode == 0
-//           ? toast.success("Mở khóa thành công")
-//           : toast.error("Lỗi máy chủ");
-//         setListUser(
-//           listUser.map((element) => {
-//             if (element.id === item.id)
-//               return { ...element, status: !element.status };
-//             else return { ...element };
-//           })
-//         );
-//       })().catch((err) => {
-//         toast.error("Có lỗi xảy ra");
-//         console.log(err);
-//       });
-//     }
-//   }
-//   function controlModal(type) {
-//     const modal = document.getElementById("authentication-modal");
-//     if (type.localeCompare("open") == 0) {
-//       modal.classList.remove("hidden");
-//       modal.classList.add("open");
-//     } else {
-//       modal.classList.remove("open");
-//       modal.classList.add("hidden");
-//     }
-//   }
-//   function BlockUser() {
-//     (async () => {
-//       // const content = document.getElementById("reason").value;
-//       const content = handleReasonChange();
-//       console.log("id:", content);
-//       const body = { content };
-//       const result = (
-//         await axiosApiInstance.post(
-//           axiosApiInstance.defaults.baseURL +
-//             `/api/v1/admin/blockuser?id_account=${user.id}`,
-//           body
-//         )
-//       ).data;
-//       result.errCode == 0
-//         ? toast.success("Khóa người dùng thành công")
-//         : toast.error("Lỗi máy chủ");
-//       setListUser(
-//         listUser.map((element) => {
-//           if (element.id == user.id)
-//             return { ...element, status: !element.status };
-//           else return { ...element };
-//         })
-//       );
-//     })()
-//       .catch((err) => {
-//         toast.error("Có lỗi xảy ra");
-//         console.log(err);
-//       })
-//       // .finally(() => controlModal("hidden"));
-//       .finally(() => handleClose());
-//   }
-// }
-
 import React, { useEffect, useState } from "react";
 // import AHeader from "../AHeader/AHeader";
 import toast, { Toaster } from "react-hot-toast";
 import { FaLock, FaUnlock } from "react-icons/fa";
+import FadeLoader from "react-spinners/FadeLoader";
 import "./Account.scss";
 import axiosApiInstance from "../../../config/interceptor";
 // import { Button } from "@material-tailwind/react";
 export default function Account() {
   const [listUser, setListUser] = useState([]);
   const [user, setUser] = useState({});
+
+  // const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, []);
+
   useEffect(() => {
     (async () => {
       const result = (
@@ -403,7 +165,8 @@ export default function Account() {
                   );
                 })
               ) : (
-                <div>Đang tải</div>
+                // <div>Đang tải</div>
+                <FadeLoader color={"#07F2FA"} loading={true} size={150} />
               )}
             </tbody>
           </table>

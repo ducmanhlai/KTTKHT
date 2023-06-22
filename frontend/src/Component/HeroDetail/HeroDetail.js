@@ -1,45 +1,49 @@
 import React, { useEffect, useState } from "react";
-import toast, { Toaster } from 'react-hot-toast';
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import toast, { Toaster } from "react-hot-toast";
+// import Header from "../Header/Header";
+// import Footer from "../Footer/Footer";
 import "./HeroDetail.scss";
 import axios from "../../config/axios";
-import link from '../../config/base'
+import link from "../../config/base";
+
 export default function HeroDetail() {
   const [hero, setHero] = useState({});
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('id')
+  const id = urlParams.get("id");
   useEffect(() => {
     (async () => {
-      const data = (await (await axios.get(`/api/v1/hero/get?id=${id}`)).data.data);
-      setHero({ ...data })
-      console.log(hero)
-    })().catch(err => {
+      const data = await (
+        await axios.get(`/api/v1/hero/get?id=${id}`)
+      ).data.data;
+      setHero({ ...data });
+      console.log(hero);
+    })().catch((err) => {
       console.log(err);
-      toast.error('Có lỗi xảy ra')
-    })
-  }, [])
+      toast.error("Có lỗi xảy ra");
+    });
+  }, []);
+
   return (
     <div className="hero">
-      <Header />
       <Toaster
         toastOptions={{
-          className: '',
+          className: "",
           duration: 1700,
           style: {
-            background: '#363636',
-            color: '#fff',
+            background: "#363636",
+            color: "#fff",
           },
           success: {
             duration: 1500,
             theme: {
-              primary: 'green',
-              secondary: 'black',
+              primary: "green",
+              secondary: "black",
             },
           },
         }}
       ></Toaster>
+
       <section className="hero-page pb-12">
         <div className="inner-page mx-auto my-0 relative">
           <div className="skin-hero ">
@@ -124,31 +128,34 @@ export default function HeroDetail() {
             </ul>
             <div className="cont-skill">
               <div id="tab-1" className="tabs-content">
-                <div className="col-skill">
-                  {hero?.skill_heros ? hero.skill_heros.map((item, index) => {
-                    return (
-                      <div className="item-skill" key={index}>
-                      <div className="img-skill">
-                        <img
-                          src="	https://lienquan.garena.vn/files/skill/icon/0fd55b686edc386f5f1937a09de2d1f1583e9d6a7fcc5.png"
-                          alt="img"
-                        ></img>
-                      </div>
-                      <div className="in-skill">
-                        <h2 className="name">{item.name}</h2>
-                        <div className="txt">{item.type_damage_type_damage.description}</div>
-                        <div className="txt">{item.description}</div>
-                      </div>
-                    </div>
-                    ) 
-                  }): null}
-                </div>
+                {hero?.skill_heros
+                  ? hero.skill_heros.map((item, index) => {
+                      return (
+                        <div className="col-skill">
+                          <div className="item-skill" key={index}>
+                            <div className="img-skill">
+                              <img
+                                src="	https://lienquan.garena.vn/files/skill/icon/0fd55b686edc386f5f1937a09de2d1f1583e9d6a7fcc5.png"
+                                alt="img"
+                              ></img>
+                            </div>
+                            <div className="in-skill">
+                              <h2 className="name-skill">{item.name}</h2>
+                              <div className="txt">
+                                {item.type_damage_type_damage.description}
+                              </div>
+                              <div className="txt">{item.description}</div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : null}
               </div>
             </div>
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

@@ -1,55 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import FadeLoader from "react-spinners/FadeLoader";
 
-import { Button } from "react-bootstrap";
+export default function Rule() {
+  const [loading, setLoading] = useState(false);
 
-const MyComponent = () => {
-  const [editable, setEditable] = useState(false);
-  const [content, setContent] = useState("Xiao Ming Xian Sheng");
-  const [editContent, setEditContent] = useState("");
-
-  const handleEditClick = () => {
-    setEditContent(content);
-    setEditable(true);
-  };
-
-  const handleSaveClick = () => {
-    setEditable(false);
-    // Xử lý logic lưu nội dung đã chỉnh sửa
-  };
-
-  const handleInputChange = (event) => {
-    setContent(event.target.value);
-  };
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+  }, []);
 
   return (
-    <div className="rule-page mt-28">
-      <div>
-        {editable ? (
-          <input
-            type="text"
-            value={editContent}
-            onChange={handleInputChange}
-            autoFocus
-          />
-        ) : (
-          <p>{content}</p>
-        )}
-      </div>
-      {editable ? (
-        <Button variant="secondary" onClick={handleSaveClick}>
-          Lưu
-        </Button>
+    <div className="app">
+      {loading ? (
+        <FadeLoader color={"#07F2FA"} loading={loading} size={150} />
       ) : (
-        <Button
-          variant="primary"
-          className="cursor-pointer"
-          onClick={handleEditClick}
-        >
-          Chỉnh sửa
-        </Button>
+        <div>Finish</div>
       )}
     </div>
   );
-};
-
-export default MyComponent;
+}

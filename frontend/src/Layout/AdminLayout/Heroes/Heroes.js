@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import axiosApiInstance from "../../../config/interceptor";
+
 // import { Link } from "react-router-dom";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,8 +9,9 @@ import axios from "axios";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 // import HeroesDetail from "./HeroesDetail";
 import "./Heroes.scss";
-import VanHeo from "../../../img/smallVanheo.jpg";
+// import VanHeo from "../../../img/smallVanheo.jpg";
 import { FaPlus, FaEye } from "react-icons/fa";
+import link from "../../../config/base";
 
 export default function Heroes() {
   // const [load, setLoad] = useState(false);
@@ -16,6 +19,7 @@ export default function Heroes() {
   const [list, setList] = useState([]);
   const [show, setShow] = useState(false);
   const [form, setForm] = useState();
+  const [change, setChange] = useState(false);
 
   const [name, setName] = useState();
   const [price, setPrice] = useState();
@@ -31,7 +35,7 @@ export default function Heroes() {
   const [mana, setMana] = useState();
   const [armorPierce, setArmorPierce] = useState();
   const [magicPierce, setMagicPierce] = useState();
-
+  const [selectedImage, setSelectedImage] = useState(null);
   const [type, setType] = useState();
 
   let Types = [
@@ -47,10 +51,23 @@ export default function Heroes() {
   const [isHovered, setIsHovered] = useState(false);
 
   async function getHeroes() {
-    const result = await axios.get("http://localhost:8081/api/v1/hero/get");
+    const result = await axiosApiInstance.get(
+      axiosApiInstance.defaults.baseURL + "/api/v1/hero/get"
+    );
     setList(result?.data.data);
     // console.log(result.data);
   }
+
+  const handleOnChangeImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setAvatar(file);
+      setSelectedImage(URL.createObjectURL(file));
+    } else {
+      setAvatar(null);
+      setSelectedImage(null);
+    }
+  };
 
   // const handleShowEdit = (e) => {
   //   setForm("edit");
@@ -84,14 +101,18 @@ export default function Heroes() {
     formData.append("magicPie", magicPierce);
     formData.append("classify", type);
     console.log(formData);
+
     const result = await axios.post(
-      "http://localhost:8081/api/v1/hero/create",
+      axiosApiInstance.defaults.baseURL + "/api/v1/hero/create",
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
+
     console.log("result: ", result);
-    
+    setChange(!change);
     setShow(false);
+    setAvatar(null);
+    setSelectedImage(null);
   };
 
   const handleMouseEnter = () => {
@@ -102,13 +123,13 @@ export default function Heroes() {
     setIsHovered(false);
   };
 
-  const handleClickPath = () => {
-    window.location.href = "/heroes-detail";
+  const handleClickPath = (id_hero) => {
+    window.location.href = `/heroes-detail/${id_hero}`;
   };
 
   useEffect(() => {
     getHeroes();
-  }, []);
+  }, [change]);
 
   return (
     <div class="heroes-page">
@@ -176,7 +197,8 @@ export default function Heroes() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <img
-                    src={VanHeo}
+                    // src={VanHeo}
+                    src={`${link.LINK_PUBLIC}${hero.avatar}`}
                     alt="img"
                     className="hover:opacity-75"
                   ></img>
@@ -194,7 +216,7 @@ export default function Heroes() {
                       <div className="edit-heroes-button btn-view">
                         <button
                           className="edit-heroes-btn"
-                          onClick={handleClickPath}
+                          onClick={() => handleClickPath(hero.id)}
                         >
                           <FaEye />
                         </button>
@@ -202,7 +224,7 @@ export default function Heroes() {
                     </>
                   )}
 
-                  <p className="name-heroes whitespace-nowrap mt-1 text-center">
+                  <p className="name-heroes whitespace-nowrap mt-2 text-center">
                     {hero.name}
                   </p>
                 </div>
@@ -269,8 +291,14 @@ export default function Heroes() {
                     <Form.Control
                       type="file"
                       placeholder="Chọn ảnh tướng"
-                      onChange={(e) => setAvatar(e.target.files[0])}
+                      onChange={(e) => handleOnChangeImage(e)}
                     />
+                    {selectedImage && (
+                      <div>
+                        <h5>Hình ảnh nhân vật:</h5>
+                        <img src={selectedImage} alt="Selected Image" />
+                      </div>
+                    )}
                     {/* {this.state.img && (
                   <img
                     src={this.state.img}
