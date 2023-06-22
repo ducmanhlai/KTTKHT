@@ -3,42 +3,41 @@ import "./Hero.scss";
 import AcademyNavigation from "../../Component/AcademyNavigation/Anav";
 import Header from "../../Component/Header/Header";
 import Footer from "../../Component/Footer/Footer";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import axios from "../../config/axios";
 import axiosApiInstance from "../../config/interceptor";
 export default function Hero() {
   const [listHero, setListHero] = useState([]);
-  const baseURL = 'http://localhost:8081/public/images/';
+  const baseURL = "http://localhost:8081/public/images/";
   useEffect(() => {
     (async () => {
-      const data = (await (await axios.get('/api/v1/hero/get')).data.data);
-      setListHero(data)
+      const data = await (await axios.get("/api/v1/hero/get")).data.data;
+      setListHero(data);
     })().catch((err) => {
       console.log(err);
-    })
-  }, [])
+    });
+  }, []);
   return (
     <>
-      <Header />
       <Toaster
         toastOptions={{
-          className: '',
+          className: "",
           duration: 1700,
           style: {
-            background: '#363636',
-            color: '#fff',
+            background: "#363636",
+            color: "#fff",
           },
           success: {
             duration: 1500,
             theme: {
-              primary: 'green',
-              secondary: 'black',
+              primary: "green",
+              secondary: "black",
             },
           },
         }}
       ></Toaster>
       <section className="main-container">
-        <AcademyNavigation />
+        {/* <AcademyNavigation /> */}
 
         <section className="hero-page pb-12">
           <div className="inner-page">
@@ -156,35 +155,35 @@ export default function Hero() {
 
             <div className="bx-list-hero">
               <ul className="list-hero overflow-hidden ">
-                {listHero.length != 0 ?
-                listHero.map((item,index)=>{
-                  return (
-                    <li id="champion-1" className="list-champion" key={index}>
-                    <span className="tags hidden" tag="1" type="6">
-                      {item.name}
-                    </span>
-                    <div className="heroes">
-                      <a href={`hero/detail?id=${item.id}`}>
-                        <img
-                          src={baseURL +item.avatar}
-                          alt="img"
-                          className="hover:opacity-75"
-                        ></img>
-                      </a>
-                      <p
-                        data-id="1"
-                        data-type="6"
-                        className="name whitespace-nowrap mt-1 text-center"
-                      >
-                        {item.name}
-                      </p>
-                    </div>
-                  </li>
-                  )
-                })
-                  :<div>Đang tải</div>
-                
-}
+                {listHero.length != 0 ? (
+                  listHero.map((item, index) => {
+                    return (
+                      <li id="champion-1" className="list-champion" key={index}>
+                        <span className="tags hidden" tag="1" type="6">
+                          {item.name}
+                        </span>
+                        <div className="heroes">
+                          <a href={`hero/detail?id=${item.id}`}>
+                            <img
+                              src={baseURL + item.avatar}
+                              alt="img"
+                              className="hover:opacity-75"
+                            ></img>
+                          </a>
+                          <p
+                            data-id="1"
+                            data-type="6"
+                            className="name whitespace-nowrap mt-1 text-center"
+                          >
+                            {item.name}
+                          </p>
+                        </div>
+                      </li>
+                    );
+                  })
+                ) : (
+                  <div>Đang tải</div>
+                )}
                 {/* <li id="champion-1" className="list-champion">
                   <span className="tags hidden" tag="2" type="4">
                     Ata, ata
@@ -327,8 +326,6 @@ export default function Hero() {
           </div>
         </section>
       </section>
-
-      <Footer />
     </>
   );
 }
