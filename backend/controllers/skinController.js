@@ -6,11 +6,25 @@ import BuySkinService from '../services/skinService';
 class skillController {
     async get(req, res) {
         try {
-            let listSkin = await SkinModel.findAll();
+            const query = req.query.id || "";
+            const listHero = query.length != 0 ? await SkinModel.findByPk(query,{
+                include:[{ model: Models.hero, as:'id_hero_hero', attributes: ['name'] },
+                {model: Models.type_skin, as:'classify_type_skin', attributes: ['name']}
+            ]
+            }) : await SkinModel.findAll({
+                include:[{ model: Models.hero, as:'id_hero_hero', attributes: ['name'] },
+                {model: Models.type_skin, as:'classify_type_skin', attributes: ['name']}
+            ]
+            });
             res.send({
-                data: listSkin,
-                message: 'Lấy dữ liệu thành công'
+                data: listHero,
+                message: 'Tìm thành công'
             })
+            // let listSkin = await SkinModel.findAll();
+            // res.send({
+            //     data: listSkin,
+            //     message: 'Lấy dữ liệu thành công'
+            // })
         } catch (err) {
             console.log(err)
             res.send({
@@ -62,7 +76,6 @@ class skillController {
             let id_skin = req.query.id_skin
             const dataSkin = await SkinModel.findOne({
                 where: { id: id_skin }
-
             });
 
             let filename = ''
