@@ -9,7 +9,6 @@ const EditSkin = ({ skin }) => {
   const [name, setName] = useState(skin.name);
   const [price, setPrice] = useState(skin.price);
   const [idHero, setIdHero] = useState(skin.id_hero);
-  const [status, setStatus] = useState("");
   const [type, setType] = useState(skin.classify);
   const [show, setShow] = useState(false);
   const [img, setImg] = useState()
@@ -24,14 +23,9 @@ const EditSkin = ({ skin }) => {
           name: item.name
         }
       })])
-      console.log(skin)
     })().catch(err => console.log(err))
 
   }, [])
-  const fileSelectedHandle = (event) => {
-    console.log(event.target.files[0])
-    setImg(event.target.files[0]);
-  };
   const notifyUpdate = () => {
     toast.success("Cập nhật trang phục thành công", {
       position: "top-right",
@@ -48,24 +42,26 @@ const EditSkin = ({ skin }) => {
   function handleSubmit(e) {
     (async () => {
       const formData = new FormData();
-      // console.log(img,formData)
+
       formData.append('name', name)
       formData.append('price', price.valueOf())
       formData.append('classify', type.valueOf())
       formData.append('avatar', img)
       formData.append('id_hero', idHero.valueOf());
-      const result = (await axiosApiInstance.post(`/api/v1/skin/update?id_skin=${skin.id}`,
+      const result = (await axiosApiInstance.put(`/api/v1/skin/update?id_skin=${skin.id}`,
         formData,
-         {headers: { "Content-Type": "multipart/form-data" } }
+        { headers: { "Content-Type": "multipart/form-data" } }
       ))
-      console.log(result)
-    })().catch(err => console.log(err))
-    setTimeout(handleClose, 3000);
+      toast.success('Thành công')
+    })().catch(err => {
+      console.log(err)
+      toast.error('Thất bại')
+    })
+    handleClose()
   };
 
   return (
     <>
-      {/* <Button variant='info' onClick={handleShow}>{title}</Button> */}
 
       <button className="btn btn-outline-success" onClick={handleShow}>
         Sửa

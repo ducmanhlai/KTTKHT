@@ -1,46 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Skin.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "./Skin.scss";
+import axiosApiInstance from "../../../config/interceptor";
 const AddSkin = ({ onHide }) => {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [detail, setDetail] = useState("");
-  const [status, setStatus] = useState("");
-
+  const [listHero, setListHero] = useState([])
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [idHero, setIdHero] = useState('');
+  const [type, setType] = useState(1);
+  const [img, setImg] = useState()
   const [show, setShow] = useState(false);
+  useEffect(() => {
+    (async () => {
+      const result = (await axiosApiInstance('/api/v1/hero/get')).data.data
+      setListHero([...result.map((item, index) => {
+        return {
+          id: item.id,
+          name: item.name
+        }
+      })])
+    })().catch(err => console.log(err))
 
+  }, [])
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const fileSelectedHandle = (event) => {
-    this.setState({
-      avatar: {
-        ...this.state.avatar.selectedFile,
-        selectedFile: event.target.files[0],
-      },
-    });
-
-    const file = event.target.files[0];
-    file.preview = URL.createObjectURL(file);
-    this.setState({
-      image: file.preview,
-    });
+    setImg(event.target.files[0])
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setName("");
-    setPrice("");
-    onHide();
+  function handleSubmit(e) {
+    (async () => {
+      const formData = new FormData();
+      formData.append('name', name)
+      formData.append('price', price.valueOf())
+      formData.append('classify', type.valueOf())
+      formData.append('avatar', img)
+      formData.append('id_hero', idHero.valueOf());
+      const result = (await axiosApiInstance.post(`/api/v1/skin/create?id_hero=${idHero}`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      ))
+      toast.success('Thành công')
+    })().catch(err =>
+      {
+        console.log(err)
+        toast.error('Thất bại')
+
+      })
+    handleClose()
   };
 
   const notifyAdd = () => {
-    console.log("có chạy mà");
     toast.success("Thêm trang phục thành công", {
       position: "top-right",
       autoClose: 3000,
@@ -73,7 +87,7 @@ const AddSkin = ({ onHide }) => {
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formName">
               <Form.Label
-              className="Name" >Tên</Form.Label>
+                className="Name" >Tên</Form.Label>
               <Form.Control
                 className="input-Skin"
                 type="text"
@@ -87,13 +101,11 @@ const AddSkin = ({ onHide }) => {
               <Form.Control
                 as="select"
                 className="input-Heroes"
-                // value={Heroes}
-                // onChange={(e) => setHeroes(e.target.value)}
+                onChange={e => setIdHero(e.target.value)}
               >
-                <option>Violet</option>
-                <option>Amily</option>
-                <option>Batman</option>
-                <option>Slimz</option>
+                {listHero.length > 0 ? listHero.map(item => {
+                  return <option key={item.id} value={item.id}>{item.name}</option>
+                }) : <></>}
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="formPrice">
@@ -112,13 +124,12 @@ const AddSkin = ({ onHide }) => {
               <Form.Control
                 as="select"
                 className="input-Value"
-                // value={Heroes}
-                // onChange={(e) => setHeroes(e.target.value)}
+                onChange={(e) => setType(e.target.value)}
               >
-                <option>S+</option>
-                <option>S</option>
-                <option>A+</option>
-                <option>A</option>
+                <option value={4}>S+</option>
+                <option value={2}>S</option>
+                <option value={3}>A+</option>
+                <option value={1}>A</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="formImg">
@@ -133,7 +144,7 @@ const AddSkin = ({ onHide }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={doubleFunction}>
+          <Button variant="primary" onClick={handleSubmit}>
             Thêm
             <ToastContainer />
           </Button>
