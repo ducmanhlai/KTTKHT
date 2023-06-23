@@ -78,9 +78,8 @@ class skillController {
                 where: { id: id_skin }
             });
 
-            let filename = ''
-            if (!req.file || !price || !classify || !name || !id_hero) {
-                console.log(id_skin, price, classify, name, id_hero, req.file);
+            let filename = dataSkin.dataValues.avatar
+            if (!price || !classify || !name || !id_hero) {
                 //Không có ảnh sẽ không update avatar
                 return res.send({
                     errCode: 1,
@@ -88,8 +87,7 @@ class skillController {
                 })
             }
             else {
-                console.log(price, classify, name);
-                filename = await fileUpload.save(req.file.buffer);
+                filename = req.file?.buffer ? await fileUpload.save(req.file.buffer): dataSkin.dataValues.avatar;
                 const skin = await dataSkin.set({
                     price, classify, name, avatar: filename, id_hero
                 });

@@ -25,6 +25,6 @@ authRouter.put(
   auth.authenUser,
   authController.changeForgotPassword
 );
-authRouter.post("/refresh", auth.authenUser, authController.refreshToken);
+authRouter.post("/refresh", authController.refreshToken);
 
 export default authRouter;

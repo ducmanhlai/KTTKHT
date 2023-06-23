@@ -34,7 +34,6 @@ function App() {
   let role = localStorage.getItem("accessToken")
     ? jwtDecode(localStorage.getItem("accessToken")).id_role
     : 1;
-  // let role = 2;
   return (
     <div className="app">
       <AuthContextProvider>
