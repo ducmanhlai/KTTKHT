@@ -302,7 +302,7 @@ export default function HeroDetail() {
     formData.append("magicPie", magicPierce);
     formData.append("classify", classify);
 
-    const result = await axios.put(
+    const result = await axiosApiInstance.put(
       axiosApiInstance.defaults.baseURL + `/api/v1/hero/update?id_hero=${id}`,
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }

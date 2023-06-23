@@ -7,14 +7,16 @@ class skillController {
     async get(req, res) {
         try {
             const query = req.query.id || "";
-            const listHero = query.length != 0 ? await SkinModel.findByPk(query,{
-                include:[{ model: Models.hero, as:'id_hero_hero', attributes: ['name'] },
-                {model: Models.type_skin, as:'classify_type_skin', attributes: ['name']}
-            ]
+            const listHero = query.length != 0 ? await SkinModel.findByPk(query, {
+                include: [{ model: Models.hero, as: 'id_hero_hero', attributes: ['name'] },
+                { model: Models.type_skin, as: 'classify_type_skin', attributes: ['name'] },
+                { model: Models.item, as: 'items', attributes: ['name'] }
+                ]
             }) : await SkinModel.findAll({
-                include:[{ model: Models.hero, as:'id_hero_hero', attributes: ['name'] },
-                {model: Models.type_skin, as:'classify_type_skin', attributes: ['name']}
-            ]
+                include: [{ model: Models.hero, as: 'id_hero_hero', attributes: ['name'] },
+                { model: Models.type_skin, as: 'classify_type_skin', attributes: ['name'] },
+                { model: Models.item, as: 'items', attributes: ['name'] }
+                ]
             });
             res.send({
                 data: listHero,
