@@ -467,26 +467,26 @@ export default function HeroDetail() {
                 <div id="tab-1" className="tabs-content">
                   {list.skill_heros && list.skill_heros.length > 0
                     ? list.skill_heros.map((item, index) => {
-                        return (
-                          <div className="col-skill">
-                            <div className="item-skill" key={index}>
-                              <div className="img-skill">
-                                <img
-                                  src="	https://lienquan.garena.vn/files/skill/icon/0fd55b686edc386f5f1937a09de2d1f1583e9d6a7fcc5.png"
-                                  alt="img"
-                                ></img>
+                      return (
+                        <div className="col-skill">
+                          <div className="item-skill" key={index}>
+                            <div className="img-skill">
+                              <img
+                                src="	https://lienquan.garena.vn/files/skill/icon/0fd55b686edc386f5f1937a09de2d1f1583e9d6a7fcc5.png"
+                                alt="img"
+                              ></img>
+                            </div>
+                            <div className="in-skill">
+                              <h2 className="name-skill">{item.name}</h2>
+                              <div className="txt">
+                                {item.type_damage_type_damage.description}
                               </div>
-                              <div className="in-skill">
-                                <h2 className="name-skill">{item.name}</h2>
-                                <div className="txt">
-                                  {item.type_damage_type_damage.description}
-                                </div>
-                                <div className="txt">{item.description}</div>
-                              </div>
+                              <div className="txt">{item.description}</div>
                             </div>
                           </div>
-                        );
-                      })
+                        </div>
+                      );
+                    })
                     : null}
                   {list.skill_heros && list.skill_heros.length > 0 ? (
                     // <button
@@ -818,7 +818,7 @@ export default function HeroDetail() {
                         setClassify(e.target.value);
                         console.log(e.target.value);
                       }}
-                      // value={this.state.id_category}
+                    // value={this.state.id_category}
                     >
                       <option>Chọn vai trò</option>
                       {Types &&

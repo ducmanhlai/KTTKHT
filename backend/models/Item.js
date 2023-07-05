@@ -8,14 +8,14 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     name: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(45),
       allowNull: true
     },
-    level: {
+    id_skin: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
-        model: 'level_item',
+        model: 'skin',
         key: 'id'
       }
     },
@@ -26,18 +26,6 @@ module.exports = function(sequelize, DataTypes) {
         model: 'type_item',
         key: 'id'
       }
-    },
-    description: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    icon: {
-      type: DataTypes.STRING(200),
-      allowNull: true
     }
   }, {
     sequelize,
@@ -53,14 +41,14 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "fk_item_level_idx",
+        name: "fk_skin_idx",
         using: "BTREE",
         fields: [
-          { name: "level" },
+          { name: "id_skin" },
         ]
       },
       {
-        name: "fk_item_type_idx",
+        name: "fk_type_idx",
         using: "BTREE",
         fields: [
           { name: "type" },

@@ -480,7 +480,7 @@ export default function Heroes() {
                     <Form.Control
                       as="select"
                       onChange={(e) => setType(e.target.value)}
-                      // value={type}
+                    // value={type}
                     >
                       <option>Chọn vai trò</option>
                       {Types &&

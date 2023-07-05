@@ -5,7 +5,9 @@ import skillRouter from "./skill";
 import skinRouter from "./skin";
 import paymentRouter from "./payment";
 import ruleRouter from "./rule";
+import itemRouter from "./item";
 import multer from "../middleware/multer";
+
 import auth from "../middleware/authenJWT";
 import userRouter from "./user";
 export default function router(app) {
@@ -16,4 +18,5 @@ export default function router(app) {
   app.use("/api/v1/skin", auth.authenUser, skinRouter);
   app.use("/api/v1/payment", paymentRouter);
   app.use("/api/v1/user", auth.authenUser, userRouter);
+
 }

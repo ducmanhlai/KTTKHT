@@ -34,7 +34,6 @@ function App() {
   let role = localStorage.getItem("accessToken")
     ? jwtDecode(localStorage.getItem("accessToken")).id_role
     : 1;
-  // let role = 2;
   return (
     <div className="app">
       <AuthContextProvider>
@@ -62,7 +61,7 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/news" element={<Login />} />
                 <Route path="/hero" element={<Hero />} />
-                <Route path="/hero-detail" element={<HeroDetail />} />
+                <Route path="/hero/detail" element={<HeroDetail />} />
                 <Route path="/academy" element={<Hero />}>
                   <Route path="introduce" element={<Introduce />} />
                   <Route path="equip" element={<Equip />} />
