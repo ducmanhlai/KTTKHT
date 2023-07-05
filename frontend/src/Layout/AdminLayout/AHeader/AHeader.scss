@@ -1,57 +1,62 @@
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 40;
+.admin-header {
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
 
-  .top-pc {
-    .nav-top {
-      background-color: url("../../../img/bg-nav-top.png") top center no-repeat;
-      .inner-page {
-        width: 1168px;
-        margin: 0 auto;
-        position: relative;
-        .logo {
-          width: 150px;
-          margin-left: -54px;
-        }
+    .top-pc {
+      .nav-top {
+        background-color: url("../../../img/bg-nav-top.png") top center
+          no-repeat;
+        .inner-page {
+          width: 1168px;
+          margin: 0 auto;
+          position: relative;
+          .logo {
+            width: 150px;
+            margin-left: -54px;
+          }
 
-        .menu-top {
-          li {
-            float: left;
+          .menu-top {
+            li {
+              float: left;
 
-            &:hover {
-              // background: url("../../../img/nav-current.png") bottom center
-              //   no-repeat;
-              // background-size: 90% 5%;
-              border-bottom: 2px solid #fff;
-              color: #b1ff00;
+              a {
+                text-decoration: none !important;
+                color: #fff;
+                text-transform: uppercase;
+                font-size: 17px;
+                line-height: 60px;
+                display: inline-block;
+                background: url(../../../img/line-nav.jpg) center right
+                  no-repeat;
 
-              text-decoration: none !important;
-              cursor: pointer;
-            }
-            a {
-              text-decoration: none !important;
-              color: #fff;
-              text-transform: uppercase;
-              font-size: 17px;
-              line-height: 60px;
-              display: inline-block;
-              background: url(../../../img/line-nav.jpg) center right no-repeat;
+                &:hover {
+                  // background: url("../../../img/nav-current.png") bottom center
+                  //   no-repeat;
+                  // background-size: 90% 5%;
+                  border-bottom: 2px solid #fff;
+                  color: #b1ff00;
 
-              &.active {
-                border-bottom: 2px solid #fff;
-                color: #b1ff00;
+                  text-decoration: none !important;
+                  cursor: pointer;
+                }
+
+                &.active {
+                  border-bottom: 2px solid #fff;
+                  color: #b1ff00;
+                }
               }
-            }
 
-            &:nth-of-type(4),
-            &:nth-of-type(5),
-            &:nth-of-type(6),
-            &:nth-of-type(7),
-            &:nth-of-type(8) {
-              float: right;
+              &:nth-of-type(4),
+              &:nth-of-type(5),
+              &:nth-of-type(6),
+              &:nth-of-type(7),
+              &:nth-of-type(8) {
+                float: right;
+              }
             }
           }
         }

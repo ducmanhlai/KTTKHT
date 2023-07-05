@@ -3,41 +3,43 @@ import { getToken, setToken } from "../services/token";
 const axiosApiInstance = axios.create({});
 
 axiosApiInstance.interceptors.request.use((config) => {
-  let [accessToken, refreshToken] = getToken()
+  let [accessToken, refreshToken] = getToken();
   if (accessToken == null) {
-    localStorage.clear()
+    localStorage.clear();
     window.location.href = "/login";
   }
 
   config.headers = {
+
     'Authorization': `Bearer ${accessToken}`,
     'Accept': 'application/json',
     // 'Content-Type': 'application/json'
   }
+
   return config;
 });
 
 axiosApiInstance.interceptors.response.use(
-  response => response,
+  (response) => response,
   async (error) => {
     if (error.response.status == 403) {
       const refreshToken = localStorage.getItem("refreshToken");
       if (refreshToken) {
         let apiResponse = await axios.post(
-          axios.defaults.baseURL + `/api/v1/auth/refresh`
-          , { token: refreshToken });
+          axios.defaults.baseURL + `/api/v1/auth/refresh`,
+          { token: refreshToken }
+        );
         if (apiResponse.data.status && apiResponse) {
           // alert("Da Refresh Token")
           const { accessToken, refreshToken } = apiResponse.data.data;
           setToken(accessToken, refreshToken);
           //alert("Da set Token moi")
           error.config.headers = {
-            'Authorization': `Bearer ${accessToken}`
-          }
-          window.location.reload()
-        }
-        else {
-          localStorage.clear()
+            Authorization: `Bearer ${accessToken}`,
+          };
+          window.location.reload();
+        } else {
+          localStorage.clear();
           window.location.href = "/login";
         }
       }

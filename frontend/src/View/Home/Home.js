@@ -3,10 +3,12 @@ import React, { useContext } from "react";
 // import Footer from "../../Component/Footer/Footer";
 import HeroFree from "../../Component/FreeHeroOfWeek/HeroFree";
 import Device from "../../Component/DeviceRequired/Device";
+import Slider from "../../Component/Slider/Slider";
 export default function Home() {
   return (
     <>
       {/* <Header /> */}
+      <Slider />
       <HeroFree />
       <Device />
       {/* <Footer /> */}

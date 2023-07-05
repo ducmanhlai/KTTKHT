@@ -17,13 +17,13 @@ export default function Login() {
       <Toaster
         toastOptions={{
           className: "",
-          duration: 1700,
+          duration: 2000,
           style: {
             background: "#363636",
             color: "#fff",
           },
           success: {
-            duration: 1000,
+            duration: 2000,
             theme: {
               primary: "green",
               secondary: "black",
@@ -51,7 +51,13 @@ export default function Login() {
           <h2>Đăng Ký</h2>
           <label>
             <span>Email</span>
-            <input type="text" name="name" id="signup-name" value={username} onChange={handleOnChangeEmail}></input>
+            <input
+              type="text"
+              name="name"
+              id="signup-name"
+              value={username}
+              onChange={handleOnChangeEmail}
+            ></input>
             {username.length != 0 ? (
               isValidUser ? (
                 <span style={{ color: "green" }}>Email hợp lệ</span>
@@ -62,10 +68,18 @@ export default function Login() {
           </label>
           <label>
             <span>Mật Khẩu</span>
-            <input type="password" name="password" id="signup-password" value={password} onChange={handleOnChangePassword}></input>
+            <input
+              type="password"
+              name="password"
+              id="signup-password"
+              value={password}
+              onChange={handleOnChangePassword}
+            ></input>
             {password.length != 0 ? (
               isValidPass ? null : (
-                <span style={{ color: "red", fontSize: 11 }}>Mật khẩu phải có ít nhất 8 kí tự, không chứa khoảng trắng</span>
+                <span style={{ color: "red", fontSize: 11 }}>
+                  Mật khẩu phải có ít nhất 8 kí tự, không chứa khoảng trắng
+                </span>
               )
             ) : null}
           </label>
@@ -80,11 +94,18 @@ export default function Login() {
             ></input>
             {confirmPass.length != 0 ? (
               password.localeCompare(confirmPass) == 0 ? null : (
-                <span style={{ color: "red", fontSize: 11 }}>Mật khẩu không trùng khớp!!</span>
+                <span style={{ color: "red", fontSize: 11 }}>
+                  Mật khẩu không trùng khớp!!
+                </span>
               )
             ) : null}
           </label>
-          <button type="button" id="signup-submit" class="submit" onClick={clickSignUp}>
+          <button
+            type="button"
+            id="signup-submit"
+            class="submit"
+            onClick={clickSignUp}
+          >
             Đăng Ký
           </button>
         </div>
@@ -105,17 +126,17 @@ export default function Login() {
   }
   function clickSignUp() {
     (async () => {
-      const data = (await axios.post('/api/v1/auth/signup', { email: username, password })).data;
+      const data = (
+        await axios.post("/api/v1/auth/signup", { email: username, password })
+      ).data;
       if (data.errCode == 1) {
         toast.error(data.message);
-      }
-      else {
+      } else {
         setTimeout(() => {
-          window.location.href = '/login'
-        }, 1500)
-        toast.success('Tạo tài khoản thành công')
+          window.location.href = "/login";
+        }, 1500);
+        toast.success("Tạo tài khoản thành công");
       }
-
     })().catch((err) =>
       toast.error(`Có lỗi xảy ra
     ${err}`)

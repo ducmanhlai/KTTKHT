@@ -14,18 +14,19 @@ export default function Footer() {
         </p>
 
         <p className="address">
-          CÔNG TY CỔ PHẦN GIẢI TRÍ VÀ THỂ THAO ĐIỆN TỬ VIỆT NAM
+          CÔNG TY CỔ PHẦN GIẢI TRÍ VÀ THỂ THAO ĐIỆN TỬ XIAO MING
           <br />
-          Giấy CNĐKKD số 0105301438, cấp lần đầu ngày 10/05/2011
+          Giấy CNĐKKD số 0105301438, cấp lần đầu ngày 30/02/2023.
           <br />
-          Cơ quan cấp: Phòng Đăng ký kinh doanh- Sở Kế hoạch và đầu tư TP Hà Nội
+          Cơ quan cấp: Phòng Đăng ký kinh doanh- Sở Kế hoạch và đầu tư TP Hồ Chí
+          Minh.
           <br />
-          Địa chỉ trụ sở chính: Tầng 29, tòa nhà Trung tâm Lotte Hà Nội, số 54,
-          đường Liễu Giai, Phường Cống Vị, Quận Ba Đình,
+          Địa chỉ trụ sở chính: Tầng 81 Tòa nhà Landmark 81, 720A Điện Biên Phủ,
+          Phường 22, Quận Bình Thạnh, TPHCM.
           <br />
-          Thành phố Hà Nội, Việt Nam.
+          Thành phố Hồ Chí Minh, Việt Nam.
           <br />
-          Điện thoại: 024 73053939
+          Điện thoại: 09 66 93 22 67
         </p>
       </div>
 

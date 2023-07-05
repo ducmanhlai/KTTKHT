@@ -6,6 +6,7 @@ import Footer from "../../Component/Footer/Footer";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "../../config/axios";
 import axiosApiInstance from "../../config/interceptor";
+import Slider from "../../Component/Slider/Slider";
 export default function Hero() {
   const [listHero, setListHero] = useState([]);
   const baseURL = "http://localhost:8081/public/images/";
@@ -36,8 +37,9 @@ export default function Hero() {
           },
         }}
       ></Toaster>
+      <Slider />
       <section className="main-container">
-        {/* <AcademyNavigation /> */}
+        <AcademyNavigation />
 
         <section className="hero-page pb-12">
           <div className="inner-page">
@@ -173,7 +175,7 @@ export default function Hero() {
                           <p
                             data-id="1"
                             data-type="6"
-                            className="name whitespace-nowrap mt-1 text-center"
+                            className="hero-name whitespace-nowrap mt-2 text-center"
                           >
                             {item.name}
                           </p>

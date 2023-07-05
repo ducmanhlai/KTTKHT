@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import AHeader from "../AHeader/AHeader";
 import toast, { Toaster } from "react-hot-toast";
 import { FaLock, FaUnlock } from "react-icons/fa";
-import FadeLoader from "react-spinners/FadeLoader";
+import PuffLoader from "react-spinners/PuffLoader";
 import "./Account.scss";
 import axiosApiInstance from "../../../config/interceptor";
 // import { Button } from "@material-tailwind/react";
@@ -165,8 +165,9 @@ export default function Account() {
                   );
                 })
               ) : (
-                // <div>Đang tải</div>
-                <FadeLoader color={"#07F2FA"} loading={true} size={150} />
+                <div className="items-center justify-center">
+                  <PuffLoader color={"#07F2FA"} loading={true} size={80} />
+                </div>
               )}
             </tbody>
           </table>

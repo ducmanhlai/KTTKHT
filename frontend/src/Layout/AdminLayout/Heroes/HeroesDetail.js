@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import link from "../../../config/base";
 import axiosApiInstance from "../../../config/interceptor";
+import toast, { Toaster } from "react-hot-toast";
 
 import "./HeroesDetail.scss";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
@@ -217,6 +218,8 @@ export default function HeroDetail() {
 
     setChange(!change);
     setShowSkill(false);
+    if (result.errCode == 1) toast.error(result.message);
+    toast.success("Thêm kĩ năng " + `${list.name}` + " thành công");
   };
 
   const handleSubmitEditSkill = async () => {
@@ -265,6 +268,9 @@ export default function HeroDetail() {
     );
     setChange(!change);
     setShowSkill(false);
+
+    if (result.errCode == 1) toast.error(result.message);
+    else toast.success("Chỉnh sửa kĩ năng " + `${list.name}` + " thành công");
   };
 
   const handleSubmitEditInfo = async () => {
@@ -311,6 +317,8 @@ export default function HeroDetail() {
     console.log("result: ", result);
     setChange(!change);
     setShow(false);
+    if (result.errCode == 1) toast.error(result.message);
+    toast.success("Sửa thuộc tính  " + `${list.name}` + " thành công");
   };
 
   useEffect(() => {
@@ -322,6 +330,24 @@ export default function HeroDetail() {
 
   return (
     <div className="hero">
+      <Toaster
+        toastOptions={{
+          className: "",
+          duration: 2000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      ></Toaster>
+
       <section className="hero-page pb-12">
         <div className="inner-page mx-auto my-0 relative">
           <div className="skin-hero ">
