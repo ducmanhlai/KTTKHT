@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FadeLoader from "react-spinners/FadeLoader";
+import PuffLoader from "react-spinners/PuffLoader";
 
 export default function Rule() {
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ export default function Rule() {
   return (
     <div className="app">
       {loading ? (
-        <FadeLoader color={"#07F2FA"} loading={loading} size={150} />
+        <PuffLoader color={"#07F2FA"} loading={loading} size={100} />
       ) : (
         <div>Finish</div>
       )}

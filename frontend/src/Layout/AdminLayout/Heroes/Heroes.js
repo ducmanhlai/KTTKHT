@@ -5,6 +5,7 @@ import axiosApiInstance from "../../../config/interceptor";
 // import { Link } from "react-router-dom";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
+import toast, { Toaster } from "react-hot-toast";
 
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 // import HeroesDetail from "./HeroesDetail";
@@ -113,6 +114,8 @@ export default function Heroes() {
     setShow(false);
     setAvatar(null);
     setSelectedImage(null);
+    if (result.errCode == 1) toast.error(result.message);
+    else toast.success("Thêm tướng mới thành công");
   };
 
   const handleMouseEnter = () => {
@@ -133,6 +136,24 @@ export default function Heroes() {
 
   return (
     <div class="heroes-page">
+      <Toaster
+        toastOptions={{
+          className: "",
+          duration: 1700,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+          success: {
+            duration: 1000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      ></Toaster>
+
       <div className="inner-page">
         <div className="filter-hero ">
           <div className="item-filter">

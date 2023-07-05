@@ -12,7 +12,7 @@ export default function Anav() {
           </Link>
         </li>
         <li className="link-title">
-          <Link className="link-item  current" to="/hero">
+          <Link className="link-item current" to="/hero">
             Tướng
           </Link>
         </li>

@@ -10,7 +10,7 @@ export default function AHeader() {
   // };
 
   return (
-    <div>
+    <div className="admin-header">
       <header>
         <div className="top-pc">
           <nav className="nav-top absolute top-0 left-0 right-0 h-40">
@@ -62,12 +62,29 @@ export default function AHeader() {
               </ul>
             </div>
 
-            <NavLink
-              to="/login"
-              className="logout py-0 px-4 no-underline absolute right-4 top-4 text-base text-white hover:text-slate-300"
-            >
-              Đăng xuất
-            </NavLink>
+            {localStorage.getItem("accessToken") ? (
+              <NavLink
+                to="/login"
+                className="logout py-0 px-4 no-underline absolute right-4 top-4 text-base text-white hover:text-slate-300"
+                onClick={() => {
+                  localStorage.removeItem("accessToken");
+                  localStorage.removeItem("refreshToken");
+                }}
+              >
+                Đăng xuất
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/login"
+                className="logout py-0 px-4 no-underline absolute right-4 top-4 text-base text-white hover:text-slate-300"
+                // onClick={() => {
+                //   localStorage.removeItem("accessToken");
+                //   localStorage.removeItem("refreshToken");
+                // }}
+              >
+                Đăng nhập
+              </NavLink>
+            )}
           </nav>
         </div>
       </header>

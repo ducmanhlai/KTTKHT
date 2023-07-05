@@ -4,7 +4,7 @@ import "./Header.scss";
 
 export default function Header() {
   return (
-    <div>
+    <div className="user-header">
       <img
         src="https://lienquan.garena.vn/asset/images/rating-18.jpg"
         className="fixed top-5 z-50"
@@ -15,51 +15,84 @@ export default function Header() {
         <div className="top-pc">
           <nav className="nav-top absolute top-0 left-0 right-0 h-40">
             <div className="inner-page relative my-0 mx-auto">
-              <Link to="/" className="logo absolute top-1 left-1/2">
+              <NavLink to="/" className="logo absolute top-1 left-1/2">
                 <img
                   src="https://cdn.vn.garenanow.com/web/kg/home/images/logo-new.png"
                   alt="logo-img"
                   className="hover:opacity-75"
                 ></img>
-              </Link>
+              </NavLink>
 
               <ul className="menu-top overflow-hidden">
                 <li className="title-menu-top float-left">
-                  <Link className="top-menu-link py-0 px-4" to="/">
+                  <NavLink className="top-menu-link py-0 px-4" to="/">
                     Trang chủ
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="title-menu-top float-left">
-                  <Link className="top-menu-link py-0 px-4" to="/news">
+                  <a
+                    className="top-menu-link py-0 px-4"
+                    href="https://lienquan.garena.vn/tin-tuc"
+                  >
                     Tin tức
-                  </Link>
+                  </a>
                 </li>
                 <li className="title-menu-top float-left">
-                  <Link className="top-menu-link py-0 px-4" to="/academy">
+                  <NavLink className="top-menu-link py-0 px-4" to="/academy">
                     Học viện
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="title-menu-top float-left">
-                  <Link className="top-menu-link py-0 px-4" to="/profile">
+                  <NavLink className="top-menu-link py-0 px-4" to="/profile">
                     Cá nhân
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="title-menu-top float-left">
-                  <Link className="top-menu-link py-0 px-4" to="/giftcode">
+                  <a
+                    className="top-menu-link py-0 px-4"
+                    href="https://lienquan.garena.vn/giftcode/"
+                  >
                     GiftCode
-                  </Link>
+                  </a>
                 </li>
                 <li className="title-menu-top float-left">
-                  <Link className="top-menu-link py-0 px-4" to="/naptien">
+                  <a
+                    className="top-menu-link py-0 px-4"
+                    href="https://napthe.vn/app"
+                  >
                     Nạp tiền
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
 
+            {localStorage.getItem("accessToken") ? (
+              <NavLink
+                to="/login"
+                id="logout-btn"
+                className="logout py-0 px-4 no-underline absolute right-4 top-4 text-base text-white hover:text-slate-300"
+                onClick={() => {
+                  localStorage.removeItem("accessToken");
+                  localStorage.removeItem("refreshToken");
+                }}
+              >
+                Đăng xuất
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/login"
+                className="logout py-0 px-4 no-underline absolute right-4 top-4 text-base text-white hover:text-slate-300"
+                // onClick={() => {
+                //   localStorage.removeItem("accessToken");
+                //   localStorage.removeItem("refreshToken");
+                // }}
+              >
+                Đăng nhập
+              </NavLink>
+            )}
           </nav>
 
-          <div className="bx-top">
+          {/* <div className="bx-top">
             <p className="logo-down">
               <a className="down-play" href="!#">
                 {" "}
@@ -72,24 +105,18 @@ export default function Header() {
                 {" "}
               </a>
             </p>
-          </div>
+          </div> */}
         </div>
 
-        <div
+        {/* <div
           id="slider"
           className="owl-carousel owl-theme owl-loaded owl-drag pt-16"
         >
           <img
             src="https://lienquan.garena.vn/files/upload/images/ThanhTu/APL2023/1920x864.jpg"
             alt="img-top"
-          // className="hover:opacity-80"
+            // className="hover:opacity-80"
           ></img>
-
-          {/* <img
-            src="https://lienquan.garena.vn/files/upload/images/Thanh%20Th%E1%BA%A3o%20CTV/webteaser2_1920x864.jpg"
-            alt="img-top"
-            className="hover:opacity-90"
-          ></img> */}
 
           <div className="owl-dots">
             <button className="owl-dot">
@@ -99,7 +126,7 @@ export default function Header() {
               <span></span>
             </button>
           </div>
-        </div>
+        </div> */}
       </header>
     </div>
   );
