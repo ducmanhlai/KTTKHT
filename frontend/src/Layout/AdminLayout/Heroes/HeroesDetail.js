@@ -8,23 +8,19 @@ import toast, { Toaster } from "react-hot-toast";
 import "./HeroesDetail.scss";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import { FaPencilAlt, FaPlus } from "react-icons/fa";
+import SkillImg from "../../../img/vanheoskillimg.png";
 
 export default function HeroDetail() {
   const [activeTab, setActiveTab] = useState("tab1");
   const [list, setList] = useState([]);
-
-  // const [form, setForm] = useState();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-
   const [formStory, setFormStory] = useState();
   const [showStory, setShowStory] = useState(false);
   const handleCloseStory = () => setShowStory(false);
-
   const [formSkill, setFormSkill] = useState();
   const [showSkill, setShowSkill] = useState(false);
   const handleCloseSkill = () => setShowSkill(false);
-
   const [change, setChange] = useState(false);
 
   //Hero Info
@@ -45,6 +41,7 @@ export default function HeroDetail() {
   const [classify, setClassify] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
 
+  // Type of Hero
   let Types = [
     { id: 1, name: "Sát thủ" },
     { id: 2, name: "Pháp sư" },
@@ -54,6 +51,7 @@ export default function HeroDetail() {
     { id: 6, name: "Đấu sĩ" },
   ];
 
+  // Type of Skill
   let TypeSkill = [
     { id: 1, name: "Sát thương chuẩn" },
     { id: 2, name: "Sát thương vật lý" },
@@ -80,7 +78,7 @@ export default function HeroDetail() {
 
   async function getHeroes() {
     const result = await axios.get(
-      `http://localhost:8081/api/v1/hero/get?id=${id}`
+      axiosApiInstance.defaults.baseURL + `/api/v1/hero/get?id=${id}`
     );
     setList(result?.data.data);
 
@@ -127,40 +125,23 @@ export default function HeroDetail() {
   };
 
   const handleShowEdit = (e) => {
-    // setForm("edit");
-    // setName(e.currentTarget.value);
-    // setID(e.currentTarget.id);
-    setShow(true);
-  };
-  const handleShowAdd = (e) => {
-    // setName(null);
-    // setID(null);
-    // setForm("add");
     setShow(true);
   };
 
   const handleShowEditSkill = (e) => {
-    // setName(e.currentTarget.value);
-    // setID(e.currentTarget.id);
     setFormSkill("edit");
     setShowSkill(true);
   };
   const handleShowAddSkill = (e) => {
-    // setName(null);
-    // setID(null);
     setFormSkill("add");
     setShowSkill(true);
   };
 
   const handleShowEditStory = (e) => {
-    // setName(e.currentTarget.value);
-    // setID(e.currentTarget.id);
     setFormStory("edit");
     setShowStory(true);
   };
   const handleShowAddStory = (e) => {
-    // setName(null);
-    // setID(null);
     setFormStory("add");
     setShowStory(true);
   };
@@ -178,7 +159,7 @@ export default function HeroDetail() {
 
   const handleSubmitSkill = async () => {
     const result = await axios.post(
-      `http://localhost:8081/api/v1/skill/create`,
+      axiosApiInstance.defaults.baseURL + "/api/v1/skill/create",
       {
         idHero: id,
         listSkill: [
@@ -224,7 +205,7 @@ export default function HeroDetail() {
 
   const handleSubmitEditSkill = async () => {
     const result = await axios.put(
-      `http://localhost:8081/api/v1/skill/update`,
+      axiosApiInstance.defaults.baseURL + "/api/v1/skill/update",
       [
         {
           id: IDSkill3,
@@ -253,19 +234,19 @@ export default function HeroDetail() {
       ]
     );
 
-    console.log(
-      "Kết quả: ",
-      result,
-      nameSkill1,
-      nameSkill2,
-      nameSkill3,
-      typeDamage1,
-      typeDamage2,
-      typeDamage3,
-      description1,
-      description2,
-      description3
-    );
+    // console.log(
+    //   "Kết quả: ",
+    //   result,
+    //   nameSkill1,
+    //   nameSkill2,
+    //   nameSkill3,
+    //   typeDamage1,
+    //   typeDamage2,
+    //   typeDamage3,
+    //   description1,
+    //   description2,
+    //   description3
+    // );
     setChange(!change);
     setShowSkill(false);
 
@@ -274,7 +255,7 @@ export default function HeroDetail() {
   };
 
   const handleSubmitEditInfo = async () => {
-    console.log(list.skill_heros);
+    // console.log(list.skill_heros);
     // console.log(
     //   name,
     //   price,
@@ -323,9 +304,6 @@ export default function HeroDetail() {
 
   useEffect(() => {
     getHeroes();
-    // const queryString = window.location.search;
-    // const urlParams = new URLSearchParams(queryString);
-    // const id = urlParams.get("id");
   }, [change]);
 
   return (
@@ -384,8 +362,6 @@ export default function HeroDetail() {
                   <label>Công vật lý</label>
                   <span className="champion_stat">
                     {list && list.attackDamage}
-                    {/* {list.price} */}
-                    {/* {console.log(list)} */}
                   </span>
                 </p>
                 <p>
@@ -467,34 +443,25 @@ export default function HeroDetail() {
                 <div id="tab-1" className="tabs-content">
                   {list.skill_heros && list.skill_heros.length > 0
                     ? list.skill_heros.map((item, index) => {
-                      return (
-                        <div className="col-skill">
-                          <div className="item-skill" key={index}>
-                            <div className="img-skill">
-                              <img
-                                src="	https://lienquan.garena.vn/files/skill/icon/0fd55b686edc386f5f1937a09de2d1f1583e9d6a7fcc5.png"
-                                alt="img"
-                              ></img>
-                            </div>
-                            <div className="in-skill">
-                              <h2 className="name-skill">{item.name}</h2>
-                              <div className="txt">
-                                {item.type_damage_type_damage.description}
+                        return (
+                          <div className="col-skill">
+                            <div className="item-skill" key={index}>
+                              <div className="img-skill">
+                                <img src={SkillImg} alt="img"></img>
                               </div>
-                              <div className="txt">{item.description}</div>
+                              <div className="in-skill">
+                                <h2 className="name-skill">{item.name}</h2>
+                                <div className="txt">
+                                  {item.type_damage_type_damage.description}
+                                </div>
+                                <div className="txt">{item.description}</div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })
+                        );
+                      })
                     : null}
                   {list.skill_heros && list.skill_heros.length > 0 ? (
-                    // <button
-                    //   className="edit-heroes-btn float-right"
-                    //   onClick={handleShowEditSkill}
-                    // >
-                    //   <FaPencilAlt />
-                    // </button>
                     <div className="edit-heroes-button">
                       <button
                         className="edit-heroes-btn float-right"
@@ -818,7 +785,7 @@ export default function HeroDetail() {
                         setClassify(e.target.value);
                         console.log(e.target.value);
                       }}
-                    // value={this.state.id_category}
+                      // value={this.state.id_category}
                     >
                       <option>Chọn vai trò</option>
                       {Types &&

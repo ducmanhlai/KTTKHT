@@ -1,0 +1,90 @@
+.device-container {
+  background: url(../../../img/bg-down.jpg) bottom center no-repeat;
+  background-size: 1920px 100%;
+  padding: 0 0 75px 0;
+  position: relative;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  .inner-page {
+    width: 1168px;
+    margin: 0 auto;
+    position: relative;
+
+    .title {
+      font-size: 36px;
+      margin-bottom: 3%;
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: bold;
+      line-height: 40px;
+      color: #cfc39b;
+    }
+
+    .notice {
+      font-size: 14px;
+      margin: 0px 200px 20px 200px;
+      text-align: center;
+    }
+
+    .info-device {
+      &::before {
+        display: table;
+        content: " ";
+      }
+
+      .bx-ios {
+        width: 50%;
+        padding-right: 15px;
+        float: left;
+
+        .bx-block {
+          border: 1px solid #ae903b;
+          overflow: hidden;
+
+          .left {
+            float: left;
+            width: 20%;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            top: 90px;
+          }
+
+          .right {
+            float: left;
+            width: 75%;
+            padding: 15px;
+            border-left: 1px solid #ae903b;
+            min-height: 230px;
+
+            h2 {
+              text-transform: uppercase;
+              margin-bottom: 5px;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+
+      //   .bx-android {
+      //     width: 50%;
+      //     padding-right: 15px;
+      //     float: left;
+      //   }
+    }
+
+    .clear-fix {
+      &::after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+      }
+    }
+  }
+}
