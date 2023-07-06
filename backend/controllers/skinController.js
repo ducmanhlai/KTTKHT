@@ -6,11 +6,27 @@ import BuySkinService from '../services/skinService';
 class skillController {
     async get(req, res) {
         try {
-            let listSkin = await SkinModel.findAll();
+            const query = req.query.id || "";
+            const listHero = query.length != 0 ? await SkinModel.findByPk(query, {
+                include: [{ model: Models.hero, as: 'id_hero_hero', attributes: ['name'] },
+                { model: Models.type_skin, as: 'classify_type_skin', attributes: ['name'] },
+                { model: Models.item, as: 'items', attributes: ['name'] }
+                ]
+            }) : await SkinModel.findAll({
+                include: [{ model: Models.hero, as: 'id_hero_hero', attributes: ['name'] },
+                { model: Models.type_skin, as: 'classify_type_skin', attributes: ['name'] },
+                { model: Models.item, as: 'items', attributes: ['name'] }
+                ]
+            });
             res.send({
-                data: listSkin,
-                message: 'Lấy dữ liệu thành công'
+                data: listHero,
+                message: 'Tìm thành công'
             })
+            // let listSkin = await SkinModel.findAll();
+            // res.send({
+            //     data: listSkin,
+            //     message: 'Lấy dữ liệu thành công'
+            // })
         } catch (err) {
             console.log(err)
             res.send({
@@ -53,6 +69,7 @@ class skillController {
             })
         }
     }
+
     async update(req, res) {
         try {
             const imagePath = '../public/images';
@@ -61,12 +78,10 @@ class skillController {
             let id_skin = req.query.id_skin
             const dataSkin = await SkinModel.findOne({
                 where: { id: id_skin }
-
             });
 
-            let filename = ''
-            if (!req.file || !price || !classify || !name || !id_hero) {
-                console.log(id_skin, price, classify, name, id_hero, req.file);
+            let filename = dataSkin.dataValues.avatar
+            if (!price || !classify || !name || !id_hero) {
                 //Không có ảnh sẽ không update avatar
                 return res.send({
                     errCode: 1,
@@ -74,8 +89,7 @@ class skillController {
                 })
             }
             else {
-                console.log(price, classify, name);
-                filename = await fileUpload.save(req.file.buffer);
+                filename = req.file?.buffer ? await fileUpload.save(req.file.buffer): dataSkin.dataValues.avatar;
                 const skin = await dataSkin.set({
                     price, classify, name, avatar: filename, id_hero
                 });

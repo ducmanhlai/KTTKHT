@@ -5,7 +5,6 @@ var _forgot_password = require("./forgot_password");
 var _hero = require("./hero");
 var _hero_of_users = require("./hero_of_users");
 var _item = require("./item");
-var _level_item = require("./level_item");
 var _payment = require("./payment");
 var _payment_method = require("./payment_method");
 var _payment_status = require("./payment_status");
@@ -30,7 +29,6 @@ function initModels(sequelize) {
   var hero = _hero(sequelize, DataTypes);
   var hero_of_users = _hero_of_users(sequelize, DataTypes);
   var item = _item(sequelize, DataTypes);
-  var level_item = _level_item(sequelize, DataTypes);
   var payment = _payment(sequelize, DataTypes);
   var payment_method = _payment_method(sequelize, DataTypes);
   var payment_status = _payment_status(sequelize, DataTypes);
@@ -66,8 +64,6 @@ function initModels(sequelize) {
   hero.hasMany(skin, { as: "skins", foreignKey: "id_hero"});
   story_hero.belongsTo(hero, { as: "id_hero_hero", foreignKey: "id_hero"});
   hero.hasOne(story_hero, { as: "story_hero", foreignKey: "id_hero"});
-  item.belongsTo(level_item, { as: "level_level_item", foreignKey: "level"});
-  level_item.hasMany(item, { as: "items", foreignKey: "level"});
   payment.belongsTo(payment_method, { as: "id_method_payment_method", foreignKey: "id_method"});
   payment_method.hasMany(payment, { as: "payments", foreignKey: "id_method"});
   payment.belongsTo(payment_status, { as: "status_payment_status", foreignKey: "status"});
@@ -76,6 +72,8 @@ function initModels(sequelize) {
   role.hasMany(account, { as: "accounts", foreignKey: "id_role"});
   type_rule.belongsTo(rule, { as: "id_rule_rule", foreignKey: "id_rule"});
   rule.hasMany(type_rule, { as: "type_rules", foreignKey: "id_rule"});
+  item.belongsTo(skin, { as: "id_skin_skin", foreignKey: "id_skin"});
+  skin.hasMany(item, { as: "items", foreignKey: "id_skin"});
   skin_of_user.belongsTo(skin, { as: "id_skin_skin", foreignKey: "id_skin"});
   skin.hasMany(skin_of_user, { as: "skin_of_users", foreignKey: "id_skin"});
   skill_hero.belongsTo(type_damage, { as: "type_damage_type_damage", foreignKey: "type_damage"});
@@ -96,7 +94,6 @@ function initModels(sequelize) {
     hero,
     hero_of_users,
     item,
-    level_item,
     payment,
     payment_method,
     payment_status,

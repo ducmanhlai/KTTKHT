@@ -10,10 +10,12 @@ axiosApiInstance.interceptors.request.use((config) => {
   }
 
   config.headers = {
-    Authorization: `Bearer ${accessToken}`,
-    Accept: "application/json",
+
+    'Authorization': `Bearer ${accessToken}`,
+    'Accept': 'application/json',
     // 'Content-Type': 'application/json'
-  };
+  }
+
   return config;
 });
 

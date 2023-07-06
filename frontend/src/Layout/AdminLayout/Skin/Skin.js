@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
@@ -10,30 +10,44 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Skin.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axiosApiInstance from "../../../config/interceptor";
 import AHeader from "../AHeader/AHeader";
+import link from '../../../config/base'
 export default function Skin() {
+
   return (
     <div>
-    <AHeader></AHeader>
-    
-    <div className="list">
-      <div className="listContainer">
-        <Box mt="300px" mb="200px" ml="300px"></Box>
-
-        <SkinMain />
+      <AHeader></AHeader>
+      <div className="list">
+        <div className="listContainer">
+          <Box mt="300px" mb="200px" ml="300px"></Box>
+          <SkinMain />
+        </div>
       </div>
-    </div>
     </div>
   );
 }
 
 const SkinMain = () => {
+  const [listSkin, setListSkin] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const result = (
+        await axiosApiInstance.get(
+          axiosApiInstance.defaults.baseURL + "/api/v1/skin/get"
+        )
+      ).data.data;
+      setListSkin([...result])
+    })().catch(err => {
+      console.log(err)
+    })
+  }, [])
   return (
     <div className="content-wrapper">
       <div className="container">
         <div className="main-content">
           <button className="button-add">
-            <AddSkin />
+            <AddSkin/>
           </button>
           <Table striped bordered hover size="sm">
             <thead className="Skin-inf">
@@ -48,83 +62,29 @@ const SkinMain = () => {
               </tr>
             </thead>
             <tbody className=" Skin-list">
-              <tr>
-                <td>1</td>
-                <td>
-                  <img className="list-images" alt="Skin photos" src={skin} />
-                </td>
-                <td>Violet thần tiên tỉ tỉ</td>
-                <td>40.000</td>
-                <td>Bậc S+</td>
-                <td>
-                  <button className="button-edit">
-                    <EditSkin />
-                  </button>
-                </td>
-                {/* <td>
-                  <button className="button-del">
-                    <DeleteModal />
-                  </button>
-                </td> */}
-              </tr>
-
-              <tr>
-                <td>2</td>
-                <td>
-                  <img className="list-images" alt="Skin photos" src={skin} />
-                </td>
-                <td>Amily Vinh Quang</td>
-                <td>30.000</td>
-                <td>Bậc S</td>
-                <td>
-                  <button className="button-edit">
-                    <EditSkin />
-                  </button>
-                </td>
-                {/* <td>
-                  <button className="button-del">
-                    <DeleteModal />
-                  </button>
-                </td> */}
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>
-                  <img className="list-images" alt="Skin photos" src={skin} />
-                </td>
-                <td>Slimz thỏ ngọc</td>
-                <td>20.000</td>
-                <td>Bậc A</td>
-                <td>
-                  <button className="button-edit">
-                    <EditSkin />
-                  </button>
-                </td>
-                {/* <td>
-                  <button className="button-del">
-                    <DeleteModal />
-                  </button>
-                </td> */}
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>
-                  <img className="list-images" alt="Skin photos" src={skin} />
-                </td>
-                <td>Batman Matcha</td>
-                <td>20.000</td>
-                <td>Bậc A</td>
-                <td>
-                  <button className="button-edit">
-                    <EditSkin />
-                  </button>
-                </td>
-                {/* <td>
-                  <button className="button-del">
-                    <DeleteModal />
-                  </button>
-                </td> */}
-              </tr>
+              {listSkin.lenght != 0 ? listSkin.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{index+1}</td>
+                    <td>
+                      <img className="list-images" alt="Skin photos" src={`${link.LINK_PUBLIC}${item.avatar}`} />
+                    </td>
+                    <td>{item.name}</td>
+                    <td>{item.price}</td>
+                    <td>{item.classify_type_skin.name}</td>
+                    <td>
+                      <button className="button-edit">
+                        <EditSkin skin={item} />
+                      </button>
+                    </td>
+                    {/* <td>
+                    <button className="button-del">
+                      <DeleteModal />
+                    </button>
+                  </td> */}
+                  </tr>
+                )
+              }) : null}
             </tbody>
           </Table>
         </div>
@@ -135,7 +95,6 @@ const SkinMain = () => {
 
 const DeleteModal = () => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 

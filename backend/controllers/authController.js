@@ -54,6 +54,7 @@ class authController {
     async signUp(req, res) {
         try {
             let data = req.body
+            console.log('Data:', data);
             let test = await createNewUser(data)
             console.log(test);
             return res.status(200).json(test)
@@ -301,6 +302,13 @@ let hashUserPassword = async (password) => {
 
 let createNewUser = async (data) => {
     try {
+        console.log(data.email, data.password);
+        if (!data.email || !data.password) {
+            return ({
+                errCode: 2,
+                message: 'Vui lòng không được bỏ trống thông tin!'
+            })
+        }
         let check = await checkUserEmail(data.email);
         if (check) {
             return ({

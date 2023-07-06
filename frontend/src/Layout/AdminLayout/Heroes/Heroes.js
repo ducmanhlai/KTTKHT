@@ -86,7 +86,7 @@ export default function Heroes() {
     formData.append("classify", type);
     console.log(formData);
 
-    const result = await axios.post(
+    const result = await axiosApiInstance.post(
       axiosApiInstance.defaults.baseURL + "/api/v1/hero/create",
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
@@ -454,7 +454,7 @@ export default function Heroes() {
                     <Form.Control
                       as="select"
                       onChange={(e) => setType(e.target.value)}
-                      // value={type}
+                    // value={type}
                     >
                       <option>Chọn vai trò</option>
                       {Types &&
