@@ -29,7 +29,7 @@ export default function Login() {
             color: "#fff",
           },
           success: {
-            duration: 2000,
+            duration: 3000,
             theme: {
               primary: "green",
               secondary: "black",
@@ -119,7 +119,6 @@ export default function Login() {
         </div>
       </div>
     </div>
-    
   );
   function handleOnChangeEmail(e) {
     const inputEmail = e.target.value;
@@ -133,6 +132,7 @@ export default function Login() {
     // Kiểm tra password chứa ít nhất 8 ký tự và không chứa khoảng trắng
     setIsValidPass(inputPassword.length >= 8 && !/\s/.test(inputPassword));
   }
+
   function clickLogin() {
     (async () => {
       const data = await handleLogin(username, password);

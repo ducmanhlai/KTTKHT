@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import axiosApiInstance from "../../../config/interceptor";
-
-// import { Link } from "react-router-dom";
-
-// import "bootstrap/dist/css/bootstrap.min.css";
-
+import toast, { Toaster } from "react-hot-toast";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
-// import HeroesDetail from "./HeroesDetail";
 import "./Heroes.scss";
-// import VanHeo from "../../../img/smallVanheo.jpg";
 import { FaPlus, FaEye } from "react-icons/fa";
 import link from "../../../config/base";
 
 export default function Heroes() {
-  // const [load, setLoad] = useState(false);
-
   const [list, setList] = useState([]);
   const [show, setShow] = useState(false);
   const [form, setForm] = useState();
@@ -69,15 +61,7 @@ export default function Heroes() {
     }
   };
 
-  // const handleShowEdit = (e) => {
-  //   setForm("edit");
-  //   // setName(e.currentTarget.title);
-  //   // setID(e.currentTarget.id);
-  //   setShow(true);
-  // };
   const handleShowAdd = (e) => {
-    // setName(null);
-    // setID(null);
     setForm("add");
     setShow(true);
   };
@@ -102,7 +86,7 @@ export default function Heroes() {
     formData.append("classify", type);
     console.log(formData);
 
-    const result = await axios.post(
+    const result = await axiosApiInstance.post(
       axiosApiInstance.defaults.baseURL + "/api/v1/hero/create",
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
@@ -113,6 +97,8 @@ export default function Heroes() {
     setShow(false);
     setAvatar(null);
     setSelectedImage(null);
+    if (result.errCode == 1) toast.error(result.message);
+    else toast.success("Thêm tướng mới thành công");
   };
 
   const handleMouseEnter = () => {
@@ -133,6 +119,24 @@ export default function Heroes() {
 
   return (
     <div class="heroes-page">
+      <Toaster
+        toastOptions={{
+          className: "",
+          duration: 1700,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+          success: {
+            duration: 1000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      ></Toaster>
+
       <div className="inner-page">
         <div className="filter-hero ">
           <div className="item-filter">
@@ -204,15 +208,6 @@ export default function Heroes() {
                   ></img>
                   {isHovered && (
                     <>
-                      {/* <div className="edit-heroes-button">
-                        <button
-                          className="edit-heroes-btn"
-                          onClick={handleShowEdit}
-                        >
-                          <FaPencilAlt />
-                        </button>
-                      </div> */}
-
                       <div className="edit-heroes-button btn-view">
                         <button
                           className="edit-heroes-btn"

@@ -6,35 +6,33 @@ import SignUp from "./View/SignUp/SignUp";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./scss/test.scss";
-// import Home from "./View/Home/Home";
 
-// import Introduce from "./View/Introduce/Introduce";
-// import Skin from "./View/Skin/Skin";
-// import Equip from "./View/Equip/Equip";
+import Home from "./Layout/UserLayout/Home/Home";
+import Hero from "./Layout/UserLayout/Hero/Hero";
+import Profile from "./Layout/UserLayout/Profile/Profile";
+import HeroDetail from "./Layout/UserLayout/HeroDetail/HeroDetail";
+import Header from "./Layout/UserLayout/Header/Header";
+import Footer from "./Layout/UserLayout/Footer/Footer";
 
-import Home from "./View/Home/Home";
-import Hero from "./View/Hero/Hero";
 import Introduce from "./View/Introduce/Introduce";
-import Skin from "./Layout/AdminLayout/Skin/Skin";
 import Equip from "./View/Equip/Equip";
 import Profile from "./View/Profile/Profile";
 import HeroDetail from "./Component/HeroDetail/HeroDetail";
 import { AuthContextProvider } from "./context/authContext";
 
+import Skin from "./Layout/AdminLayout/Skin/Skin";
 import AHome from "./Layout/AdminLayout/Home/AHome";
 import Account from "./Layout/AdminLayout/Account/Account";
 import HeroDetails from "./Layout/AdminLayout/Heroes/HeroesDetail";
 import Heroes from "./Layout/AdminLayout/Heroes/Heroes";
-import Header from "./Component/Header/Header";
 import AHeader from "./Layout/AdminLayout/AHeader/AHeader";
-import Footer from "./Component/Footer/Footer";
 import Rule from "./Layout/AdminLayout/Rule/Rule";
+import Item from "./Layout/AdminLayout/Item/Item";
 
 function App() {
   let role = localStorage.getItem("accessToken")
     ? jwtDecode(localStorage.getItem("accessToken")).id_role
     : 1;
-  // let role = 2;
   return (
     <div className="app">
       <AuthContextProvider>
@@ -51,6 +49,7 @@ function App() {
                 <Route path="/heroes-detail/:id" element={<HeroDetails />} />
                 <Route path="/skin" element={<Skin />} />
                 <Route path="/rule" element={<Rule />} />
+                <Route path="/item" element={<Item />} />
               </Routes>
             </>
           ) : (
