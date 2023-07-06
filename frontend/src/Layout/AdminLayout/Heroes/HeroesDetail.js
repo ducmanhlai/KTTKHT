@@ -283,7 +283,8 @@ export default function HeroDetail() {
     //   mana,
     //   armorPierce,
     //   magicPierce,
-    //   classify
+    //   classify,
+    //   avatar
     // );
     const formData = new FormData();
     formData.append("name", name);

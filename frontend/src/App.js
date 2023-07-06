@@ -17,7 +17,7 @@ import Hero from "./View/Hero/Hero";
 import Introduce from "./View/Introduce/Introduce";
 import Skin from "./Layout/AdminLayout/Skin/Skin";
 import Equip from "./View/Equip/Equip";
-import Profile from "./View/Profile";
+import Profile from "./View/Profile/Profile";
 import HeroDetail from "./Component/HeroDetail/HeroDetail";
 import { AuthContextProvider } from "./context/authContext";
 
