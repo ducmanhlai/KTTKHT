@@ -1,14 +1,11 @@
 import React from "react";
 import "./AHome.scss";
+import BgHome from "../../../img/bg-home.jpg";
 
 export default function AHome() {
   return (
     <div className="home-page">
-      <img
-        src="https://lienquan.garena.vn/files/upload/images/ThanhTu/APL2023/1920x864.jpg"
-        alt="img-top"
-        // className="mt-0"
-      ></img>
+      <img src={BgHome} alt="img-top"></img>
     </div>
   );
 }

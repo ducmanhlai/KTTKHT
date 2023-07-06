@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from "react";
-// import AHeader from "../AHeader/AHeader";
 import toast, { Toaster } from "react-hot-toast";
 import { FaLock, FaUnlock } from "react-icons/fa";
 import PuffLoader from "react-spinners/PuffLoader";
 import "./Account.scss";
 import axiosApiInstance from "../../../config/interceptor";
-// import { Button } from "@material-tailwind/react";
 export default function Account() {
   const [listUser, setListUser] = useState([]);
   const [user, setUser] = useState({});
-
-  // const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -146,7 +135,6 @@ export default function Account() {
                             onClick={() => {
                               handleClickLock(item);
                             }}
-                            // onClick={handleShow}
                           >
                             <FaLock />
                           </button>
