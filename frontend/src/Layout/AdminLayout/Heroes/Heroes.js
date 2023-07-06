@@ -103,7 +103,7 @@ export default function Heroes() {
     formData.append("classify", type);
     console.log(formData);
 
-    const result = await axios.post(
+    const result = await axiosApiInstance.post(
       axiosApiInstance.defaults.baseURL + "/api/v1/hero/create",
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
