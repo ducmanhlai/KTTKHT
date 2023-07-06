@@ -48,7 +48,7 @@ export default function Profile() {
                   className="nav nav-pills"
                   id="v-pills-tab"
                   role="tablist"
-                  // aria-orientation="vertical"
+                // aria-orientation="vertical"
                 >
                   <a
                     className="nav-link active"
