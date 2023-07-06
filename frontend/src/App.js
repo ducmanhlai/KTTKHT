@@ -16,8 +16,8 @@ import Footer from "./Layout/UserLayout/Footer/Footer";
 
 import Introduce from "./View/Introduce/Introduce";
 import Equip from "./View/Equip/Equip";
-import Profile from "./View/Profile/Profile";
-import HeroDetail from "./Component/HeroDetail/HeroDetail";
+// import Profile from "./View/Profile/Profile";
+// import HeroDetail from "./Component/HeroDetail/HeroDetail";
 import { AuthContextProvider } from "./context/authContext";
 
 import Skin from "./Layout/AdminLayout/Skin/Skin";
