@@ -1,23 +1,36 @@
-.hero {
-  .hero-page {
+.hero-detail {
+  padding: 50px 0 70px 0;
+  position: relative;
+  margin-bottom: -60px;
+  margin-top: 130px;
+  .hero-detail-page {
     .inner-page {
       width: 1168px;
+      margin: 0 auto;
+      position: relative;
       .skin-hero {
         .title {
-          margin-bottom: 20px;
+          font-size: 36px;
+          margin-bottom: 3%;
           text-transform: uppercase;
+          text-align: center;
           font-weight: bold;
+          line-height: 40px;
           color: #cfc39b;
         }
       }
 
       .bxskin {
+        // position: relative;
+        // left: auto;
+        // right: auto;
+        width: 8%;
+        margin-left: auto;
+        margin-right: auto;
         .cont-skin {
           .tabs-content-skin {
             border: 1px solid #a08945;
-            &:first-child {
-              display: block;
-            }
+            display: block;
           }
         }
         .numeral {
@@ -31,16 +44,15 @@
         .headbx {
           border-bottom: 1px solid #a08945;
           padding-bottom: 15px;
+
+          .txt {
+            color: #fff;
+            font-size: 26px;
+            text-transform: uppercase;
+            font-family: arial, helvetica, sans-serif;
+          }
         }
-        .txt {
-          color: #fff;
-          font-size: 26px;
-          text-transform: uppercase;
-          font-family: arial, helvetica, sans-serif;
-        }
-        .level {
-          display: none;
-        }
+
         .cont {
           padding: 20px 0 0 0;
           overflow: hidden;
@@ -63,16 +75,25 @@
       }
       .bxskill {
         border: 1px solid #a08945;
-        padding: 3% 5% 2% 5%;
+        margin-top: 5%;
         .tabs-link {
-          margin-top: -24px;
+          margin: 0;
           border-bottom: 1px solid #a08945;
           overflow: hidden;
-          .current {
+          li {
             display: inline-block;
             padding: 0 20px;
-            background: url(https://lienquan.garena.vn/asset/images/line-link.png)
-              right no-repeat;
+            float: left;
+            background: url("../../../img/line-link.png") right no-repeat;
+
+            &:hover,
+            &.active {
+              background: url("../../../img/nav-current.png") bottom center
+                no-repeat;
+              background-size: 100% auto;
+              text-decoration: none !important;
+              cursor: pointer;
+            }
           }
           .txtskill {
             line-height: 58px;
@@ -87,53 +108,76 @@
           }
         }
         .cont-skill {
-          padding: 3% 7%;
+          padding: 3% 3%;
           overflow: hidden;
-
           .tabs-content {
             display: block;
+            .ask {
+              color: #00ffff;
+            }
+            .ideal {
+              color: #b1ff00;
+            }
+            .no-worry {
+              color: #ff8c00;
+            }
+            .contact {
+              color: #b1ff00;
+              a {
+                color: red;
+                font-size: 20px;
+              }
+            }
             .col-skill {
               width: 33.3333%;
-              flex-direction: column !important;
               float: left;
               border-right: 1px solid #a08945;
-              padding-right: 7%;
+              padding-right: 10%;
+              padding-left: 4%;
+              max-height: 5%;
+
+              &:nth-child(3) {
+                border-right: none;
+              }
               .item-skill {
                 height: 500px !important;
                 border-bottom: 1px solid #a08945;
                 padding: 7% 0;
                 overflow: hidden;
                 .img-skill {
-                  width: 20%;
+                  width: 25%;
                   float: left;
+
+                  img {
+                    // width: 50px;
+                    // height: 80px;
+                  }
                 }
                 .in-skill {
-                  width: 80%;
+                  width: 75%;
                   float: left;
-                  padding-left: 5%;
-                  min-height: 200px;
-                  .name {
-                    font-size: 18px;
+                  padding-left: 7%;
+                  .name-skill {
+                    font-size: 20px;
                     text-transform: uppercase;
-                    margin-bottom: 5px;
+                    // margin-top: 2px;
+                    margin-bottom: 16px;
                     line-height: 22px;
+                    color: #00ffff;
                   }
                   .txt {
-                    margin-bottom: 20px;
-                    font-family: arial, helvetica, sans-serif;
+                    color: #b1ff00;
+                    margin-bottom: 16px;
+
+                    &:nth-child(2) {
+                      color: #ff8c00;
+                    }
                   }
                 }
               }
               .item-skill:last-child {
                 border: none;
               }
-            }
-            .col-skill:last-child {
-              border-left: 1px solid #a08945;
-              border-right: none;
-              padding-left: 7%;
-              padding-right: 0;
-              margin-left: -1px;
             }
           }
         }

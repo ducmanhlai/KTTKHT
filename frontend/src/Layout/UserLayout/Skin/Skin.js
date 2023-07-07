@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from "react";
-import "./Hero.scss";
-import AcademyNavigation from "../../UserLayout/AcademyNavigation/Anav";
-import toast, { Toaster } from "react-hot-toast";
-import axios from "../../../config/axios";
+import React, { useState, useEffect } from "react";
 import axiosApiInstance from "../../../config/interceptor";
+import AcademyNavigation from "../../UserLayout/AcademyNavigation/Anav";
+import "./Skin.scss";
+import { FaEye } from "react-icons/fa";
+import link from "../../../config/base";
 import Slider from "../Slider/Slider";
-export default function Hero() {
+
+export default function Skin() {
+  const [list, setList] = useState([]);
   const [listHero, setListHero] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
+
   const baseURL = "http://localhost:8081/public/images/";
 
   let Types = [
-    { id: 1, name: "Sát thủ" },
-    { id: 2, name: "Pháp sư" },
-    { id: 3, name: "Xạ thủ" },
-    { id: 4, name: "Trợ thủ" },
-    { id: 5, name: "Đỡ đòn" },
-    { id: 6, name: "Đấu sĩ" },
+    { id: 1, name: "Bậc A" },
+    { id: 2, name: "Bậc S" },
+    { id: 3, name: "Bậc S+" },
+    { id: 4, name: "Bậc SS" },
+    { id: 6, name: "Bậc SSS" },
+    { id: 6, name: "Bậc SS hữu hạn" },
   ];
 
   async function getHeroes() {
@@ -26,8 +30,17 @@ export default function Hero() {
     // console.log(result.data);
   }
 
+  async function getSkins() {
+    const result = await axiosApiInstance.get(
+      axiosApiInstance.defaults.baseURL + "/api/v1/skin/get"
+    );
+    setList(result?.data.data);
+    // console.log(result.data);
+  }
+
   useEffect(() => {
     getHeroes();
+    getSkins();
   }, []);
 
   return (
@@ -36,9 +49,9 @@ export default function Hero() {
       <section className="main-container">
         <AcademyNavigation />
 
-        <section className="hero-page pb-12">
+        <div className="skin-page">
           <div className="inner-page">
-            <div className="filter-hero">
+            <div className="filter-skin">
               <div className="item-filter">
                 <input
                   id="filter-10"
@@ -77,46 +90,37 @@ export default function Hero() {
                   type="text"
                   id="filter-name"
                   className="input"
-                  placeholder="Nhập tên tướng ..."
+                  placeholder="Nhập tên trang phục ..."
                 ></input>
               </form>
             </div>
 
-            <div className="bx-list-hero">
-              <ul className="list-hero overflow-hidden ">
-                {listHero.length != 0 ? (
-                  listHero.map((item, index) => {
-                    return (
-                      <li id="champion-1" className="list-champion" key={index}>
-                        <span className="tags hidden" tag="1" type="6">
-                          {item.name}
-                        </span>
-                        <div className="heroes">
-                          <a href={`hero/detail?id=${item.id}`}>
-                            <img
-                              src={baseURL + item.avatar}
-                              alt="img"
-                              className="hover:opacity-75"
-                            ></img>
-                          </a>
-                          <p
-                            data-id="1"
-                            data-type="6"
-                            className="hero-name whitespace-nowrap mt-2 text-center"
-                          >
-                            {item.name}
-                          </p>
-                        </div>
-                      </li>
-                    );
-                  })
-                ) : (
-                  <div>Đang tải</div>
-                )}
+            <div className="list-skins">
+              <ul className="list-skin overflow-hidden">
+                {list.map((hero) => (
+                  <li key={hero.id} id="champion-1" className="list-champion">
+                    <div className="heroes">
+                      <a href={`skin/detail?id=${hero.id}`}>
+                        <img
+                          src={baseURL + hero.avatar}
+                          alt="img"
+                          className="hover:opacity-75"
+                        ></img>
+                      </a>
+                      <p
+                        data-id="1"
+                        data-type="6"
+                        className="hero-name whitespace-nowrap mt-2 text-center"
+                      >
+                        {hero.name}
+                      </p>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
-        </section>
+        </div>
       </section>
     </>
   );
