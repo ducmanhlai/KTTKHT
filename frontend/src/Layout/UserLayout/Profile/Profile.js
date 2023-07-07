@@ -9,6 +9,7 @@ import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import { FaKey, FaUser } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
 import { TiCameraOutline } from "react-icons/ti";
+import link from '../../../config/base'
 
 import Avatar from "react-avatar-edit";
 
@@ -23,6 +24,7 @@ export default function Profile() {
   const [passwordNew2, setPasswordNew2] = useState('')
   const [nameUser, setNameUser] = useState('')
   const [phone, setPhone] = useState('')
+  const [change, setChange] = useState(false)
 
   const [imgCrop, setimgCrop] = useState(false);
   const [storeImage, setstoreImage] = useState([]);
@@ -86,7 +88,7 @@ export default function Profile() {
     })().catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, [change]);
 
   //Phong
   const changePassword = async () => {
@@ -96,6 +98,11 @@ export default function Profile() {
       { oldPassword: passwordOld, currentPassword: passwordNew1, newPassword: passwordNew2 }
     );
     console.log('>>> Check change: ', res);
+    if (res && res.data && res.data.errCode == 0) {
+      setPasswordOld('')
+      setPasswordNew1('')
+      setPasswordNew2('')
+    }
   }
 
   const handleUpdateInfo = async () => {
@@ -110,7 +117,16 @@ export default function Profile() {
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
+
     console.log(res);
+
+    if (res) {
+      setimage('')
+      setNameUser('')
+      setPhone('')
+      setChange(!change)
+    }
+
   }
 
   return (
@@ -130,7 +146,9 @@ export default function Profile() {
                 <div className="p-4">
                   <div className="img-circle text-center mb-3">
                     <img
-                      src={profileImageShow.length ? profileImageShow : imguse}
+                      // src={profileImageShow.length ? profileImageShow : imguse}
+                      src={profileImageShow.length ? profileImageShow : `${link.LINK_PUBLIC}${account['users.avatar']
+                        }`}
                       alt=""
                       className="shadow"
                     ></img>
