@@ -110,7 +110,7 @@ export default function Skin() {
                       <p
                         data-id="1"
                         data-type="6"
-                        className="hero-name whitespace-nowrap mt-2 text-center"
+                        className="hero-name mt-2 text-center"
                       >
                         {hero.name}
                       </p>

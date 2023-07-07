@@ -200,9 +200,7 @@ export default function Skin() {
                     </>
                   )}
 
-                  <p className="name-skins whitespace-nowrap mt-2 text-center">
-                    {hero.name}
-                  </p>
+                  <p className="name-skins mt-2 text-center">{hero.name}</p>
                 </div>
               </li>
             ))}
