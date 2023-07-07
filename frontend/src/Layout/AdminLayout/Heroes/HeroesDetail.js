@@ -77,7 +77,7 @@ export default function HeroDetail() {
   console.log(id);
 
   async function getHeroes() {
-    const result = await axios.get(
+    const result = await axiosApiInstance.get(
       axiosApiInstance.defaults.baseURL + `/api/v1/hero/get?id=${id}`
     );
     setList(result?.data.data);
@@ -158,7 +158,7 @@ export default function HeroDetail() {
   };
 
   const handleSubmitSkill = async () => {
-    const result = await axios.post(
+    const result = await axiosApiInstance.post(
       axiosApiInstance.defaults.baseURL + "/api/v1/skill/create",
       {
         idHero: id,
@@ -204,7 +204,7 @@ export default function HeroDetail() {
   };
 
   const handleSubmitEditSkill = async () => {
-    const result = await axios.put(
+    const result = await axiosApiInstance.put(
       axiosApiInstance.defaults.baseURL + "/api/v1/skill/update",
       [
         {
@@ -308,7 +308,7 @@ export default function HeroDetail() {
   }, [change]);
 
   return (
-    <div className="hero">
+    <div className="heroes">
       <Toaster
         toastOptions={{
           className: "",
@@ -327,9 +327,9 @@ export default function HeroDetail() {
         }}
       ></Toaster>
 
-      <section className="hero-page pb-12">
+      <section className="heroes-page pb-12">
         <div className="inner-page mx-auto my-0 relative">
-          <div className="skin-hero ">
+          <div className="skin-heroes">
             <h2 className="title text-4xl text-center">{list.name}</h2>
             <div className="bxskin">
               <div className="cont-skin">
@@ -354,7 +354,6 @@ export default function HeroDetail() {
                   <FaPencilAlt />
                 </button>
               </div>
-              <div className="nice-select level"></div>
             </div>
 
             <div className="cont">
@@ -784,9 +783,7 @@ export default function HeroDetail() {
                       // value={classify}
                       onChange={(e) => {
                         setClassify(e.target.value);
-                        console.log(e.target.value);
                       }}
-                      // value={this.state.id_category}
                     >
                       <option>Chọn vai trò</option>
                       {Types &&

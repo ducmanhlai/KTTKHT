@@ -5,7 +5,6 @@ const multer = require("multer");
 const upload = multer();
 import auth from "../middleware/authenJWT";
 
-
 heroRouter.get("/get", heroController.get);
 heroRouter.post("/create", upload.single("avatar"), heroController.createHero);
 heroRouter.put(
@@ -15,4 +14,3 @@ heroRouter.put(
   heroController.updateHero
 );
 export default heroRouter;
-

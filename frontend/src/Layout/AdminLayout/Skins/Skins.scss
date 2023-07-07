@@ -1,4 +1,4 @@
-.heroes-page {
+.skins-page {
   padding-top: 100px;
 
   .inner-page {
@@ -6,7 +6,7 @@
     margin: 0 auto;
     position: relative;
 
-    .filter-heroes {
+    .filter-skins {
       overflow: hidden;
       margin-bottom: 3%;
 
@@ -73,7 +73,7 @@
       }
     }
 
-    .add-heroes-button {
+    .add-skins-button {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -83,7 +83,7 @@
         font-size: 24px;
       }
 
-      .add-heroes-btn {
+      .add-skins-btn {
         border-radius: 6px;
         margin-left: 10%;
         margin-bottom: 12px;
@@ -95,8 +95,8 @@
       }
     }
 
-    .list-heroes {
-      .list-hero {
+    .list-skins {
+      .list-skin {
         .list-champion {
           width: 14.111%;
           float: left;
@@ -110,10 +110,10 @@
               border: 2px solid #a08945;
             }
 
-            .edit-heroes-button {
+            .edit-skins-button {
               font-size: 28px;
 
-              .edit-heroes-btn {
+              .edit-skins-btn {
                 // font-size: 24px;
                 border-radius: 6px;
                 margin-left: 10%;

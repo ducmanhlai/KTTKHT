@@ -138,7 +138,7 @@ export default function Heroes() {
       ></Toaster>
 
       <div className="inner-page">
-        <div className="filter-hero ">
+        <div className="filter-heroes">
           <div className="item-filter">
             <input
               id="filter-10"
@@ -289,20 +289,14 @@ export default function Heroes() {
                       onChange={(e) => handleOnChangeImage(e)}
                     />
                     {selectedImage && (
-                      <div>
-                        <h5>Hình ảnh nhân vật:</h5>
-                        <img src={selectedImage} alt="Selected Image" />
-                      </div>
+                      <img
+                        src={selectedImage}
+                        alt="Selected Image"
+                        height={90}
+                        width={90}
+                        className="mt-3"
+                      />
                     )}
-                    {/* {this.state.img && (
-                  <img
-                    src={this.state.img}
-                    height={90}
-                    width={90}
-                    alt="img"
-                    className="d-block"
-                  />
-                )} */}
                   </Form.Group>
                 </Col>
                 <Col>
@@ -454,7 +448,7 @@ export default function Heroes() {
                     <Form.Control
                       as="select"
                       onChange={(e) => setType(e.target.value)}
-                    // value={type}
+                      // value={type}
                     >
                       <option>Chọn vai trò</option>
                       {Types &&

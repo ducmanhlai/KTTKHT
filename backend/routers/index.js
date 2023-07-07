@@ -18,5 +18,5 @@ export default function router(app) {
   app.use("/api/v1/skin", auth.authenUser, skinRouter);
   app.use("/api/v1/payment", paymentRouter);
   app.use("/api/v1/user", auth.authenUser, userRouter);
-
+  app.use("/api/v1/item", itemRouter);
 }
