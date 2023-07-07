@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import axiosApiInstance from "../../../config/interceptor";
 import "./Profile.scss";
 
-import imguse from "../../../img/user2.jpg"
+import imguse from "../../../img/user2.jpg";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 
 // import Header from "../../Component/Header/Header";
 import { FaKey, FaUser } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
 import { TiCameraOutline } from "react-icons/ti";
-import link from '../../../config/base'
+import link from "../../../config/base";
 
 import Avatar from "react-avatar-edit";
 
@@ -19,12 +19,12 @@ export default function Profile() {
   const [activeTab, setActiveTab] = useState("account");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   //Phong
-  const [passwordOld, setPasswordOld] = useState('')
-  const [passwordNew1, setPasswordNew1] = useState('')
-  const [passwordNew2, setPasswordNew2] = useState('')
-  const [nameUser, setNameUser] = useState('')
-  const [phone, setPhone] = useState('')
-  const [change, setChange] = useState(false)
+  const [passwordOld, setPasswordOld] = useState("");
+  const [passwordNew1, setPasswordNew1] = useState("");
+  const [passwordNew2, setPasswordNew2] = useState("");
+  const [nameUser, setNameUser] = useState("");
+  const [phone, setPhone] = useState("");
+  const [change, setChange] = useState(false);
 
   const [imgCrop, setimgCrop] = useState(false);
   const [storeImage, setstoreImage] = useState([]);
@@ -51,9 +51,9 @@ export default function Profile() {
     setShow(false);
   };
 
-  function togglePasswordVisibility() {
-    setIsPasswordVisible((prevState) => !prevState);
-  }
+  // function togglePasswordVisibility() {
+  //   setIsPasswordVisible((prevState) => !prevState);
+  // }
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -64,8 +64,6 @@ export default function Profile() {
     currency: "VND",
     maximumFractionDigits: 9,
   };
-
-
 
   useEffect(() => {
     (async () => {
@@ -92,22 +90,32 @@ export default function Profile() {
 
   //Phong
   const changePassword = async () => {
-    console.log('password cũ: ', passwordOld, 'pass 1: ', passwordNew1, 'pass 2: ', passwordNew2);
+    console.log(
+      "password cũ: ",
+      passwordOld,
+      "pass 1: ",
+      passwordNew1,
+      "pass 2: ",
+      passwordNew2
+    );
     const res = await axiosApiInstance.put(
       axiosApiInstance.defaults.baseURL + `/api/v1/auth/changepassword`,
-      { oldPassword: passwordOld, currentPassword: passwordNew1, newPassword: passwordNew2 }
+      {
+        oldPassword: passwordOld,
+        currentPassword: passwordNew1,
+        newPassword: passwordNew2,
+      }
     );
-    console.log('>>> Check change: ', res);
+    console.log(">>> Check change: ", res);
     if (res && res.data && res.data.errCode == 0) {
-      setPasswordOld('')
-      setPasswordNew1('')
-      setPasswordNew2('')
+      setPasswordOld("");
+      setPasswordNew1("");
+      setPasswordNew2("");
     }
-  }
+  };
 
   const handleUpdateInfo = async () => {
-
-    console.log('Phone: ', phone, 'Ten: ', nameUser, 'Ảnh: ', image);
+    console.log("Phone: ", phone, "Ten: ", nameUser, "Ảnh: ", image);
     const formData = new FormData();
     formData.append("name_user", nameUser);
     formData.append("phone", phone);
@@ -121,34 +129,36 @@ export default function Profile() {
     console.log(res);
 
     if (res) {
-      setimage('')
-      setNameUser('')
-      setPhone('')
-      setChange(!change)
+      setimage("");
+      setNameUser("");
+      setPhone("");
+      setChange(!change);
     }
-
-  }
+  };
 
   return (
-    <div className="nb bg-white pt-14">
-      <section className=" body p-10 ml-10">
+    <div className="nb pt-14">
+      <section className="body p-10 ml-10">
         {account?.id ? (
           <div className="container">
-            <div className="hd">
+            {/* <div className="hd">
               <div className="hd-main">
                 <div className="hd-trigger" id="J-msidebar-left-trigger"></div>
                 <a className="hd-logo"></a>
               </div>
-            </div>
+            </div> */}
             {/* <h1 className="mb-5 text-black">Thông tin tài khoản</h1> */}
-            <div className="bg-white shadow rounded-lg d-block d-sm-flex">
+            <div className="main-main shadow rounded-lg d-block d-sm-flex">
               <div className="profile-tab-nav">
                 <div className="p-4">
                   <div className="img-circle text-center mb-3">
                     <img
                       // src={profileImageShow.length ? profileImageShow : imguse}
-                      src={profileImageShow.length ? profileImageShow : `${link.LINK_PUBLIC}${account['users.avatar']
-                        }`}
+                      src={
+                        profileImageShow.length
+                          ? profileImageShow
+                          : `${link.LINK_PUBLIC}${account["users.avatar"]}`
+                      }
                       alt=""
                       className="shadow"
                     ></img>
@@ -158,9 +168,8 @@ export default function Profile() {
                           type="file"
                           accept="image/*"
                           onClick={handleShow}
-
                           onChange={(Event) => {
-                            console.log('hello');
+                            console.log("hello");
                             console.log(Event);
                             const file = Event.target.files[0];
                             if (file && file.type.substring(0, 5) === "image") {
@@ -188,10 +197,13 @@ export default function Profile() {
                             controlId="exampleForm.ControlTextarea1"
                             type="file"
                             onChange={(Event) => {
-                              console.log('hello');
+                              console.log("hello");
                               console.log(Event);
                               const file = Event.target.files[0];
-                              if (file && file.type.substring(0, 5) === "image") {
+                              if (
+                                file &&
+                                file.type.substring(0, 5) === "image"
+                              ) {
                                 setimage(file);
                               } else {
                                 setimage(null);
@@ -203,9 +215,9 @@ export default function Profile() {
                               height={300}
                               onClose={onClose}
                               onCrop={onCrop}
-                            // src={src}
-                            // shadingColor={"#474649"}
-                            // backgroundColor={"#474649"}
+                              // src={src}
+                              // shadingColor={"#474649"}
+                              // backgroundColor={"#474649"}
                             />
                           </Form.Group>
                         </Form>
@@ -225,21 +237,23 @@ export default function Profile() {
                   <h4 className="text-black text-center mb-3">
                     {account && account["users.name_user"]}
                   </h4>
-                  <div className="text-black">
-                    Tướng sở hữu:{analysis?.hero ? analysis.hero : null}
+                  <div className="text-black mt-4">
+                    {/* Tướng sở hữu:{analysis?.hero ? analysis.hero : null} */}
+                    Tướng sở hữu : 110
                     {/* // console.log(analysis) */}
                   </div>
-                  <div className="text-black">
-                    Trang phục sở hữu:{analysis && analysis.skin}
+                  <div className="text-black mt-1">
+                    {/* Trang phục sở hữu:{analysis && analysis.skin} */}
+                    Trang phục sở hữu : 420
                   </div>
-                  <div className=" text-black ">
-                    Số tiền nạp:{""}
-                    {new Intl.NumberFormat("vi-VN", config)
+                  <div className=" text-black mt-1">
+                    Số tiền nạp: 44.000.000 đ
+                    {/* {new Intl.NumberFormat("vi-VN", config)
                       .format(analysis && analysis.amount)
                       .toLocaleString("vi", {
                         style: "currency",
                         currency: "VND",
-                      })}
+                      })} */}
                   </div>
                 </div>
                 <div
@@ -250,8 +264,9 @@ export default function Profile() {
                 >
                   <div className="div">
                     <a
-                      className={`nav-link ${activeTab === "account" ? "active" : ""
-                        }`}
+                      className={`nav-link ${
+                        activeTab === "account" ? "active" : ""
+                      }`}
                       onClick={() => handleTabClick("account")}
                       href="#account"
                       role="tab"
@@ -265,8 +280,9 @@ export default function Profile() {
 
                   <div className="div">
                     <a
-                      className={`nav-link  ${activeTab === "password" ? "active" : ""
-                        }`}
+                      className={`nav-link  ${
+                        activeTab === "password" ? "active" : ""
+                      }`}
                       onClick={() => handleTabClick("password")}
                       href="#password"
                       role="tab"
@@ -277,45 +293,32 @@ export default function Profile() {
                       Mật khẩu
                     </a>
                   </div>
-
-                  <div>
-                    <a
-                      className={`nav-link ${activeTab === "logout" ? "active" : ""
-                        }`}
-                      onClick={() => handleTabClick("logout")}
-                      href="#logout"
-                      role="tab"
-                      aria-controls="logout"
-                      aria-selected={activeTab === "logout"}
-                    >
-                      {/* <LoLogout className="text-center mr-2 mt-1"></LoLogout> */}
-                      <IoLogOut className="text-center mr-2 mt-1"></IoLogOut>
-                      Đăng xuất
-                    </a>
-                  </div>
                 </div>
               </div>
               <div className="tab-content p-5" id="v-pills-tabContent">
                 <div
-                  className={`tab-pane fade ${activeTab === "account" ? "show active" : ""
-                    }`}
+                  className={`tab-pane fade ${
+                    activeTab === "account" ? "show active" : ""
+                  }`}
                   id="account"
                   role="tabpanel"
                   aria-labelledby="account-tab"
                 >
-                  <h3 className="mb-4 text-black text-lg">Cài đặt tài khoản</h3>
+                  <h3 className="mb-4 text-black text-2xl uppercase text-center">
+                    Thay đổi thông tin
+                  </h3>
                   <div className="col">
                     <div className="col-md-6">
-                      <div className="form-group">
+                      <div className="form-group ">
                         <label className="block">
                           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                            Tên tài khoản
+                            Tên người dùng
                           </span>
                           <input
                             type="text"
                             name="name"
                             className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                            placeholder=""
+                            placeholder="Nhập tên người dùng"
                             value={nameUser}
                             onChange={(e) => setNameUser(e.target.value)}
                           ></input>
@@ -333,7 +336,7 @@ export default function Profile() {
                             type="tel"
                             name="phone"
                             className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                            placeholder=""
+                            placeholder="Nhập số điện thoại"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                           />
@@ -342,23 +345,28 @@ export default function Profile() {
                     </div>
                   </div>
                   <div>
-                    <button className="btn-update bg-sky-500 hover:bg-sky-700"
-                      onClick={() => handleUpdateInfo()}>
-                      Cập nhập
+                    <button
+                      className="btn-update bg-green hover:bg-dark_blue"
+                      onClick={() => handleUpdateInfo()}
+                    >
+                      Cập nhật
                     </button>
-                    <button className="btn-cancel py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm">
+                    {/* <button className="btn-cancel py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm">
                       Hủy
-                    </button>
+                    </button> */}
                   </div>
                 </div>
                 <div
-                  className={`tab-pane fade ${activeTab === "password" ? "show active" : ""
-                    }`}
+                  className={`tab-pane fade ${
+                    activeTab === "password" ? "show active" : ""
+                  }`}
                   id="password"
                   role="tabpanel"
                   aria-labelledby="password-tab"
                 >
-                  <h3 className="text-black mb-4 text-lg">Đổi lại mật khẩu</h3>
+                  <h3 className="text-black mb-4 text-2xl text-center uppercase">
+                    Thay đổi mật khẩu
+                  </h3>
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
@@ -367,10 +375,10 @@ export default function Profile() {
                             Mật khẩu cũ
                           </span>
                           <input
-                            type="text"
+                            type={isPasswordVisible ? "text" : "password"}
                             name="password-old"
                             className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                            placeholder=""
+                            placeholder="Nhập mật khẩu cũ"
                             value={passwordOld}
                             onChange={(e) => setPasswordOld(e.target.value)}
                           />
@@ -386,17 +394,17 @@ export default function Profile() {
                             Mật khẩu mới
                             {/* <FaEye></FaEye> */}
                           </span>
-                          <div className="relative  mx-auto mt-1">
+                          <div className="relative mx-auto mt-1">
                             <input
                               id="2"
                               type={isPasswordVisible ? "text" : "password"}
-                              placeholder="Password"
+                              placeholder="Nhập mật khẩu mới"
                               className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                               value={passwordNew1}
                               onChange={(e) => setPasswordNew1(e.target.value)}
                             />
-                            <button
-                              className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"
+                            {/* <button
+                              className="absolute inset-y-0 left-96 flex items-center px-4 text-gray-600"
                               onClick={togglePasswordVisibility}
                             >
                               {isPasswordVisible ? (
@@ -435,11 +443,13 @@ export default function Profile() {
                                   />
                                 </svg>
                               )}
-                            </button>
+                            </button> */}
                           </div>
                         </label>
                       </div>
                     </div>
+                  </div>
+                  <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
                         <label className="block">
@@ -450,12 +460,12 @@ export default function Profile() {
                             <input
                               id="1"
                               type={isPasswordVisible ? "text" : "password"}
-                              placeholder="Password"
+                              placeholder="Nhập lại mật khẩu"
                               className="text-input mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                               value={passwordNew2}
                               onChange={(e) => setPasswordNew2(e.target.value)}
                             />
-                            <button
+                            {/* <button
                               className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"
                               onClick={togglePasswordVisibility}
                             >
@@ -495,26 +505,29 @@ export default function Profile() {
                                   />
                                 </svg>
                               )}
-                            </button>
+                            </button> */}
                           </div>
                         </label>
                       </div>
                     </div>
                   </div>
+
                   <div>
-                    <button className="btn-update bg-sky-500 hover:bg-sky-700"
+                    <button
+                      className="btn-update bg-green hover:bg-dark_blue"
                       onClick={() => changePassword()}
                     >
-                      Cập nhập
+                      Cập nhật
                     </button>
-                    <button className="btn-cancel py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm">
+                    {/* <button className="btn-cancel py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm">
                       Hủy
-                    </button>
+                    </button> */}
                   </div>
                 </div>
                 <div
-                  className={`tab-pane fade p-4 sm:p-10 text-center overflow-y-auto ${activeTab === "logout" ? "show active" : ""
-                    }`}
+                  className={`tab-pane fade p-4 sm:p-10 text-center overflow-y-auto ${
+                    activeTab === "logout" ? "show active" : ""
+                  }`}
                   id="logout"
                   role="tabpanel"
                   aria-labelledby="password-tab"
