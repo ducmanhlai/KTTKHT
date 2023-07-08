@@ -1,3 +1,3 @@
-# Kiến Trúc Và Thiết Kế Phần Mềm
+# Đồ án Kiến Trúc Và Thiết Kế Phần Mềm
 
-![new Db](https://github.com/ducmanhlai/KTTKHT/assets/72874551/a4af93f8-31db-4a43-b904-749f7364990b)
+![db](https://github.com/ducmanhlai/KTTKHT/assets/72874551/9af27b1e-cb6a-4d5b-bf63-24366ee66e87)
